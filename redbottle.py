@@ -22,7 +22,7 @@ def template_add():
 
 @route('/keyvalue/delete/', method='POST')
 @view('delete')
-def template_add():
+def template_delete():
         if 'key_delete' in request.POST:
                 key_delete = request.POST['key_delete']
 
