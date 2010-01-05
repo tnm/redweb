@@ -37,7 +37,8 @@ To show the value of any key:
 
 Additions
 ----------
-Modular additions are on the to-do list.
+Modular additions, such as error messages and client-side validation, are on the to-do list. For the initial version,
+the idea is to keep RedBottle as simple as possible, so developers can customize it as they see fit.
 
 Author
 ------
