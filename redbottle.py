@@ -20,6 +20,15 @@ def template_add():
 
 	return dict(title="Key-Value Pair", key=key, value=value)
 
+@route('/keyvalue/delete/', method='POST')
+@view('delete')
+def template_add():
+        if 'key_delete' in request.POST:
+                key_delete = request.POST['key_delete']
+
+        r.delete(key_delete)
+
+        return dict(title="Key-Value Pair", key=key_delete)
 
 @route('keyvalue/show/:key')
 @view('show')
