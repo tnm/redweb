@@ -1,3 +1,5 @@
+##RedBottle
+
 RedBottle is a small, pluggable application skeleton that's designed to neatly integrate Bottle
 with Redis. Bottle is a simple, yet powerful Python framework, with built-in routing and templating. Redis
 is a fast, powerful, persistent key-value store. Combined, they make a dynamite combination!
@@ -7,11 +9,11 @@ RedBottle uses a straight-forward, RESTful style to add, remove, and show key-va
 Install and Configure
 ---------------------
 
-You'll need Bottle, Redis, and the Python wrapper for Redis.
+You'll need [Bottle](http://github.com/defnull/bottle "Bottle"), [Redis](http://code.google.com/p/redis/ "Redis"), and the [Python interface](http://github.com/andymccurdy/redis-py/ "Python Interface") for Redis.
 
 If you have those installed, start your Redis server. Then:
 
-python redbottle.py
+`python redbottle.py`
 
 and the application will start on localhost. Now build your application around it.
 
@@ -25,17 +27,17 @@ Do Stuff
 Let's say you want to add a key-value with the number 2 as a key and the name 'John' as its value.
 It's as easy as utilizing the REST resource at:
 
-/keyvalue/2/John/add
+**/keyvalue/2/John/add**
 
 That saves it to the Redis data store.
 
 To delete it:
 
-/keyvalue/2/John/delete
+**/keyvalue/2/John/delete**
 
 To view the value associated with the key:
 
-/keyvalue/2/
+**/keyvalue/2/**
 
 
 Author
