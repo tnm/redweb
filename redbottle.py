@@ -4,13 +4,13 @@ import redis
 r = redis.Redis()
 
 @route('/keyvalue/')
-@view('add')
+@view('keys')
 def template_keyvalue():
 	all_keys = r.keys('*')
 	return dict(title='Key-Value Store', all_keys=all_keys)
 
 @route('/keyvalue/add/', method='POST')
-@view('add')
+@view('keys')
 def template_add():
 	if 'key' in request.POST:
 		key = request.POST['key']
@@ -22,7 +22,7 @@ def template_add():
 	return dict(title="Key-Value Pair", key=key, value=value, all_keys=all_keys)
 
 @route('/keyvalue/delete/', method='POST')
-@view('add')
+@view('keys')
 def template_delete():
         if 'key_delete' in request.POST:
                 key_delete = request.POST['key_delete']
