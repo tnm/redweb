@@ -21,23 +21,26 @@ It's important to note that there is no built-in data sanitization, beyond what 
 in to Bottle. So if you need to do some particular sanitization, please roll your own.
 
 
-Do Stuff
----------
+Add/Remove/Show Key-Value Pairs
+-------------------------------
 
-Let's say you want to add a key-value the number '2' as a key and the name 'John' as its value.
+Let's say you want to add a key-value pair with the number '2' as a key and the name 'John' as its value.
 It's as easy as utilizing POST at:
 
-**/keyvalue/**
+> **/keyvalue/**
 
-That saves it to the Redis data store.
+That saves it to the Redis data store. You can utilize delete functionality there as well. 
 
 To show the value of any key:
 
-**/keyvalue/show/[key]**
+> **/keyvalue/show/[key]**
 
-Additions
+To Do
 ----------
-Modular additions, such as error messages and client-side validation, are on the to-do list. For the initial version,
+
+Better (error) handling of string entries will be up shortly. 
+  
+Modular additions, such as error messages and some client-side validation, are on the to-do list. For the initial version,
 the idea is to keep RedBottle as simple as possible, so developers can customize it as they see fit.
 
 Author
