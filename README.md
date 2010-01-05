@@ -4,7 +4,7 @@ RedBottle is a small, pluggable application skeleton that's designed to neatly i
 with Redis. Bottle is a simple, yet powerful Python framework, with built-in routing and templating. Redis
 is a fast, powerful, persistent key-value store. Combined, they make a dynamite combination!
 
-RedBottle uses a straight-forward, RESTful style to add, remove, and show key-values.
+RedBottle uses a straight-forward, REST-like style to add, remove, and show key-values.
 
 Install and Configure
 ---------------------
@@ -13,9 +13,9 @@ You'll need [Bottle](http://github.com/defnull/bottle "Bottle"), [Redis](http://
 
 If you have those installed, start your Redis server. Then:
 
-`python redbottle.py`
+`python redbottle.py` 
 
-and the application will start on localhost. Now build your application around it.
+and the RedBottle application will start on localhost. Now you can build your application around it.
 
 It's important to note that there is no built-in data sanitization, beyond what is built
 in to Bottle. So if you need to do some particular sanitization, please roll your own.
@@ -24,8 +24,8 @@ in to Bottle. So if you need to do some particular sanitization, please roll you
 Do Stuff
 ---------
 
-Let's say you want to add a key-value with the number 2 as a key and the name 'John' as its value.
-It's as easy as utilizing the REST resource at:
+Let's say you want to add a key-value the number '2' as a key and the name 'John' as its value.
+It's as easy as utilizing the resource at:
 
 **/keyvalue/2/John/add**
 
@@ -40,12 +40,15 @@ To view the value associated with the key:
 **/keyvalue/2/**
 
 
+**Modular** additions are on the to-do list.
+
 Author
 ------
 
-Ted Nyman : @tnm8
+Ted Nyman - @tnm8
 
-A little [blog post](http://philosophyofweb.com/2010/01/bottle-py-redis-redbottle/ "Post") about RedBottle
+A [blog post](http://philosophyofweb.com/2010/01/bottle-py-redis-redbottle/ "Post") about RedBottle
+
 
 MIT License
 -----------
