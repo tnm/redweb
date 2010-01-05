@@ -20,7 +20,10 @@
 <input type="submit" value="Delete" />
 
 </form>
-
+<p><strong>All keys:</strong> </p>
+ %for all_keys in all_keys:
+ <p><a href="/keyvalue/show/{{all_keys}}"> {{all_keys}}</p>
+%end
  
 </body>
 </html>

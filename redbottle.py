@@ -6,7 +6,8 @@ r = redis.Redis()
 @route('/keyvalue/')
 @view('add')
 def template_keyvalue():
-	return dict(title='Key-Value Store')
+	all_keys = r.keys('*')
+	return dict(title='Key-Value Store', all_keys=all_keys)
 
 @route('/keyvalue/add/', method='POST')
 @view('add')
@@ -15,21 +16,20 @@ def template_add():
 		key = request.POST['key']
 	if 'value' in request.POST:
 		value = request.POST['value']
-
+	
 	r.set(key,value)
-
-	return dict(title="Key-Value Pair", key=key, value=value)
+	all_keys = r.keys('*')
+	return dict(title="Key-Value Pair", key=key, value=value, all_keys=all_keys)
 
 @route('/keyvalue/delete/', method='POST')
-@view('delete')
+@view('add')
 def template_delete():
         if 'key_delete' in request.POST:
                 key_delete = request.POST['key_delete']
 
         r.delete(key_delete)
-
-        return dict(title="Key-Value Pair", key=key_delete)
-
+	all_keys = r.keys('*')
+        return dict(title="Key-Value Pair", key=key_delete, all_keys=all_keys)
 @route('keyvalue/show/:key')
 @view('show')
 
