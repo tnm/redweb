@@ -45,6 +45,8 @@ Author
 
 Ted Nyman : @tnm8
 
+A little [blog post](http://philosophyofweb.com/2010/01/bottle-py-redis-redbottle/ "Post") about RedBottle
+
 MIT License
 -----------
 
