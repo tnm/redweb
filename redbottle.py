@@ -1,34 +1,27 @@
-from bottle import route, view, run
+from bottle import route, request, response, view, run
 import redis
 
 r = redis.Redis()
 
-
-@route('/keyvalue/:key/:value/add')
+@route('/keyvalue/')
 @view('add')
+def template_keyvalue():
+	return dict(title='Key-Value Store')
 
-def template_add(key,value):
-	key = key.strip()
-	value = value.strip()
-	
-	r.set(key, value)
+@route('/keyvalue/add/', method='POST')
+@view('add')
+def template_add():
+	if 'key' in request.POST:
+		key = request.POST['key']
+	if 'value' in request.POST:
+		value = request.POST['value']
 
-	return dict(title="Key-Value Pair with Redis", key=key, value=value)
+	r.set(key,value)
 
-
-@route('keyvalue/:key/:value/delete')
-@view('delete')
-
-def template_delete(key,value):
-        key = key.strip()
-        value = value.strip()
-	
-	r.delete(key)
-
-        return dict(title="Key-Value Pair with Redis", key=key, value=value)
+	return dict(title="Key-Value Pair", key=key, value=value)
 
 
-@route('keyvalue/:key/')
+@route('keyvalue/show/:key')
 @view('show')
 
 def template_show(key):

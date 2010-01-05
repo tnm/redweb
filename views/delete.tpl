@@ -3,10 +3,14 @@
   <title>{{title}}</title>
  </head>
  <body>
-    <h2>Deleted</h2>
-    <p>Your key: <strong>{{key}}</strong></p>
-    <p>Your value: <strong>{{value}}</strong></p>
- 
- </body>
-</html>
 
+    <form name="input2" action="/keyvalue/delete" method="post">
+    <p>Delete a key:</p>
+<input type="text" name="key_delete" />
+
+<input type="submit" value="Delete" />
+
+</form>
+</body>
+</html>
+>

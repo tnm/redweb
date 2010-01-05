@@ -25,22 +25,19 @@ Do Stuff
 ---------
 
 Let's say you want to add a key-value the number '2' as a key and the name 'John' as its value.
-It's as easy as utilizing the resource at:
+It's as easy as utilizing POST at:
 
-**/keyvalue/2/John/add**
+**/keyvalue/**
 
 That saves it to the Redis data store.
 
-To delete it:
+To show the value of any key:
 
-**/keyvalue/2/John/delete**
+**/keyvalue/show/[key]
 
-To view the value associated with the key:
-
-**/keyvalue/2/**
-
-
-**Modular** additions are on the to-do list.
+Additions
+----------
+Modular additions are on the to-do list.
 
 Author
 ------
