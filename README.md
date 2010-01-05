@@ -33,7 +33,7 @@ That saves it to the Redis data store.
 
 To show the value of any key:
 
-**/keyvalue/show/[key]
+**/keyvalue/show/[key]**
 
 Additions
 ----------
