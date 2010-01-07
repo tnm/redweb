@@ -19,7 +19,7 @@
 
 <form name="input2" action="/keyvalue/delete/" method="post">
     <p>Delete the key:</p>
-    <p><input type="text" name="key_delete" value="{{key}}" input class=":required" /></p>
+    <p><input type="text" name="key_delete" value="{{key}}" /></p>
 
     <input type="submit" value="Delete" />
 

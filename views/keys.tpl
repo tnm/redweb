@@ -21,7 +21,7 @@
 
 <form name="input2" action="/keyvalue/delete/" method="post">
     <p>Delete a key:</p>
-    <p><input type="text" name="key_delete" input class=":required" /></p>
+    <p><input type="text" name="key_delete" /></p>
 
     <input type="submit" value="Delete" />
 
