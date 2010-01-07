@@ -1,9 +1,5 @@
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  
   <title>{{title}}</title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
   <script src="/static/vanadium-min.js" type="text/javascript"></script>

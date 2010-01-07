@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from bottle import route, request, response, view, send_file, run
 import redis
 
@@ -35,7 +33,6 @@ def template_delete():
         if 'key_delete' in request.POST:
                 key_delete = request.POST['key_delete']
 
-        r.delete(key_delete)
 	all_keys = r.keys('*')
         return dict(title="Key-Value Pair", key=key_delete, all_keys=all_keys)
 
