@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from bottle import route, request, response, view, send_file, run
 import redis
 
