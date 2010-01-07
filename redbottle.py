@@ -41,8 +41,8 @@ def template_delete():
 @view('show')
 
 def template_show(key):
-	the_key = key.strip()
-	value = r.get(the_key)	
+	key = key
+	value = r.get(key)	
 	
-	return dict(title=the_key, the_key=the_key, value=value)	
+	return dict(title=key, key=key, value=value)	
 run()
