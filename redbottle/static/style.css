@@ -69,8 +69,34 @@ a {
 }
 
 a:hover {
+
 	text-decoration: underline;
 	color: #566988;
+}
+
+/* style for validation */
+
+* {
+    margin: 10px;
+}
+ 
+div.vanadium-invalid {
+    border-color: red !important;
+    border-style: solid !important;
+}
+ 
+div.vanadium-valid {
+    border-color: green !important;
+    border-style: solid !important;
+}
+ 
+.vanadium-message-value {
+    font-style: italic;
+    text-decoration: underline;
+}
+ 
+.vanadium-advice.vanadium-invalid, .vanadium-advice.vanadium-invalid * {
+    color: red;
 }
 
 

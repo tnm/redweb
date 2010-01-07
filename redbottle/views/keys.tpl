@@ -15,15 +15,14 @@
 
 <div class="main">     
 
-    <h1>Add a Key-Value to the Redis Store</h1>
-
     <form name="input" action="/keyvalue/add/" method="post">
-    
+   
+    <h2>Add a Key-Value to the Redis Store</h2> 
     <p>Key:</p>
-    <p><input type="text" name="key" input class=":required input_form" /></p>
+    <p><input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
     
     <p>Value:</p>
-    <p><input type="text" name="value" input class=":required input_form" /></p>
+    <p><input type="text" name="value" input class=":required :only_on_submit input_form" /></p>
 
     <input type="submit" class="submit_form" value="Add" />
 
@@ -32,8 +31,9 @@
 <hr />
 
     <form name="input2" action="/keyvalue/delete/" method="post">
-    <p>Delete a key:</p>
-    <p><input type="text" class="input_form" name="key_delete" /></p>
+    
+    <h2>Delete a key:</h2>
+    <p><input type="text" input class=":required :only_on_submit input_form" name="key_delete" /></p>
 
     <input type="submit" class="submit_form" value="Delete" />
 
@@ -41,7 +41,7 @@
 
 <hr />
 
-<h2><strong>All keys:</strong></h2>
+    <h2><strong>All keys:</strong></h2>
 
 %for all_keys in all_keys:
 <p><a href="/keyvalue/show/{{all_keys}}"> {{all_keys}}</p>
