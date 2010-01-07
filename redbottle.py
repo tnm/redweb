@@ -5,17 +5,17 @@ r = redis.Redis()
 
 @route('/static/:filename')
 def static_file(filename):
-	send_file(filename, root='../redbottle/views/js')
+	send_file(filename, root='../redbottle/static')
 
 @route('/keyvalue/')
-@view('keysjs')
+@view('keys')
 def template_keyvalue():
 
 	all_keys = r.keys('*')
 	return dict(title='Key-Value Store', all_keys=all_keys)
 
 @route('/keyvalue/add/', method='POST')
-@view('keysjs')
+@view('keys')
 def template_add():
 
 	if 'key' in request.POST and 'value' in request.POST:
@@ -27,7 +27,7 @@ def template_add():
 	return dict(title="Key-Value Pair", key=key, value=value, all_keys=all_keys)
 
 @route('/keyvalue/delete/', method='POST')
-@view('keysjs')
+@view('keys')
 def template_delete():
 
         if 'key_delete' in request.POST:
