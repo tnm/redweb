@@ -20,8 +20,18 @@ hr {
 	margin: 0 auto;	
 }
 
-.input_form
-{
+.main {
+	text-align:left;
+	clear: both;
+	background-color: #E9EAEB;
+	width: 700px;
+	margin: 30px;
+	padding:15px 15px 25px 25px;
+	-moz-border-radius:10px 10px 10px 10px;
+	-webkit-border-radius: 10px;
+}
+
+.input_form {
 	color: black;
 	font-size: 22px;
 	font-weight: normal;
@@ -54,12 +64,6 @@ p {
 	line-height:22px;
 }
 
-ul{
-}
-
-li {
-}
-
 a {
 
 	text-decoration: underline;
@@ -71,14 +75,4 @@ a:hover {
 	color: #566988;
 }
 
-.main {
-	text-align:left;
-	clear: both;
-	background-color:#E9EAEB;
-	width: 650px;
-	margin: 30px;
-	padding:15px 15px 25px 25px;
-	-moz-border-radius:10px 10px 10px 10px;
-	-webkit-border-radius: 10px;
-}
 
