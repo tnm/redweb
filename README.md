@@ -38,18 +38,19 @@ To show the value of any key:
 To Do
 ----------
 
-Better handling of string entries will be up shortly. 
+Better handling of string entries will be up shortly. I'll also integrate JSON serialization. 
   
 Certain other modular additions are on the to-do list. For the initial version,
 the idea is to keep RedBottle as simple as possible, so developers can customize it as they see fit.
 
-Author
+More
 ------
 
-Ted Nyman - @tnm8
+Author: Ted Nyman - @tnm8
 
 A [blog post](http://philosophyofweb.com/2010/01/bottle-py-redis-redbottle/ "Post") about RedBottle
 
+Jeff Triplett has ported RedBottle to itty (another micro-framework for Python, started by Daniel Lindsley) as [reditty](http://github.com/jefftriplett/reditty "reditty")
 
 MIT License
 -----------
