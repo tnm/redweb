@@ -12,7 +12,8 @@ def static_file(filename):
 def template_keyvalue():
 
     all_keys = r.keys('*')
-    return dict(title='Key-Value Store', all_keys=all_keys)
+    db_size = r.dbsize()
+    return dict(title='Key-Value Store', db_size=db_size, all_keys=all_keys)
 
 @route('/keyvalue/add/', method='POST')
 @view('keys')
@@ -24,7 +25,8 @@ def template_add():
 
         r.set(key,value)
         all_keys = r.keys('*')
-        return dict(title="Key-Value Pair", key=key, value=value, all_keys=all_keys)
+        db_size = r.dbsize()
+        return dict(title="Key-Value Pair", key=key, db_size=db_size, value=value, all_keys=all_keys)
 
 @route('/keyvalue/delete/', method='POST')
 @view('keys')
@@ -35,7 +37,8 @@ def template_delete():
 
         r.delete(key_delete)
         all_keys = r.keys('*')
-        return dict(title="Key-Value Pair", key=key_delete, all_keys=all_keys)
+	db_size = r.dbsize()
+        return dict(title="Key-Value Pair", db_size = db_size, key=key_delete, all_keys=all_keys)
 
 @route('keyvalue/show/:key')
 @view('show')

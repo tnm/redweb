@@ -1,7 +1,7 @@
 ##RedBottle
 
 RedBottle is a small, pluggable application skeleton that's designed to neatly integrate Bottle
-with Redis. Bottle is a simple, yet powerful Python framework, with built-in routing and templating. Redis
+with Redis. Bottle is a simple, cool, fairly powerful Python micro-framework, with built-in routing and templating. Redis
 is a fast, powerful, persistent key-value store. Combined, they make a great combination!
 
 RedBottle uses a straight-forward, REST-like style to add, remove, and show key-values.
