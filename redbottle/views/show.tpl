@@ -12,7 +12,7 @@
 <div class="main">
 
 
-    <h2>Change the key's value ({{key}} | {{value}}):</h2>
+    <h2>Change the key's value ( {{key}} | {{value}} ):</h2>
 
 
     <form name="edit" action="/keyvalue/add/" method="post">
