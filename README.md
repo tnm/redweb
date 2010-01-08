@@ -52,8 +52,6 @@ A [blog post](http://philosophyofweb.com/2010/01/bottle-py-redis-redbottle/ "Pos
 
 Jeff Triplett has ported RedBottle to itty (another micro-framework for Python, started by Daniel Lindsley) as [reditty](http://github.com/jefftriplett/reditty "reditty")
 
-(There appear to be few known complexities/issues with the redis-py interface, such as an bug relating to the 'key' function. In any case, I've forked redis-py and will hopefully be able to contribute some patches there.)
-
 MIT License
 -----------
 
