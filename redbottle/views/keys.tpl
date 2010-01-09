@@ -41,12 +41,7 @@
 
 <hr />
 
-     <h2>All keys:</h2>
      <p>Number of keys in store: {{db_size}}</p>
-
-%for all_keys in all_keys:
-<p><a href="/keyvalue/show/{{all_keys}}"> {{all_keys}}</p>
-%end
 
 </div>
 
