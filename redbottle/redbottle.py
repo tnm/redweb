@@ -6,7 +6,7 @@ from bottle import route, request, response, view, send_file, run
 import redis
 import bottle
 
-bottle.debug(True)
+bottle.debug(True) #remove in production
 r = redis.Redis()
 
 @route('/static/:filename')
