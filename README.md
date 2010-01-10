@@ -35,6 +35,11 @@ To show the value of any key:
 
 > **/keyvalue/show/[key]**
 
+
+Included Templates
+------------------
+In addition to the Python code at redbottle.py, RedBottle comes with two basic templates that can easily be extended. **keys.tpl** allows a user to enter a key and a value using a basic web form; **show.tpl** displays the key and value for any given key. Delete functionality is also available in each template.
+
 To Do
 ----------
 
