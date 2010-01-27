@@ -1,5 +1,5 @@
 __author__ = 'Ted Nyman'
-__version__ = '0.1.0'
+__version__ = '0.1.2'
 __license__ = 'MIT'
 
 from bottle import route, request, response, view, send_file, run
@@ -13,13 +13,17 @@ r = redis.Redis()
 def static_file(filename):
     send_file(filename, root='../redbottle/static')
 
-@route('/keyvalue/')
+
+# String functionality 
+# ---------------------
+
+@route('/strings/')
 @view('keys')
 def template_keyvalue():  
     db_size = r.dbsize()
     return dict(title='Key-Value Store', db_size=db_size)
 
-@route('/keyvalue/add/', method='POST')
+@route('/strings/add/', method='POST')
 @view('keys')
 def template_add():
     key = request.POST.get('key', '').strip()
@@ -30,7 +34,7 @@ def template_add():
  
     return dict(title="Key-Value Pair", key=key, db_size=db_size, value=value)
 
-@route('/keyvalue/delete/', method='POST')
+@route('/strings/delete/', method='POST')
 @view('keys')
 def template_delete():
 
@@ -40,7 +44,8 @@ def template_delete():
 	   
     return dict(title="Key-Value Pair", db_size = db_size, key=key_delete)
 
-@route('keyvalue/show/:key')
+
+@route('strings/show/:key')
 @view('show')
 
 def template_show(key):
@@ -48,5 +53,49 @@ def template_show(key):
     value = r.get(key)	
 	
     return dict(title=key, key=key, value=value)	
+
+
+# List Functionality
+# ------------------
+
+@route('/lists/')
+@view('keys')
+def template_keyvalue():  
+    db_size = r.dbsize()
+    return dict(title='Key-Value Store', db_size=db_size)
+
+@route('/lists/add/', method='POST')
+@view('keys')
+def template_add():
+    key = request.POST.get('key', '').strip()
+    value = request.POST.get('value', '').strip()
+
+    r.push(key,value)
+    db_size = r.dbsize()
+ 
+    return dict(title="Key-Value Pair", key=key, db_size=db_size, value=value)
+
+@route('/lists/delete/', method='POST')
+@view('keys')
+def template_delete():
+
+    key_delete = request.POST.get('key_delete', '').strip()
+    r.delete(key_delete)
+    db_size = r.dbsize()	
+	   
+    return dict(title="Key-Value Pair", db_size = db_size, key=key_delete)
+
+@route('lists/show/:key')
+@view('show')
+
+def template_show(key):
+    key = key
+    value = r.get(key)	
+	
+    return dict(title=key, key=key, value=value)	
+
+
+
+
 
 run()
