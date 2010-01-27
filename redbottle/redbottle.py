@@ -6,16 +6,18 @@ from bottle import route, request, response, view, send_file, run
 import redis
 import bottle
 
-bottle.debug(True) #remove in production
+# Bottle debug - remove in production!
+bottle.debug(True)
+
+# The main redis object
 r = redis.Redis()
 
+# Set static file routing
 @route('/static/:filename')
 def static_file(filename):
     send_file(filename, root='../redbottle/static')
 
-
-# String functionality 
-# ---------------------
+# Redis string functionality 
 
 @route('/strings/')
 @view('keys')
@@ -55,8 +57,7 @@ def template_show(key):
     return dict(title=key, key=key, value=value)	
 
 
-# List Functionality
-# ------------------
+# Redis List Functionality
 
 @route('/lists/')
 @view('keys')
@@ -64,7 +65,7 @@ def template_keyvalue():
     db_size = r.dbsize()
     return dict(title='Key-Value Store', db_size=db_size)
 
-@route('/lists/add/', method='POST')
+@route('/lists/push/', method='POST')
 @view('keys')
 def template_add():
     key = request.POST.get('key', '').strip()
@@ -75,7 +76,7 @@ def template_add():
  
     return dict(title="Key-Value Pair", key=key, db_size=db_size, value=value)
 
-@route('/lists/delete/', method='POST')
+@route('/lists/trim/', method='POST')
 @view('keys')
 def template_delete():
 
