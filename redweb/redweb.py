@@ -56,7 +56,7 @@ def template_delete_all():
 
 # -- STRINGS --------------------------------------------- 
 
-# SET |
+# SET | set a string value for a given key
 
 @route('/strings/set/', method='post')
 @view('strings')
@@ -70,7 +70,7 @@ def template_set():
     return dict(key=key, db_size=db_size, value=value)
 
 
-# GET |
+# GET | return the string value of a key
 
 @route('/strings/get/' method='post')
 @view('strings')
