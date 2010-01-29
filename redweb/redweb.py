@@ -67,9 +67,9 @@ def template_add():
 @view('strings')
 def template_show(key):
     key = request.post.get('key', '').strip()
-    value = r.get(key)	
+    show_value = r.get(key)	
 	
-    return dict(key=key, value=value)	
+    return dict(key=key, show_value=show_value)	
 
 # List Functionality
 
@@ -82,7 +82,11 @@ def template_lists_push():
     r.push(key,member)
     db_size = r.dbsize()
  
-    return dict(key=key, db_size=db_size, value=value)
+    return dict(key=key, member=member, db_size=db_size)
+
+"""
+LLEN | return the length of a list
+"""
 
 @route('/lists/length/' method='post':)
 @view('lists')
@@ -103,8 +107,7 @@ def template_lists_range():
     range = r.lrange(key, start, end)
     db_size = r.dbsize()
 
-    return dict(key=key,range=range,db_size=db_size)
-
+    return dict(key=key, range=range, db_size=db_size)
 
 @route('/lists/pop/' method='post')
 @view('lists')
@@ -204,7 +207,7 @@ def template_zsets_add():
    return dict(key=key, value=value, db_size=db_size)      
 
 """
-ZREM | remove a mber of a sorted set
+ZREM | remove a member of a sorted set
 """
 
 @route('/zsets/remove/', method='post')
@@ -216,7 +219,7 @@ def template_zsets_remove():
    zset_remove = r.zrem(key, member)
    db_size = r.dbsize()  
   
-   return dict(key=key, value=value, db_size=db_size)      
+   return dict(key=key, member=member, db_size=db_size)      
 
 #run it!
 run()
