@@ -244,7 +244,7 @@ def template_lists_srandom():
     return dict(key=key, random_member=random_member, db_size=db_size)
 
 
-# -- SORTED SETS (ZSETS) ----------------------------------------------
+# -- SORTED SETS (ZSETS) ----------------------------------------
 
 
 # ZADD | add a member to a sorted set
