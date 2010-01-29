@@ -55,7 +55,7 @@ def template_delete_all():
 
     return dict(db_size = db_size)
 
-# -- STRINGS ---------------------------------------------- 
+# -- STRINGS --------------------------------------------- 
 
 @route('/strings/add/', method='post')
 @view('strings')
@@ -76,7 +76,7 @@ def template_show(key):
 	
     return dict(key=key, show_value=show_value)	
 
-# -- LISTS -----------------------------------------------
+# -- LISTS ----------------------------------------------
 
 @route('/lists/push/', method='post')
 @view('lists')
@@ -204,9 +204,8 @@ def template_zsets_add():
  
     return dict(key=key, value=value, db_size=db_size)      
 
-"""
-ZREM | remove a member of a sorted set
-"""
+
+# ZREM | remove a member of a sorted set
 
 @route('/zsets/remove/', method='post')
 @view('zsets')
