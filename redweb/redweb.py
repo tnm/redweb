@@ -30,21 +30,21 @@ def template_keyvalue():
 
 # Universal functionality
 
-@route('/delete/', method='POST')
+@route('/delete/', method='post')
 @view('central')
 def template_delete():
 
-    key_delete = request.POST.get('key_delete', '').strip()
+    key_delete = request.post.get('key_delete', '').strip()
     r.delete(key_delete)
     db_size = r.dbsize()	
 	   
     return dict(db_size = db_size, key=key_delete)
 
-@route('/delete/all/', method='POST')
+@route('/delete/all/', method='post')
 @view('central')
 def template_delete_all():
 
-   delete_all = request.POST.get('delete_all', '').strip()
+   delete_all = request.post.get('delete_all', '').strip()
    r.flushdb()
    db_size = r.dbsize()
 
@@ -52,53 +52,53 @@ def template_delete_all():
 
 # String functionality 
 
-@route('/strings/add/', method='POST')
+@route('/strings/add/', method='post')
 @view('strings')
 def template_add():
-    key = request.POST.get('key', '').strip()
-    value = request.POST.get('value', '').strip()
+    key = request.post.get('key', '').strip()
+    value = request.post.get('value', '').strip()
 
     r.set(key,value)
     db_size = r.dbsize()
  
     return dict(key=key, db_size=db_size, value=value)
 
-@route('/strings/show/:key')
+@route('/strings/show/' method='post')
 @view('strings')
 def template_show(key):
-    key = key
+    key = request.post.get('key', '').strip()
     value = r.get(key)	
 	
     return dict(key=key, value=value)	
 
 # List Functionality
 
-@route('/lists/push/', method='POST')
+@route('/lists/push/', method='post')
 @view('lists')
 def template_lists_push():
-    key = request.POST.get('key', '').strip()
-    member = request.POST.get('member', '').strip()
+    key = request.post.get('key', '').strip()
+    member = request.post.get('member', '').strip()
 
     r.push(key,member)
     db_size = r.dbsize()
  
     return dict(key=key, db_size=db_size, value=value)
 
-@route('/lists/length/:key')
+@route('/lists/length/' method='post':)
 @view('lists')
 def template_lists_length():
-    key = key
+    key = request.post.get('key', '').strip()
     length = r.llen(key)
     dbsize = r.dbsize()
 
     return dict(key=key, length=length, db_size=db_size)
 
-@route('/lists/range/' method='POST')
+@route('/lists/range/' method='post')
 @view('lists')
 def template_lists_range():
-    key = request.POST.get('key', '').strip()
-    start = request.POST.get('start', '').strip()
-    end = request.POST.get('end', '').strip()
+    key = request.post.get('key', '').strip()
+    start = request.post.get('start', '').strip()
+    end = request.post.get('end', '').strip()
 
     range = r.lrange(key, start, end)
     db_size = r.dbsize()
@@ -106,10 +106,10 @@ def template_lists_range():
     return dict(key=key,range=range,db_size=db_size)
 
 
-@route('/lists/pop/' method='POST')
+@route('/lists/pop/' method='post')
 @view('lists')
 def template_lists_pop):
-    key = request.POST.get('key', '').strip()
+    key = request.post.get('key', '').strip()
     pop = r.pop(key)
     dbsize = r.dbsize()
 
@@ -117,7 +117,11 @@ def template_lists_pop):
 
 # Set Functionality
 
-@route('/sets/add/', method='POST')
+"""
+SADD | add a member to a set
+"""
+
+@route('/sets/add/', method='post')
 @view('sets')
 def template_sets_add():
    key = request.post.get('key', '').strip()
@@ -128,7 +132,11 @@ def template_sets_add():
  
    return dict(key=key, value=value, db_size=db_size)      
 
-@route('/sets/remove/', method='POST')
+"""
+SREM | remove a member of a set
+"""
+
+@route('/sets/remove/', method='post')
 @view('sets')
 def template_sets_remove():
    key = request.post.get('key', '').strip()
@@ -139,10 +147,14 @@ def template_sets_remove():
   
    return dict(key=key, value=value, db_size=db_size)      
 
-@route('/sets/cardinality/:key')
+"""
+SCARD | return the cardinality for a set
+"""
+
+@route('/sets/cardinality/' method='post')
 @view('sets')
 def template_lists_length():
-    key = key 
+    key = request.post.get('key', '').strip() 
     cardinality = r.scard(key)
     dbsize = r.dbsize()
 
@@ -152,7 +164,7 @@ def template_lists_length():
 SMEMBERS | return all members of a set
 """
 
-@route('/sets/members/', method='POST')
+@route('/sets/members/', method='post')
 @view('sets')
 def template_lists_smembers():
     key = key
@@ -165,7 +177,7 @@ def template_lists_smembers():
 SRANDMEMBER | return a random member of set, without removing it
 """
 
-@route('/sets/random/', method='POST')
+@route('/sets/random/', method='post')
 @view('sets')
 def template_lists_srandom():
     key = key
@@ -176,7 +188,11 @@ def template_lists_srandom():
 
 # Sorted Set Functionality
 
-@route('/zsets/add/', method='POST')
+"""
+ZADD | add a member to a sorted set
+"""
+
+@route('/zsets/add/', method='post')
 @view('zsets')
 def template_zsets_add():
    key = request.post.get('key', '').strip()
@@ -187,7 +203,11 @@ def template_zsets_add():
  
    return dict(key=key, value=value, db_size=db_size)      
 
-@route('/zsets/remove/', method='POST')
+"""
+ZREM | remove a mber of a sorted set
+"""
+
+@route('/zsets/remove/', method='post')
 @view('zsets')
 def template_zsets_remove():
    key = request.post.get('key', '').strip()
@@ -198,4 +218,5 @@ def template_zsets_remove():
   
    return dict(key=key, value=value, db_size=db_size)      
 
+#run it!
 run()
