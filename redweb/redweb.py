@@ -130,10 +130,10 @@ def template_lists_range():
     key = request.post.get('key', '').strip()
     start = request.post.get('start', '').strip()
     end = request.post.get('end', '').strip()
-    range = r.lrange(key, start, end)
+    list_range = r.lrange(key, start, end)
     db_size = r.dbsize()
 
-    return dict(key=key, range=range, db_size=db_size)
+    return dict(key=key, list_range=list_range, db_size=db_size)
 
 # LTRIM
 # LINDEX
