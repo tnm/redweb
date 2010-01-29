@@ -6,7 +6,6 @@ from bottle import route, request, response, view, send_file, run
 import redis
 import bottle
 
-
 # -- PRELIMINARIES ----------------------------------------
 
 # Bottle debug - remove in production!
@@ -57,7 +56,9 @@ def template_delete_all():
 
 # -- STRINGS --------------------------------------------- 
 
-@route('/strings/add/', method='post')
+# SET |
+
+@route('/strings/set/', method='post')
 @view('strings')
 def template_add():
     key = request.post.get('key', '').strip()
@@ -68,7 +69,10 @@ def template_add():
  
     return dict(key=key, db_size=db_size, value=value)
 
-@route('/strings/show/' method='post')
+
+# GET |
+
+@route('/strings/get/' method='post')
 @view('strings')
 def template_show(key):
     key = request.post.get('key', '').strip()
@@ -78,13 +82,29 @@ def template_show(key):
 
 # -- LISTS ----------------------------------------------
 
-@route('/lists/push/', method='post')
+# RPUSH | append an element to the tail of a list
+
+@route('/lists/rightpush/', method='post')
 @view('lists')
-def template_lists_push():
+def template_lists_rightpush():
     key = request.post.get('key', '').strip()
     member = request.post.get('member', '').strip()
 
     r.push(key,member)
+    db_size = r.dbsize()
+ 
+    return dict(key=key, member=member, db_size=db_size)
+
+
+# LPUSH | append an element to the head of a list
+
+@route('/lists/leftpush/', method='post')
+@view('lists')
+def template_lists_leftpush():
+    key = request.post.get('key', '').strip()
+    member = request.post.get('member', '').strip()
+
+    r.push(key,member, tail=True)
     db_size = r.dbsize()
  
     return dict(key=key, member=member, db_size=db_size)
@@ -101,6 +121,9 @@ def template_lists_length():
 
     return dict(key=key, length=length, db_size=db_size)
 
+
+# LRANGE | return a range of elements from a list
+
 @route('/lists/range/' method='post')
 @view('lists')
 def template_lists_range():
@@ -112,6 +135,14 @@ def template_lists_range():
 
     return dict(key=key, range=range, db_size=db_size)
 
+# LTRIM
+# LINDEX
+# LSET
+# LREM
+
+
+# LPOP | return and remove the first element of a list
+
 @route('/lists/pop/' method='post')
 @view('lists')
 def template_lists_pop):
@@ -120,6 +151,23 @@ def template_lists_pop):
     dbsize = r.dbsize()
 
     return dict(key=key, db_size=db_size)
+
+
+# RPOP | return and remove the last element of a list
+
+@route('/lists/pop/' method='post')
+@view('lists')
+def template_lists_pop):
+    key = request.post.get('key', '').strip()
+    pop = r.pop(key, tail=True)
+    dbsize = r.dbsize()
+
+    return dict(key=key, db_size=db_size)
+
+# BLPOP
+# BRPOP
+# RPOPLPPUSH
+
 
 # -- SETS -------------------------------------------------
 
@@ -149,7 +197,10 @@ def template_sets_remove():
     return dict(key=key, value=value, db_size=db_size)      
 
 
-#SCARD | return the cardinality for a set
+# SPOP
+# SMOVE
+
+# SCARD | return the cardinality for a set
 
 @route('/sets/cardinality/' method='post')
 @view('sets')
@@ -160,9 +211,14 @@ def template_lists_length():
 
     return dict(key=key, cardinality=cardinality, db_size=db_size)
 
+# SISMEMBER
 
 # SINTER | for any number of sets, return the values that those sets all share
-
+# SINTERSTORE
+# SUNION
+# SUNIONSTORE
+# SDIFF
+# SDIFFSTORE
 
 # SMEMBERS | return all members of a set
 
@@ -217,6 +273,39 @@ def template_zsets_remove():
     db_size = r.dbsize()  
   
     return dict(key=key, member=member, db_size=db_size)      
+
+# ZINCRBY
+# ZCRANGE
+# ZREVRANGE
+# ZRANGEBYSCORE
+
+# ZCARD | return the cardinality for a set
+
+@route('/zsets/cardinality/' method='post')
+@view('zsets')
+def template_lists_length():
+    key = request.post.get('key', '').strip() 
+    cardinality = r.zcard(key)
+    dbsize = r.dbsize()
+
+    return dict(key=key, cardinality=cardinality, db_size=db_size)
+
+# ZSCORE
+# ZREMRANGEBYSCORE
+
+
+# -- SORTING, PERSISTENCE, REMOTE SERVER--------------------
+
+# SORT
+
+# BGSAVE
+# LASTSAVE
+# SHUTDOWN
+# BGREWRITEAOF
+
+# INFO
+# MONITOR
+# SLAVE
 
 #run it!
 run()
