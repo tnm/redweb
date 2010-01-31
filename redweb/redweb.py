@@ -171,7 +171,7 @@ def template_sets_add():
     set_add = r.sadd(key, member)
     db_size = r.dbsize()  
  
-    return dict(key=key, value=value, db_size=db_size)      
+    return dict(key=key, member=member, db_size=db_size)      
 
 
 # SREM | remove a member of a set
@@ -183,7 +183,7 @@ def template_sets_remove():
     set_remove = r.srem(key, member)
     db_size = r.dbsize()  
   
-    return dict(key=key, value=value, db_size=db_size)      
+    return dict(key=key, member=member, db_size=db_size)      
 
 
 # SPOP
