@@ -105,7 +105,7 @@ def template_lists_leftpush():
 
 
 # LLEN | return the length of a list
-@route('/lists/length/' method='post':)
+@route('/lists/length/', method='post')
 @view('central')
 def template_lists_length():
     key = request.post.get('key', '').strip()
@@ -116,7 +116,7 @@ def template_lists_length():
 
 
 # LRANGE | return a range of elements from a list
-@route('/lists/range/' method='post')
+@route('/lists/range/', method='post')
 @view('central')
 def template_lists_range():
     key = request.post.get('key', '').strip()
@@ -134,9 +134,9 @@ def template_lists_range():
 
 
 # LPOP | return and remove the first element of a list
-@route('/lists/pop/' method='post')
+@route('/lists/pop/', method='post')
 @view('central')
-def template_lists_lpop):
+def template_lists_lpop():
     key = request.post.get('key', '').strip()
     pop = r.pop(key)
     dbsize = r.dbsize()
@@ -145,9 +145,9 @@ def template_lists_lpop):
 
 
 # RPOP | return and remove the last element of a list
-@route('/lists/pop/' method='post')
+@route('/lists/pop/', method='post')
 @view('central')
-def template_lists_rpop):
+def template_lists_rpop():
     key = request.post.get('key', '').strip()
     pop = r.pop(key, tail=True)
     dbsize = r.dbsize()
@@ -189,7 +189,7 @@ def template_sets_remove():
 # SMOVE
 
 # SCARD | return the cardinality for a set
-@route('/sets/cardinality/' method='post')
+@route('/sets/cardinality/', method='post')
 @view('central')
 def template_sets_cardinality():
     key = request.post.get('key', '').strip() 
@@ -261,7 +261,7 @@ def template_zsets_remove():
 # ZRANGEBYSCORE
 
 # ZCARD | return the cardinality for a set
-@route('/zsets/cardinality/' method='post')
+@route('/zsets/cardinality/', method='post')
 @view('central')
 def template_zsets_cardinality():
     key = request.post.get('key', '').strip() 
