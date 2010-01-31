@@ -17,7 +17,7 @@ r = redis.Redis()
 # Set static file routing
 @route('/static/:filename')
 def static_file(filename):
-    send_file(filename, root='../redbottle/static')
+    send_file(filename, root='../redweb/static')
 
 # CENTRAL
 

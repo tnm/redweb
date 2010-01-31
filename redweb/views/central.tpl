@@ -47,7 +47,7 @@
 
     <form name="list_rightpush" action="/lists/rightpush/" method="post">
     
-    <h2>append element to the tail of a list (RPUSH)</h2>
+    <h3>append element to the tail of a list (RPUSH)</h3>
     <p>Key:</p>
     <p><input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
     
@@ -62,7 +62,7 @@
 
     <form name="list_leftpush" action="/lists/leftpush/" method="post">
 
-    <h2>append element to the head of a list (LPUSH)</h2>
+    <h3>append element to the head of a list (LPUSH)</h3>
     <p>Key:</p>
     <p><input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
     
@@ -79,7 +79,7 @@
 
     <form name="set_add" action="/sets/add/" method="post">
 
-    <h2>add a member to a set (SADD)</h2>
+    <h3>add a member to a set (SADD)</h3>
     <p>Key:</p>
     <p><input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
     
@@ -94,7 +94,7 @@
 
     <form name="set_remove" action="/sets/remove/" method="post">
 
-    <h2>remove a member to a set (SREM)</h2>
+    <h3>remove a member to a set (SREM)</h3>
     <p>Key:</p>
     <p><input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
     
