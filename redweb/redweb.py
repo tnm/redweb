@@ -67,7 +67,7 @@ def template_set():
 
 
 # GET | return the string value of a key
-@route('/strings/get/' method='post')
+@route('/strings/get/', method='post')
 @view('central')
 def template_get(key):
     key = request.post.get('key', '').strip()
