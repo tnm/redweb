@@ -1,38 +1,34 @@
 __author__ = 'Ted Nyman'
-__version__ = '0.1.2'
+__version__ = '0.1.0'
 __license__ = 'MIT'
 
 from bottle import route, request, response, view, send_file, run
 import redis
 import bottle
 
-# -- PRELIMINARIES ----------------------------------------
+# PRELIMINARIES
 
 # Bottle debug - remove in production!
-
 bottle.debug(True)
 
 # The main redis object
-
 r = redis.Redis()
 
 # Set static file routing
-
 @route('/static/:filename')
 def static_file(filename):
     send_file(filename, root='../redbottle/static')
 
-# -- CENTRAL PAGE -----------------------------------------
+# CENTRAL
 
 # Central page for all operations
-
 @route('/central/')
 @view('central')
 def template_keyvalue():  
     db_size = r.dbsize()
     return dict(db_size=db_size)
 
-# -- UNIVERSALS -------------------------------------------
+# UNIVERSALS 
 
 @route('/delete/', method='post')
 @view('central')
@@ -54,10 +50,10 @@ def template_delete_all():
 
     return dict(db_size = db_size)
 
-# -- STRINGS --------------------------------------------- 
+
+# STRINGS 
 
 # SET | set a string value for a given key
-
 @route('/strings/set/', method='post')
 @view('strings')
 def template_set():
@@ -71,7 +67,6 @@ def template_set():
 
 
 # GET | return the string value of a key
-
 @route('/strings/get/' method='post')
 @view('strings')
 def template_get(key):
@@ -80,10 +75,10 @@ def template_get(key):
 	
     return dict(key=key, show_value=show_value)	
 
-# -- LISTS ----------------------------------------------
+
+# LISTS
 
 # RPUSH | append an element to the tail of a list
-
 @route('/lists/rightpush/', method='post')
 @view('lists')
 def template_lists_rightpush():
@@ -97,7 +92,6 @@ def template_lists_rightpush():
 
 
 # LPUSH | append an element to the head of a list
-
 @route('/lists/leftpush/', method='post')
 @view('lists')
 def template_lists_leftpush():
@@ -111,7 +105,6 @@ def template_lists_leftpush():
 
 
 # LLEN | return the length of a list
-
 @route('/lists/length/' method='post':)
 @view('lists')
 def template_lists_length():
@@ -123,7 +116,6 @@ def template_lists_length():
 
 
 # LRANGE | return a range of elements from a list
-
 @route('/lists/range/' method='post')
 @view('lists')
 def template_lists_range():
@@ -142,7 +134,6 @@ def template_lists_range():
 
 
 # LPOP | return and remove the first element of a list
-
 @route('/lists/pop/' method='post')
 @view('lists')
 def template_lists_lpop):
@@ -154,7 +145,6 @@ def template_lists_lpop):
 
 
 # RPOP | return and remove the last element of a list
-
 @route('/lists/pop/' method='post')
 @view('lists')
 def template_lists_rpop):
@@ -169,10 +159,9 @@ def template_lists_rpop):
 # RPOPLPPUSH
 
 
-# -- SETS -------------------------------------------------
+# SETS
 
 # SADD | add a member to a set
-
 @route('/sets/add/', method='post')
 @view('sets')
 def template_sets_add():
@@ -185,7 +174,6 @@ def template_sets_add():
 
 
 # SREM | remove a member of a set
-
 @route('/sets/remove/', method='post')
 @view('sets')
 def template_sets_remove():
@@ -201,7 +189,6 @@ def template_sets_remove():
 # SMOVE
 
 # SCARD | return the cardinality for a set
-
 @route('/sets/cardinality/' method='post')
 @view('sets')
 def template_sets_cardinality():
@@ -212,7 +199,6 @@ def template_sets_cardinality():
     return dict(key=key, cardinality=cardinality, db_size=db_size)
 
 # SISMEMBER
-
 # SINTER | for any number of sets, return the values that those sets all share
 # SINTERSTORE
 # SUNION
@@ -221,7 +207,6 @@ def template_sets_cardinality():
 # SDIFFSTORE
 
 # SMEMBERS | return all members of a set
-
 @route('/sets/members/', method='post')
 @view('sets')
 def template_sets_members():
@@ -233,7 +218,6 @@ def template_sets_members():
 
 
 # SRANDMEMBER | return a random member of set, without removing it
-
 @route('/sets/random/', method='post')
 @view('sets')
 def template_sets_srandom():
@@ -244,11 +228,9 @@ def template_sets_srandom():
     return dict(key=key, random_member=random_member, db_size=db_size)
 
 
-# -- SORTED SETS (ZSETS) ----------------------------------------
-
+# SORTED SETS (ZSETS)
 
 # ZADD | add a member to a sorted set
-
 @route('/zsets/add/', method='post')
 @view('zsets')
 def template_zsets_add():
@@ -262,7 +244,6 @@ def template_zsets_add():
 
 
 # ZREM | remove a member of a sorted set
-
 @route('/zsets/remove/', method='post')
 @view('zsets')
 def template_zsets_remove():
@@ -280,7 +261,6 @@ def template_zsets_remove():
 # ZRANGEBYSCORE
 
 # ZCARD | return the cardinality for a set
-
 @route('/zsets/cardinality/' method='post')
 @view('zsets')
 def template_zsets_cardinality():
@@ -294,7 +274,7 @@ def template_zsets_cardinality():
 # ZREMRANGEBYSCORE
 
 
-# -- SORTING, PERSISTENCE, REMOTE SERVER--------------------
+# SORTING, PERSISTENCE, REMOTE SERVER
 
 # SORT
 
