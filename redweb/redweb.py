@@ -86,7 +86,7 @@ def template_lists_rightpush():
     key = request.POST.get('key', '').strip()
     element = request.POST.get('element', '').strip()
 
-    r.push(key,member)
+    r.push(key,element)
     db_size = r.dbsize()
  
     return dict(key=key, element=element, db_size=db_size)
