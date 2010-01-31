@@ -14,6 +14,8 @@
 <div class="wrapper">
 
 <div class="main">     
+    <p>number of keys: {{db_size}} </p>
+
     <h2>Strings</h2>
 
     <form name="string_set" action="/strings/set/" method="post">
@@ -110,7 +112,6 @@
 
 
    
-     <p>Number of keys in store: {{db_size}}</p>
 
 
 
