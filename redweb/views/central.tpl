@@ -37,9 +37,6 @@
     <p>Key:</p>
     <p><input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
     
-    <p>Value:</p>
-    <p><input type="text" name="value" input class=":required :only_on_submit input_form" /></p>
-
     <input type="submit" class="submit_form" value="Get" />
 
     </form>
