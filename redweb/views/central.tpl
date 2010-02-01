@@ -1,7 +1,7 @@
 <html>
  <head>
 
- <title>redweb</title>
+ <title>redweb | web interface for Redis</title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
   <script src="/static/vanadium-min.js" type="text/javascript"></script> 
 
@@ -10,12 +10,14 @@
 </head>
 
 <body> 
+<div id="header-wrap"> 
+<h1>Returned Value/Request: <strong class="red">{{returned_value}}</strong></h1>
+</div>
 
 <div class="sidebar">
-
-<h2>Your Database Infobox</h2>
-<br />
-<h3>Last Returned Value: <strong>{{returned_value}}</strong></h3>
+<h2>Database Infobox</h2>
+<hr />
+<p>Go to: <a href="#strings">Strings</a> | <a href="#lists">Lists</a> | <a href="#sets">Sets</a> | <a href="#zsets">Sorted Sets</a></p>
 <hr />
 <p>Database Size: <strong>{{db_size}}</strong></p>
 <hr />
@@ -28,22 +30,24 @@
 <input type="submit" value="Delete" />
 </form>
 %end
+<hr />
 </p>
 
 </div>
 
 
 <div class="wrapper">
+
+
 <div class="main">   
-<h1 class = "red"> Welcome to redweb.</h1>
+<h1 class = "red"> Welcome to Redweb.</h1>
+<p>Redweb is a web interface for Redis, by Ted Nyman. It's MIT licensed, so go ahead and fork redweb on GitHub! </div>
 
-<p>ping your database | about | help </p>
-</div>
-
+ <a name="strings"></a>
 <div class="main">     
 
 
-    <h2>Strings</h2>
+   <h2>Strings</h2>
 <hr />
 
     <form name="string_set" action="/strings/set/" method="post">
@@ -67,7 +71,7 @@
     </form>
 
     </div>
-   
+   <a name="lists"></a>
     <div class="main">     
 	
     <h2>Lists</h2>
@@ -95,8 +99,42 @@
 
     </form>
 
+    <hr />
+
+    <form name="list_length" action="/lists/length/" method="post">
+
+    <h3>Return the length of a list (LLEN)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+
+    <input type="submit" class="submit_form" value="Get Length" />
+
+    </form>
+
+    <hr />
+
+    <form name="list_lpop" action="/lists/leftpop/" method="post">
+
+    <h3>Return and remove the first element of a list (LPOP)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+
+    <input type="submit" class="submit_form" value="Left Pop" />
+
+    </form>
+
+    <hr />
+
+    <form name="list_rpop" action="/lists/rightpop/" method="post">
+
+    <h3>Return and remove the last element of a list (RPOP)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+
+    <input type="submit" class="submit_form" value="Right Pop" />
+
+    </form>
+
+
     </div>
-   
+   <a name="sets"></a>
     <div class="main">   
     <h2>Sets</h2>
     <hr />
@@ -115,7 +153,7 @@
 
     <form name="set_remove" action="/sets/remove/" method="post">
 
-    <h3>Remove a member to a set (SREM)</h3>
+    <h3>Remove a member from a set (SREM)</h3>
     <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
        Member:<input type="text" name="member" input class=":required :only_on_submit input_form" /></p>
 
@@ -123,9 +161,76 @@
 
     </form>
 
-    </div>
+    <hr />
 
+    <form name="set_cardinality" action="/sets/cardinality/" method="post">
+
+    <h3>Return the cardinality of a set (SCARD)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+
+    <input type="submit" class="submit_form" value="Return Cardinality" />
+
+    </form>
+
+    <hr />
+
+    <form name="set_members" action="/sets/members/" method="post">
+
+    <h3>Return all members of a set (SMEMBERS)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+
+    <input type="submit" class="submit_form" value="Return Members" />
+
+    </form>
+
+    <hr />
+
+    <form name="set_random" action="/sets/random/" method="post">
+
+    <h3>Return a random member of a set, without removing it (SRANDMEMBER)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+
+    <input type="submit" class="submit_form" value="Return Random Member" />
+
+    </form>
+
+    </div>
+    <a name="zsets"></a>
     <div class="main">   
+    <h2>Sorted Sets</h2>
+    <hr />
+    <form name="zset_remove" action="/zsets/add/" method="post">
+    <h3>Add a member to a sorted set (ZADD)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
+       Member:<input type="text" name="member" input class=":required :only_on_submit input_form" /></p>
+
+    <input type="submit" class="submit_form" value="Add" />
+
+    </form>
+   
+    <hr />
+
+    <form name="zset_remove" action="/sets/remove/" method="post">
+
+    <h3>Remove a member from a sorted set (ZREM)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
+       Member:<input type="text" name="member" input class=":required :only_on_submit input_form" /></p>
+
+    <input type="submit" class="submit_form" value="Remove" />
+
+    </form>
+
+    <hr />
+
+    <form name="zset_cardinality" action="/zsets/cardinality/" method="post">
+
+    <h3>Return the cardinality of a sorted set (ZCARD)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+
+    <input type="submit" class="submit_form" value="Return Cardinality" />
+
+    </form>
+
 
     </div>
 </div>

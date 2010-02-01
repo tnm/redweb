@@ -53,7 +53,6 @@ def template_delete_all():
     delete_all = request.POST.get('delete_all', '').strip()
     r.flushdb()
     all_keys = r.keys('*')
-
     db_size = r.dbsize()
 
     return dict(all_keys=all_keys, db_size = db_size)
@@ -126,7 +125,7 @@ def template_lists_length():
     key = request.POST.get('key', '').strip()
     llen = r.llen(key)
     all_keys = r.keys('*')
-    dbsize = r.dbsize()
+    db_size = r.dbsize()
 
     return dict(key=key, returned_value=llen, all_keys=all_keys, db_size=db_size)
 
@@ -151,25 +150,25 @@ def template_lists_range():
 
 
 # LPOP | return and remove the first element of a list
-@route('/lists/pop/', method='POST')
+@route('/lists/leftpop/', method='POST')
 @view('central')
 def template_lists_lpop():
     key = request.POST.get('key', '').strip()
     left_pop = r.pop(key)
     all_keys = r.keys('*')
-    dbsize = r.dbsize()
+    db_size = r.dbsize()
 
     return dict(key=key, returned_value=left_pop, all_keys=all_keys, db_size=db_size)
 
 
 # RPOP | return and remove the last element of a list
-@route('/lists/pop/', method='POST')
+@route('/lists/rightpop/', method='POST')
 @view('central')
 def template_lists_rpop():
     key = request.POST.get('key', '').strip()
     right_pop = r.pop(key, tail=True)
     all_keys = r.keys('*')
-    dbsize = r.dbsize()
+    db_size = r.dbsize()
 
     return dict(key=key, returned_value=right_pop, all_keys=all_keys, db_size=db_size)
 
@@ -218,7 +217,7 @@ def template_sets_cardinality():
     key = request.POST.get('key', '').strip() 
     cardinality = r.scard(key)
     all_keys = r.keys('*')
-    dbsize = r.dbsize()
+    db_size = r.dbsize()
 
     return dict(key=key, returned_value=cardinality, all_keys=all_keys, db_size=db_size)
 
@@ -237,7 +236,7 @@ def template_sets_members():
     key = key
     members = r.smembers(key)
     all_keys = r.keys('*')
-    dbsize = r.dbsize()
+    db_size = r.dbsize()
   
     return dict(key=key, returned_value=members, all_keys=all_keys, db_size=db_size)
 
@@ -246,10 +245,10 @@ def template_sets_members():
 @route('/sets/random/', method='POST')
 @view('central')
 def template_sets_srandom():
-    key = key
+    key = request.POST.get('key', '').strip()
     random_member = r.srandmember(key)
     all_keys = r.keys('*')
-    dbsize = r.dbsize()
+    db_size = r.dbsize()
   
     return dict(key=key, returned_value=random_member, all_keys=all_keys, db_size=db_size)
 
@@ -295,7 +294,7 @@ def template_zsets_cardinality():
     key = request.POST.get('key', '').strip() 
     cardinality = r.zcard(key)
     all_keys = r.keys('*')
-    dbsize = r.dbsize()
+    db_size = r.dbsize()
 
     return dict(key=key, returned_value=cardinality, all_keys=all_keys, db_size=db_size)
 
