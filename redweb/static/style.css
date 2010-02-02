@@ -40,6 +40,8 @@ hr {
 	margin: 30px;
 	padding: 20px;
 	background-color:#DADEE6;
+	overflow-x: hidden; 
+	overflow-y: scroll;
 	position:fixed;
 	right: 3%;
 	border-style:solid;
