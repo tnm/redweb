@@ -203,7 +203,7 @@ i
     <h3>Add a member to a sorted set (ZADD)</h3>
     <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
        Member:<input type="text" name="member" input class=":required :only_on_submit input_form" /></p>
-       Score:<input type="text" name="score" input class=":required :only_on_submit input_form" /><
+       Score:<input type="text" name="score" input class=":required :only_on_submit input_form" />
     <input type="submit" class="submit_form" value="Add" />
 
     </form>
