@@ -30,9 +30,9 @@ More and To Do
 
 Redweb is certainly alpha. It implements a fair amount of Redis functionality, but there is still more to be added. A soon-to-happen commit will implement union and intersection functionality. My plan is to eventually include all Redis functionality.
 
-I intend to keep Redweb as current as possible for each new Redis releases.
+I intend to keep Redweb as current as possible for each new Redis release.
 
-Feel free to fork. Contributions are welcome.
+Feel free to fork. Patches are welcome.
 
 Author: Ted Nyman - @tnm8
 
