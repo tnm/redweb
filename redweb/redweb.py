@@ -264,7 +264,7 @@ def template_zsets_add():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
     score = request.POST.get('score', '').strip()
-    zset_add = r.zadd(key, member)
+    zset_add = r.zadd(key, member, score)
     all_keys = r.keys('*')
     db_size = r.dbsize()  
  

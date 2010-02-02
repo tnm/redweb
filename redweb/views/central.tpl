@@ -41,7 +41,7 @@ i
 
 <div class="main">   
 <h1 class = "red"> Welcome to Redweb.</h1>
-<p>Redweb is a web interface for Redis, by Ted Nyman. It's MIT licensed, so go ahead and <a href="https://github.com/tnm/redweb"> fork Redweb</a>on GitHub!</div>
+<p>Redweb is a web interface for Redis, by Ted Nyman. It's MIT licensed, so go ahead and <a href="https://github.com/tnm/redweb">fork Redweb</a>on GitHub!</div>
 
  <a name="strings"></a>
 <div class="main">     
