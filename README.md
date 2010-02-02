@@ -3,7 +3,7 @@ Redweb
 
 Redweb is a web interface to the Redis key-value store and server. It is written in Python, powered by the Bottle micro-framework. You can think of Redweb as something like phpMyAdmin, but for Redis (and written in Python, of course).
 
-But Redweb is more than that, too. The Redweb source can be reused to create web applications that utilize Bottle and Redis. For example, you should be able to piece together code from Redweb and (with some additions) cook up a simple Twitter clone. So Redweb is sort of like a reversible jacket -- you get two neat things for the price of one. Well, for no price actually, as Redweb is MIT-licensed and wants to be forked.
+But Redweb is more than that, too. The Redweb source can be reused to create neat web applications that utilize Bottle and Redis. So Redweb is sort of like a reversible jacket -- you get two nice featuresfor the price of one. Well, you get it for no price actually -- Redweb is MIT-licensed.
 
 The basic idea derives from my super-simple [RedBottle](http://github.com/tnm/redbottle/"RedBottle") project.
 
