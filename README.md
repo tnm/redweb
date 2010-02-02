@@ -12,18 +12,20 @@ Install and Run
 
 Installation is simple. The only requirements are [Redis](http://code.google.com/p/redis/ "Redis"), [Bottle](http://github.com/defnull/bottle "Bottle"), and the Python interface for Redis (the latter two are included here). For now, I recommend using the version of the [Python interface] (http://github.com/razmataz/redis-py "Python Interface") included here, for its style of string handling (the [main trunk](http://github.com/andymccurdy/redis-py/ "main trunk") of redis-py will soon have similar changes).
 
-Make sure Bottle and redis-py are in in your PYTHONPATH.
+Make sure Bottle and redis-py are in your PYTHONPATH.
 
-Start your Redis server, and then:
+Start your Redis server, head to the Redweb directory, and then:
 
 `python redweb.py`
 
-The interface will start on localhost. The Python codes lives at ** redweb.py**, and the web template code is at **central.tpl**. I've included some client-side JS form validation, as well.  
+The web interface will start on localhost, so point your browser to **http://127.0.0.1:8080/**. 
+
+The Python codes lives at ** redweb.py**, and the web template code is at **central.tpl**. I've included some client-side JS form validation, as well.  
 
 What You Can Do
 ---------------
 
-You will be able to add key-value pairs, return random values, append lists and sets, and more, through an easy-to-use web interface. The code is easily portable, and can be incorporated into simple, quick apps that utilize Bottle and Redis.
+You will be able to add key-value pairs, return random values, append lists and sets, and more, through an easy-to-use web interface. The code is easily portable, and can be incorporated into simple, quick applications that utilize Bottle and Redis.
 
 More and To Do
 ---------------
