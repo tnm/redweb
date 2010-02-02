@@ -28,7 +28,7 @@ You will be able to add key-value pairs, return random values, append lists and 
 More and To Do
 ---------------
 
-Redweb is certainly alpha. It implements a fair amount of Redis functionality, but there is still more to be added. A soon-to-happen commit will implement union and intersection functionality. My plan is to eventually include all Redis functionality.
+Redweb is certainly alpha. It implements a fair amount of Redis functionality, but there is still more to be added. A soon-to-happen commit will bring union and intersection functionality. My plan is to eventually include all Redis functionality.
 
 I intend to keep Redweb as current as possible for each new Redis release.
 
