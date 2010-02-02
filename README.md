@@ -34,6 +34,8 @@ Redweb is certainly alpha. It implements a fair amount of Redis functionality, b
 
 I intend to keep Redweb as current as possible for each new Redis release.
 
+JSON serialization is also on the to-do list.
+
 Feel free to fork. Patches are welcome.
 
 Author: Ted Nyman - @tnm8
