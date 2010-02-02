@@ -11,7 +11,7 @@
 
 <body> 
 <div id="header-wrap"> 
-<h1>Returned Value/Request: <strong class="red">{{returned_value}}</strong></h1>
+<h1>Returned: <strong class="red">{{returned_value}}</strong></h1>
 </div>
 
 <div class="sidebar">
@@ -39,7 +39,7 @@
 
 
 <div class="main">   
-<h1 class = "red"> Welcome to Redweb.</h1>
+<h1 class = "red"> Redweb.</h1>
 <p>Redweb is a web interface for Redis, by Ted Nyman. It's MIT licensed, so go ahead and <a href="https://github.com/tnm/redweb">fork Redweb</a>on GitHub!</div>
 
  <a name="strings"></a>

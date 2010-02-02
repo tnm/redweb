@@ -233,7 +233,7 @@ def template_sets_cardinality():
 @route('/sets/members/', method='POST')
 @view('central')
 def template_sets_members():
-    key = key
+    key = request.POST.get('key', '').strip()
     members = r.smembers(key)
     all_keys = r.keys('*')
     db_size = r.dbsize()
