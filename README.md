@@ -18,9 +18,9 @@ Start your Redis server, head to the Redweb directory, and then:
 
 `python redweb.py`
 
-The web interface will start on localhost, so point your browser to **http://127.0.0.1:8080/**. 
+The web interface will start on localhost, so point your browser to `http://127.0.0.1:8080/`. 
 
-The Python codes lives at ** redweb.py**, and the web template code is at **central.tpl**. I've included some client-side JS form validation, as well.  
+The Python code lives at ** redweb.py**, and the web template is at **/views/central.tpl**. I've included some client-side JS form validation, as well.  
 
 What You Can Do
 ---------------
