@@ -22,7 +22,6 @@
 <p>Database Size: <strong>{{db_size}}</strong></p>
 <hr />
 <p>All Keys:</p>
-i
 <p>
 %for all_keys in all_keys:
 <form name="key_delete" action="/delete/" method="post">
