@@ -263,11 +263,12 @@ Sorted Sets
 def template_zsets_add():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
+    score = request.POST.get('score', '').strip()
     zset_add = r.zadd(key, member)
     all_keys = r.keys('*')
     db_size = r.dbsize()  
  
-    return dict(key=key, value=value, returned_value=returned_value, all_keys=all_keys, db_size=db_size)      
+    return dict(key=key, value=value, score=score, returned_value=returned_value, all_keys=all_keys, db_size=db_size)      
 
 
 # ZREM | remove a member of a sorted set
