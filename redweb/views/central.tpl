@@ -179,18 +179,6 @@
 
     <hr />
 
-    
-    <form name="set_intersection" action="/sets/intersection/" method="post">
-
-    <h3>Return the values that any number of sets share in common (SINTER) </h3>
-    <p>Keys (comma seperated):<input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
-
-    <input type="submit" class="submit_form" value="Return Members" />
-
-    </form>
-
-    <hr />
-
     <form name="set_members" action="/sets/members/" method="post">
 
     <h3>Return all members of a set (SMEMBERS)</h3>

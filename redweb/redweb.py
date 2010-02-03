@@ -237,16 +237,7 @@ def template_sets_cardinality():
 # SISMEMBER
 
 # SINTER | for any number of sets, return the values that those sets all share
-@route('/sets/intersection/', method='POST')
-@view('central')
-def template_sets_insection():
-    key = request.POST.get('key', '').strip()
-        
-    intersection = r.sinter()
-    all_keys = r.keys('*')
-    db_size = r.dbsize()
 
-    return dict(key=key, returned_value=intersection, all_keys=all_keys, db_size=db_size, search_result=search_result)
 
 
 
