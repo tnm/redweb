@@ -25,7 +25,9 @@ The Python code lives at ** redweb.py**, and the web template is at **/views/cen
 What You Can Do
 ---------------
 
-You will be able to add key-value pairs, return random values, append lists and sets, and more, through an easy-to-use web interface. The code is easily portable, and can be incorporated into simple, quick applications that utilize Bottle and Redis.
+You will be able to add key-value pairs, return random values, append lists and sets, and more, through an easy-to-use web interface. You can also use standard Redis syntax to search for keys and delete keys.
+
+The code is easily portable, and can be incorporated into simple, quick applications that utilize Bottle and Redis.
 
 More and To Do
 ---------------
