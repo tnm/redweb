@@ -21,16 +21,22 @@
 <hr />
 <p>Database Size: <strong>{{db_size}}</strong></p>
 <hr />
-<p>All Keys:</p>
-<p>
-%for all_keys in all_keys:
+<p>Search for keys: (use <strong>*</strong> for wildcard)</p>
+    <form name="search" action="/search/" method="post">
+    <input type="text" name="key" input class=":required :only_on_submit input_form" />
+    <input type="submit" value="Search" /></p>
+
+    </form>
+<p>Results:</p>
+%for results in search_result:
 <form name="key_delete" action="/delete/" method="post">
-<input type="text" name="key_delete" value="{{all_keys}}" readonly  />
+<input type="text" name="key_delete" value="{{results}}" readonly  />
 <input type="submit" value="Delete" />
 </form>
 %end
+
+
 <hr />
-</p>
 
 </div>
 
@@ -168,6 +174,18 @@
     <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
 
     <input type="submit" class="submit_form" value="Return Cardinality" />
+
+    </form>
+
+    <hr />
+
+    
+    <form name="set_intersection" action="/sets/intersection/" method="post">
+
+    <h3>Return the values that any number of sets share in common (SINTER) </h3>
+    <p>Keys (comma seperated):<input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+
+    <input type="submit" class="submit_form" value="Return Members" />
 
     </form>
 
