@@ -256,7 +256,17 @@ def template_sets_intersection():
 
 
 # SUNION
-
+@route('/sets/union/', method='POST')
+@view('central')
+def template_sets_union():
+    key = request.POST.get('key', '').strip()
+    keys = string.split(key, ',')
+    tuple_keys = tuple(keys)
+    union = r.sunion('%s' % ' '.join(tuple_keys))
+    all_keys = r.keys('*')
+    db_size = r.dbsize()
+  
+    return dict(key=key, returned_value=union, all_keys=all_keys, db_size=db_size, search_result=search_result)
 
 
 # SUNIONSTORE
