@@ -44,6 +44,11 @@ Feel free to fork. Patches are welcome.
 
 Author: Ted Nyman - @tnm8
 
+Screenshot
+-----------
+![Screenshot of Redweb](http://www.philosophyofweb.com/redweb5.gif "Redweb")
+
+
 MIT License
 ------------
 Copyright (c) 2010 Ted Nyman
