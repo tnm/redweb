@@ -5,6 +5,7 @@ __license__ = 'MIT'
 from bottle import route, request, response, view, send_file, run
 import redis
 import bottle
+import string
 
 # Bottle debug - remove in production!
 bottle.debug(True)
@@ -237,7 +238,17 @@ def template_sets_cardinality():
 # SISMEMBER
 
 # SINTER | for any number of sets, return the values that those sets all share
-
+@route('/sets/intersection/', method='POST')
+@view('central')
+def template_sets_intersection():
+    key = request.POST.get('key', '').strip()
+    keys = string.split(key, ',')
+    tuple_keys = tuple(keys)
+    intersection = r.sinter('%s' % ' '.join(tuple_keys))
+    all_keys = r.keys('*')
+    db_size = r.dbsize()
+  
+    return dict(key=key, returned_value=intersection, all_keys=all_keys, db_size=db_size, search_result=search_result)
 
 
 
