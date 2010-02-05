@@ -31,9 +31,8 @@ def static_file(filename):
 @view('central')
 def template_keyvalue():
    db_size = r.dbsize()
-   all_keys = r.keys('*')
   
-   return dict(returned_value=returned_value, all_keys=all_keys, db_size=db_size, search_result=search_result)
+   return dict(returned_value=returned_value, db_size=db_size, search_result=search_result)
 
 """
 Actions for all data types
@@ -46,9 +45,8 @@ def template_delete():
     key_delete = request.POST.get('key_delete', '').strip()
     r.delete(key_delete)
     db_size = r.dbsize()
-    all_keys = r.keys('*')
 	   
-    return dict(db_size = db_size, all_keys = all_keys, returned_value=returned_value, search_result=search_result, key=key_delete)
+    return dict(db_size = db_size, returned_value=returned_value, search_result=search_result, key=key_delete)
 
 @route('/delete/all/', method='POST')
 @view('central')
@@ -56,20 +54,18 @@ def template_delete_all():
 
     delete_all = request.POST.get('delete_all', '').strip()
     r.flushdb()
-    all_keys = r.keys('*')
     db_size = r.dbsize()
 
-    return dict(all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(db_size=db_size, search_result=search_result)
 
 @route('/search/', method='POST')
 @view('central')
 def template_search():
     key = request.POST.get('key', '').strip()
     search_result = r.keys(key)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
 
-    return dict(all_keys=all_keys, db_size=db_size, returned_value=returned_value, search_result=search_result)
+    return dict(db_size=db_size, returned_value=returned_value, search_result=search_result)
 
 
 """
@@ -83,10 +79,9 @@ def template_strings_set():
     key = request.POST.get('key', '').strip()
     value = request.POST.get('value', '').strip()
     r.set(key,value)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
  
-    return dict(key=key, value=value, returned_value=returned_value, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, value=value, returned_value=returned_value, db_size=db_size, search_result=search_result)
 
 
 # GET | return the string value of a key
@@ -95,10 +90,9 @@ def template_strings_set():
 def template_string_get():
     key = request.POST.get('key', '').strip()
     returned_value = r.get(key)	
-    all_keys = r.keys('*')
     db_size = r.dbsize()
 	
-    return dict(key=key, returned_value=returned_value, all_keys=all_keys, db_size=db_size, search_result=search_result)	
+    return dict(key=key, returned_value=returned_value,  db_size=db_size, search_result=search_result)	
 
 
 """
@@ -113,10 +107,9 @@ def template_lists_rightpush():
     key = request.POST.get('key', '').strip()
     element = request.POST.get('element', '').strip()
     r.push(key,element)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
  
-    return dict(key=key, element=element, returned_value=returned_value, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, element=element, returned_value=returned_value, db_size=db_size, search_result=search_result)
 
 
 # LPUSH | append an element to the head of a list
@@ -126,10 +119,9 @@ def template_lists_leftpush():
     key = request.POST.get('key', '').strip()
     element = request.POST.get('element', '').strip()
     r.push(key,element, tail=True)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
  
-    return dict(key=key, element=element, returned_value=returned_value, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, element=element, returned_value=returned_value, db_size=db_size, search_result=search_result)
 
 
 # LLEN | return the length of a list
@@ -138,10 +130,9 @@ def template_lists_leftpush():
 def template_lists_length():
     key = request.POST.get('key', '').strip()
     llen = r.llen(key)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
 
-    return dict(key=key, returned_value=llen, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=llen, db_size=db_size, search_result=search_result)
 
 
 # LRANGE | return a range of elements from a list
@@ -152,10 +143,9 @@ def template_lists_range():
     start = request.POST.get('start', '').strip()
     end = request.POST.get('end', '').strip()
     list_range = r.lrange(key, start, end)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
 
-    return dict(key=key, list_range=list_range, returned_value=returned_value, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, list_range=list_range, returned_value=returned_value, db_size=db_size, search_result=search_result)
 
 # LTRIM
 # LINDEX
@@ -169,10 +159,9 @@ def template_lists_range():
 def template_lists_lpop():
     key = request.POST.get('key', '').strip()
     left_pop = r.pop(key)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
 
-    return dict(key=key, returned_value=left_pop, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=left_pop, db_size=db_size, search_result=search_result)
 
 
 # RPOP | return and remove the last element of a list
@@ -181,10 +170,9 @@ def template_lists_lpop():
 def template_lists_rpop():
     key = request.POST.get('key', '').strip()
     right_pop = r.pop(key, tail=True)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
 
-    return dict(key=key, returned_value=right_pop, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=right_pop, db_size=db_size, search_result=search_result)
 
 # BLPOP
 # BRPOP
@@ -202,10 +190,9 @@ def template_sets_add():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
     set_add = r.sadd(key, member)
-    all_keys = r.keys('*')
     db_size = r.dbsize()  
  
-    return dict(key=key, member=member, returned_value=returned_value, all_keys=all_keys, db_size=db_size, search_result=search_result)      
+    return dict(key=key, member=member, returned_value=returned_value, db_size=db_size, search_result=search_result)      
 
 
 # SREM | remove a member of a set
@@ -215,10 +202,9 @@ def template_sets_remove():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
     set_remove = r.srem(key, member)
-    all_keys = r.keys('*')
     db_size = r.dbsize()  
   
-    return dict(key=key, member=member, returned_value=returned_value, all_keys=all_keys, db_size=db_size, search_result=search_result)      
+    return dict(key=key, member=member, returned_value=returned_value, db_size=db_size, search_result=search_result)      
 
 
 # SPOP
@@ -230,10 +216,9 @@ def template_sets_remove():
 def template_sets_cardinality():
     key = request.POST.get('key', '').strip() 
     cardinality = r.scard(key)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
 
-    return dict(key=key, returned_value=cardinality, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=cardinality, db_size=db_size, search_result=search_result)
 
 # SISMEMBER
 
@@ -245,15 +230,12 @@ def template_sets_intersection():
     keys = string.split(key, ',')
     tuple_keys = tuple(keys)
     intersection = r.sinter('%s' % ' '.join(tuple_keys))
-    all_keys = r.keys('*')
     db_size = r.dbsize()
   
-    return dict(key=key, returned_value=intersection, all_keys=all_keys, db_size=db_size, search_result=search_result)
-
+    return dict(key=key, returned_value=intersection, db_size=db_size, search_result=search_result)
 
 
 # SINTERSTORE
-
 
 # SUNION
 @route('/sets/union/', method='POST')
@@ -263,10 +245,9 @@ def template_sets_union():
     keys = string.split(key, ',')
     tuple_keys = tuple(keys)
     union = r.sunion('%s' % ' '.join(tuple_keys))
-    all_keys = r.keys('*')
     db_size = r.dbsize()
   
-    return dict(key=key, returned_value=union, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=union, db_size=db_size, search_result=search_result)
 
 
 # SUNIONSTORE
@@ -279,10 +260,9 @@ def template_sets_union():
 def template_sets_members():
     key = request.POST.get('key', '').strip()
     members = r.smembers(key)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
   
-    return dict(key=key, returned_value=members, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=members, db_size=db_size, search_result=search_result)
 
 
 # SRANDMEMBER | return a random member of set, without removing it
@@ -291,10 +271,9 @@ def template_sets_members():
 def template_sets_srandom():
     key = request.POST.get('key', '').strip()
     random_member = r.srandmember(key)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
   
-    return dict(key=key, returned_value=random_member, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=random_member, db_size=db_size, search_result=search_result)
 
 
 """
@@ -309,10 +288,9 @@ def template_zsets_add():
     member = request.POST.get('member', '').strip()
     score = request.POST.get('score', '').strip()
     zset_add = r.zadd(key, member, score)
-    all_keys = r.keys('*')
     db_size = r.dbsize()  
  
-    return dict(key=key, member=member, score=score, returned_value=returned_value, all_keys=all_keys, db_size=db_size, search_result=search_result)      
+    return dict(key=key, member=member, score=score, returned_value=returned_value, db_size=db_size, search_result=search_result)      
 
 
 # ZREM | remove a member of a sorted set
@@ -322,10 +300,9 @@ def template_zsets_remove():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
     zset_remove = r.zrem(key, member)
-    all_keys = r.keys('*')
     db_size = r.dbsize()  
   
-    return dict(key=key, member=member, returned_value=returned_value, all_keys=all_keys, db_size=db_size, search_result=search_result)      
+    return dict(key=key, member=member, returned_value=returned_value, db_size=db_size, search_result=search_result)      
 
 # ZINCRBY
 # ZCRANGE
@@ -338,10 +315,9 @@ def template_zsets_remove():
 def template_zsets_cardinality():
     key = request.POST.get('key', '').strip() 
     cardinality = r.zcard(key)
-    all_keys = r.keys('*')
     db_size = r.dbsize()
 
-    return dict(key=key, returned_value=cardinality, all_keys=all_keys, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=cardinality, db_size=db_size, search_result=search_result)
 
 # ZSCORE
 # ZREMRANGEBYSCORE
