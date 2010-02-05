@@ -253,7 +253,7 @@
     </div>
 
 <div id = "footer-wrap">
-<p class = "red">Redweb - a web interface for Redis, by Ted Nyman. MIT licensed. <a href="https://github.com/tnm/redweb">Fork Redweb</a> on GitHub!
+<p class = "red"><strong>Redweb</strong> - a web interface for Redis, by Ted Nyman. MIT licensed. <a href="https://github.com/tnm/redweb">Fork Redweb</a> on GitHub!
 
 </div>
 
