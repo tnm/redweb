@@ -176,7 +176,7 @@
     <hr />
 
     <form name="set_move" action="/sets/move/" method="post">
-    <h3>Move a member of a set to another set(SMOVE)</h3>
+    <h3>Move a member of a set to another set (SMOVE)</h3>
     <p>Source Key:<input type="text" name="source_key" input class=":required :only_on_submit input_form" />
        Destination Key:<input type="text" name="destination_key" input class=":required :only_on_submit input_form" /><br />
        Member:<input type="text" name="member" input class=":required :only_on_submit input_form" />
@@ -190,6 +190,16 @@
 
     <h3>Return the cardinality of a set (SCARD)</h3>
     <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return Cardinality" /></p>
+
+    </form>
+
+    <hr />
+
+    <form name="set_ismember" action="/sets/ismember/" method="post">
+
+    <h3>Check if member is a member at a particular key - returns 1 if true (SISMEMBER)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
+       Member:<input type="text" name="member" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Check for membership" /></p>
 
     </form>
 

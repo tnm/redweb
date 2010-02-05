@@ -225,7 +225,6 @@ def template_sets_pop():
   
     return dict(key=key, member=member, returned_value=random_pop, db_size=db_size, search_result=search_result)      
 
-
 # SMOVE | move a member of a one set to another set
 @route('/sets/move/', method='POST')
 @view('central')
@@ -239,8 +238,6 @@ def template_sets_move():
     return dict(member=member, returned_value=returned_value, db_size=db_size, search_result=search_result)      
 
 
-
-
 # SCARD | return the cardinality for a set
 @route('/sets/cardinality/', method='POST')
 @view('central')
@@ -251,7 +248,17 @@ def template_sets_cardinality():
 
     return dict(key=key, returned_value=cardinality, db_size=db_size, search_result=search_result)
 
-# SISMEMBER
+
+# SISMEMBER | check if a member is stored at a key - returns 1 if true, 0 if false
+@route('/sets/ismember/', method='POST')
+@view('central')
+def template_sets_ismember():
+    key = request.POST.get('key', '').strip()
+    member = request.POST.get('member', '').strip()
+    is_member = r.sismember(key, member)
+    db_size = r.dbsize()  
+ 
+    return dict(key=key, member=member, returned_value=is_member, db_size=db_size, search_result=search_result)      
 
 # SINTER | for any number of sets, return the intersection
 @route('/sets/intersection/', method='POST')
