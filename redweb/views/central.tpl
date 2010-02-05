@@ -183,11 +183,11 @@
 
     <hr />
 
-    <form name="set_intersection" action="/sets/interstore/" method="post">
+    <form name="set_interstore" action="/sets/interstore/" method="post">
 
-    <h3>For any number of sets, return the intersection of those sets and save it to the destination key(SINTERSTORE)</h3>
+    <h3>For any number of sets, return the intersection of those sets and save it to the destination key (SINTERSTORE)</h3>
  <p>Destination key:<input type="text" name="destkey" input class=":required :only_on_submit input_form" />
-    Keys (comma separated):<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return Intersection" /></p>
+    Keys (comma separated):<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return and Store Intersection" /></p>
 
     </form>
 
@@ -204,6 +204,17 @@
 
     <hr />
 
+    <form name="set_unionstore" action="/sets/unionstore/" method="post">
+
+    <h3>For any number of sets, return the union of those sets and save it to the destination key (SUNIONSTORE)</h3>
+ <p>Destination key:<input type="text" name="destkey" input class=":required :only_on_submit input_form" />
+    Keys (comma separated):<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return and Store Union" /></p>
+
+    </form>
+
+
+    <hr />
+
     <form name="set_difference" action="/sets/difference/" method="post">
 
     <h3>For any number of sets, return the difference between the first set and all subsequent sets (SDIFF)</h3>
@@ -211,6 +222,17 @@
     <input type="submit" class="submit_form" value="Return Difference" /></p>
 
     </form>
+
+    <hr />
+
+    <form name="set_diffstore" action="/sets/diffstore/" method="post">
+
+    <h3>For any number of sets, return the difference and store it to a destination key (SDIFFSTORE)</h3>
+ <p>Destination key:<input type="text" name="destkey" input class=":required :only_on_submit input_form" />
+    Keys (comma separated):<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return and Store Difference" /></p>
+
+    </form>
+
 
     <hr />
 

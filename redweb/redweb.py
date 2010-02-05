@@ -236,12 +236,11 @@ def template_sets_intersection():
 # SINTERSTORE | for any number of sets, return the intersection and store it as a new key
 @route('/sets/interstore/', method='POST')
 @view('central')
-def template_sets_union():
+def template_sets_interstore():
     destination_key = request.POST.get('destkey', '').strip()
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
     tuple_keys = tuple(keys)
-    intersection = r.sinter('%s' % ' '.join(tuple_keys))
     interstore = r.sinterstore('%s %s' % (destination_key, ' '.join(tuple_keys)))
     db_size = r.dbsize()
   
@@ -262,6 +261,17 @@ def template_sets_union():
 
 
 # SUNIONSTORE | for any number of sets, return the union and store it as a new key
+@route('/sets/unionstore/', method='POST')
+@view('central')
+def template_sets_unionstore():
+    destination_key = request.POST.get('destkey', '').strip()
+    key = request.POST.get('key', '').strip()
+    keys = string.split(key, ',')
+    tuple_keys = tuple(keys)
+    unionstore = r.sunionstore('%s %s' % (destination_key, ' '.join(tuple_keys)))
+    db_size = r.dbsize()
+  
+    return dict(key=key, returned_value=returned_value, db_size=db_size, search_result=search_result)
 
 
 # SDIFF | for any number of sets, return the difference
@@ -277,7 +287,20 @@ def template_sets_difference():
     return dict(key=key, returned_value=difference, db_size=db_size, search_result=search_result)
 
 
-# SDIFFSTORE
+# SDIFFSTORE | for any number of sets, return the difference and store it as a new key
+
+@route('/sets/diffstore/', method='POST')
+@view('central')
+def template_sets_diffstore():
+    destination_key = request.POST.get('destkey', '').strip()
+    key = request.POST.get('key', '').strip()
+    keys = string.split(key, ',')
+    tuple_keys = tuple(keys)
+    diffstore = r.sdiffstore('%s %s' % (destination_key, ' '.join(tuple_keys)))
+    db_size = r.dbsize()
+  
+    return dict(key=key, returned_value=returned_value, db_size=db_size, search_result=search_result)
+
 
 # SMEMBERS | return all members of a set
 @route('/sets/members/', method='POST')
