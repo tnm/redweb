@@ -4,7 +4,6 @@
  <title>redweb | web interface for Redis</title>
 
   <link type="text/css" href="/static/style.css" rel="stylesheet" />
-  <link type="text/css" href="/static/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
   
   <script type="text/javascript" src="/static/jquery-1.3.2.min.js"></script>
   <script type="text/javascript" src="/static/jquery-ui-1.7.2.custom.min.js"></script>
@@ -146,9 +145,6 @@
  
     <div id="sets">
 
-    <h2>Sets</h2>
-    <hr />
-
     <form name="set_add" action="/sets/add/" method="post">
 
     <h3>Add a member to a set (SADD)</h3>
@@ -222,8 +218,6 @@
 
     <div id="zsets">
 
-    <h2>Sorted Sets</h2>
-    <hr />
     <form name="zset_remove" action="/zsets/add/" method="post">
     <h3>Add a member to a sorted set (ZADD)</h3>
     <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
