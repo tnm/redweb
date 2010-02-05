@@ -25,14 +25,14 @@ The Python code lives at ** redweb.py**, and the web template is at **/views/cen
 What You Can Do
 ---------------
 
-You will be able to add key-value pairs, return random values, append lists and sets, return intersection and union for sets, and more, through an easy-to-use web interface. You can also use standard Redis syntax to search for keys and delete keys.
+You will be able to add key-value pairs, return random values, append lists and sets, return and store intersection and union for sets, and a good deal more -- through an easy-to-use web interface. You can also use standard Redis syntax to search for keys, and you can delete keys.
 
 The code is easily portable, and can be incorporated into simple, quick applications that utilize Bottle and Redis.
 
 More and To Do
 ---------------
 
-Redweb is certainly alpha. It implements most Redis functionality, but there is still more to be added. Additionaly list and sorted set functionality is upcoming. The plan is to include all Redis functionality soon.
+Redweb is certainly alpha. It implements most Redis functionality, but there is still more to be added. Additional list and sorted set functionality is upcoming. The plan is to include all Redis functionality soon.
 
 I intend to keep Redweb as current as possible for each new Redis release. 
 

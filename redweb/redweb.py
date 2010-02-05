@@ -1,6 +1,16 @@
+"""
+Redweb is a web interface to the Redis key-value store and server. It is written in Python, and is built on the
+Bottle micro-framework. With Redweb, you can easily interact with the Redis database through your
+web browser, utilizing POST functionality.
+
+	5 Feb 2010 | additional set functionality, UI improvements
+	2 Feb 2010 | first public release (0.1.0)
+"""
+
 __author__ = 'Ted Nyman'
 __version__ = '0.1.0'
 __license__ = 'MIT'
+
 
 from bottle import route, request, response, view, send_file, run
 import redis
@@ -16,7 +26,7 @@ r = redis.Redis()
 # returned_value defaults to empty string
 returned_value = ""
 
-# search result defaults to empty string
+# search_result defaults to empty string
 search_result = ""
 
 # Set static file routing
@@ -205,8 +215,31 @@ def template_sets_remove():
     return dict(key=key, member=member, returned_value=returned_value, db_size=db_size, search_result=search_result)      
 
 
-# SPOP
-# SMOVE
+# SPOP | return and remove a random member from a set
+@route('/sets/pop/', method='POST')
+@view('central')
+def template_sets_pop():
+    key = request.POST.get('key', '').strip()
+    random_pop = r.spop(key)
+    db_size = r.dbsize()  
+  
+    return dict(key=key, member=member, returned_value=random_pop, db_size=db_size, search_result=search_result)      
+
+
+# SMOVE | move a member of a one set to another set
+@route('/sets/move/', method='POST')
+@view('central')
+def template_sets_move():
+    source_key = request.POST.get('source_key', '').strip()
+    destination_key = request.POST.get('destination_key', '').strip()
+    member = request.POST.get('member', '').strip()
+    smove = r.smove(source_key, destination_key, member)
+    db_size = r.dbsize()
+ 
+    return dict(member=member, returned_value=returned_value, db_size=db_size, search_result=search_result)      
+
+
+
 
 # SCARD | return the cardinality for a set
 @route('/sets/cardinality/', method='POST')

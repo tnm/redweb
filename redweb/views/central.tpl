@@ -165,6 +165,27 @@
 
     <hr />
 
+    <form name="set_pop" action="/sets/pop/" method="post">
+
+    <h3>Return and remove a random member from a set (POP)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Pop" /></p>
+
+    </form>
+
+
+    <hr />
+
+    <form name="set_move" action="/sets/move/" method="post">
+    <h3>Move a member of a set to another set(SMOVE)</h3>
+    <p>Source Key:<input type="text" name="source_key" input class=":required :only_on_submit input_form" />
+       Destination Key:<input type="text" name="destination_key" input class=":required :only_on_submit input_form" /><br />
+       Member:<input type="text" name="member" input class=":required :only_on_submit input_form" />
+    <input type="submit" class="submit_form" value="Move" /></p>
+
+    </form>
+   
+    <hr />
+
     <form name="set_cardinality" action="/sets/cardinality/" method="post">
 
     <h3>Return the cardinality of a set (SCARD)</h3>
@@ -185,7 +206,7 @@
 
     <form name="set_interstore" action="/sets/interstore/" method="post">
 
-    <h3>For any number of sets, return the intersection of those sets and save it to the destination key (SINTERSTORE)</h3>
+    <h3>For any number of sets, return the intersection and store to the destination key (SINTERSTORE)</h3>
  <p>Destination key:<input type="text" name="destkey" input class=":required :only_on_submit input_form" />
     Keys (comma separated):<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return and Store Intersection" /></p>
 
@@ -206,7 +227,7 @@
 
     <form name="set_unionstore" action="/sets/unionstore/" method="post">
 
-    <h3>For any number of sets, return the union of those sets and save it to the destination key (SUNIONSTORE)</h3>
+    <h3>For any number of sets, return the union and store it to the destination key (SUNIONSTORE)</h3>
  <p>Destination key:<input type="text" name="destkey" input class=":required :only_on_submit input_form" />
     Keys (comma separated):<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return and Store Union" /></p>
 
@@ -296,7 +317,7 @@
     </div>
 
 <div id = "footer-wrap">
-<p class = "red"><strong>Redweb</strong> - a web interface for Redis, by Ted Nyman. MIT licensed. <a href="https://github.com/tnm/redweb">Fork Redweb</a> on GitHub!
+<p><strong class="red">Redweb</strong> | a web interface for Redis, by Ted Nyman | MIT licensed. <a href="https://github.com/tnm/redweb">Fork Redweb</a> on GitHub | The <a href="http://code.google.com/p/redis/wiki/CommandReference">Redis Command Reference</a>
 
 </div>
 
