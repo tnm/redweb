@@ -1,7 +1,7 @@
 <html>
  <head>
 
- <title>redweb | web interface for Redis</title>
+ <title>Redweb | web interface for Redis</title>
 
   <link type="text/css" href="/static/style.css" rel="stylesheet" />
   
@@ -180,14 +180,35 @@
     <p>Keys (comma separated):<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return Intersection" /></p>
 
     </form>
+
+    <hr />
+
+    <form name="set_intersection" action="/sets/interstore/" method="post">
+
+    <h3>For any number of sets, return the intersection of those sets and save it to the destination key(SINTERSTORE)</h3>
+ <p>Destination key:<input type="text" name="destkey" input class=":required :only_on_submit input_form" />
+    Keys (comma separated):<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return Intersection" /></p>
+
+    </form>
+
     
     <hr />
 
-    <form name="set_union" action="/sets/intersection/" method="post">
+    <form name="set_union" action="/sets/union/" method="post">
 
     <h3>For any number of sets, return the the union of those sets (SUNION)</h3>
     <p>Keys (comma separated):<input type="text" name="key" input class=":required :only_on_submit input_form" />
     <input type="submit" class="submit_form" value="Return Union" /></p>
+
+    </form>
+
+    <hr />
+
+    <form name="set_difference" action="/sets/difference/" method="post">
+
+    <h3>For any number of sets, return the difference between the first set and all subsequent sets (SDIFF)</h3>
+    <p>Keys (comma separated):<input type="text" name="key" input class=":required :only_on_submit input_form" />
+    <input type="submit" class="submit_form" value="Return Difference" /></p>
 
     </form>
 

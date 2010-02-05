@@ -24,8 +24,6 @@ search_result = ""
 def static_file(filename):
     send_file(filename, root='../redweb/static')
 
-
-
 # Home route
 @route('/')
 @view('central')
@@ -222,7 +220,7 @@ def template_sets_cardinality():
 
 # SISMEMBER
 
-# SINTER | for any number of sets, return the values that those sets all share
+# SINTER | for any number of sets, return the intersection
 @route('/sets/intersection/', method='POST')
 @view('central')
 def template_sets_intersection():
@@ -235,9 +233,22 @@ def template_sets_intersection():
     return dict(key=key, returned_value=intersection, db_size=db_size, search_result=search_result)
 
 
-# SINTERSTORE
+# SINTERSTORE | for any number of sets, return the intersection and store it as a new key
+@route('/sets/interstore/', method='POST')
+@view('central')
+def template_sets_union():
+    destination_key = request.POST.get('destkey', '').strip()
+    key = request.POST.get('key', '').strip()
+    keys = string.split(key, ',')
+    tuple_keys = tuple(keys)
+    intersection = r.sinter('%s' % ' '.join(tuple_keys))
+    interstore = r.sinterstore('%s %s' % (destination_key, ' '.join(tuple_keys)))
+    db_size = r.dbsize()
+  
+    return dict(key=key, returned_value=returned_value, db_size=db_size, search_result=search_result)
 
-# SUNION
+
+# SUNION | for any number of sets, return the union
 @route('/sets/union/', method='POST')
 @view('central')
 def template_sets_union():
@@ -250,8 +261,22 @@ def template_sets_union():
     return dict(key=key, returned_value=union, db_size=db_size, search_result=search_result)
 
 
-# SUNIONSTORE
-# SDIFF
+# SUNIONSTORE | for any number of sets, return the union and store it as a new key
+
+
+# SDIFF | for any number of sets, return the difference
+@route('/sets/difference/', method='POST')
+@view('central')
+def template_sets_difference():
+    key = request.POST.get('key', '').strip()
+    keys = string.split(key, ',')
+    tuple_keys = tuple(keys)
+    difference = r.sunion('%s' % ' '.join(tuple_keys))
+    db_size = r.dbsize()
+  
+    return dict(key=key, returned_value=difference, db_size=db_size, search_result=search_result)
+
+
 # SDIFFSTORE
 
 # SMEMBERS | return all members of a set
