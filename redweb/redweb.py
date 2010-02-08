@@ -2,13 +2,14 @@
 Redweb is a web interface to the Redis key-value store and server. It is written in Python, and is built on the
 Bottle micro-framework. With Redweb, you can easily interact with the Redis database through your
 web browser, utilizing POST functionality.
-
+	
+	8 Feb 2010 | all functions return either a status code, value, or other (0.1.1)
 	5 Feb 2010 | additional set functionality, UI improvements
 	2 Feb 2010 | first public release (0.1.0)
 """
 
 __author__ = 'Ted Nyman'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __license__ = 'MIT'
 
 
@@ -86,10 +87,10 @@ Strings
 def template_strings_set():
     key = request.POST.get('key', '').strip()
     value = request.POST.get('value', '').strip()
-    r.set(key,value)
+    set = r.set(key,value)
     db_size = r.dbsize()
  
-    return dict(key=key, value=value, returned_value=returned_value, db_size=db_size, search_result=search_result)
+    return dict(key=key, value=value, returned_value=set, db_size=db_size, search_result=search_result)
 
 
 # GET | return the string value of a key
@@ -97,10 +98,10 @@ def template_strings_set():
 @view('central')
 def template_string_get():
     key = request.POST.get('key', '').strip()
-    returned_value = r.get(key)	
+    get = r.get(key)	
     db_size = r.dbsize()
 	
-    return dict(key=key, returned_value=returned_value,  db_size=db_size, search_result=search_result)	
+    return dict(key=key, returned_value=get,  db_size=db_size, search_result=search_result)	
 
 
 """
@@ -114,10 +115,10 @@ Lists
 def template_lists_rightpush():
     key = request.POST.get('key', '').strip()
     element = request.POST.get('element', '').strip()
-    r.push(key,element)
+    right_push = r.push(key,element)
     db_size = r.dbsize()
  
-    return dict(key=key, element=element, returned_value=returned_value, db_size=db_size, search_result=search_result)
+    return dict(key=key, element=element, returned_value=right_push, db_size=db_size, search_result=search_result)
 
 
 # LPUSH | append an element to the head of a list
@@ -126,10 +127,10 @@ def template_lists_rightpush():
 def template_lists_leftpush():
     key = request.POST.get('key', '').strip()
     element = request.POST.get('element', '').strip()
-    r.push(key,element, tail=True)
+    left_push = r.push(key,element, tail=True)
     db_size = r.dbsize()
  
-    return dict(key=key, element=element, returned_value=returned_value, db_size=db_size, search_result=search_result)
+    return dict(key=key, element=element, returned_value=left_push, db_size=db_size, search_result=search_result)
 
 
 # LLEN | return the length of a list
@@ -153,7 +154,7 @@ def template_lists_range():
     list_range = r.lrange(key, start, end)
     db_size = r.dbsize()
 
-    return dict(key=key, list_range=list_range, returned_value=returned_value, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=list_range, db_size=db_size, search_result=search_result)
 
 # LTRIM
 # LINDEX
@@ -200,7 +201,7 @@ def template_sets_add():
     set_add = r.sadd(key, member)
     db_size = r.dbsize()  
  
-    return dict(key=key, member=member, returned_value=returned_value, db_size=db_size, search_result=search_result)      
+    return dict(key=key, member=member, returned_value=set_add, db_size=db_size, search_result=search_result)      
 
 
 # SREM | remove a member of a set
@@ -212,7 +213,7 @@ def template_sets_remove():
     set_remove = r.srem(key, member)
     db_size = r.dbsize()  
   
-    return dict(key=key, member=member, returned_value=returned_value, db_size=db_size, search_result=search_result)      
+    return dict(key=key, member=member, returned_value=set_remove, db_size=db_size, search_result=search_result)      
 
 
 # SPOP | return and remove a random member from a set
@@ -235,7 +236,7 @@ def template_sets_move():
     smove = r.smove(source_key, destination_key, member)
     db_size = r.dbsize()
  
-    return dict(member=member, returned_value=returned_value, db_size=db_size, search_result=search_result)      
+    return dict(member=member, returned_value=smove, db_size=db_size, search_result=search_result)      
 
 
 # SCARD | return the cardinality for a set
@@ -284,7 +285,7 @@ def template_sets_interstore():
     interstore = r.sinterstore('%s %s' % (destination_key, ' '.join(tuple_keys)))
     db_size = r.dbsize()
   
-    return dict(key=key, returned_value=returned_value, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=interstore, db_size=db_size, search_result=search_result)
 
 
 # SUNION | for any number of sets, return the union
@@ -311,7 +312,7 @@ def template_sets_unionstore():
     unionstore = r.sunionstore('%s %s' % (destination_key, ' '.join(tuple_keys)))
     db_size = r.dbsize()
   
-    return dict(key=key, returned_value=returned_value, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=unionstore, db_size=db_size, search_result=search_result)
 
 
 # SDIFF | for any number of sets, return the difference
@@ -339,7 +340,7 @@ def template_sets_diffstore():
     diffstore = r.sdiffstore('%s %s' % (destination_key, ' '.join(tuple_keys)))
     db_size = r.dbsize()
   
-    return dict(key=key, returned_value=returned_value, db_size=db_size, search_result=search_result)
+    return dict(key=key, returned_value=diffstore, db_size=db_size, search_result=search_result)
 
 
 # SMEMBERS | return all members of a set
@@ -378,7 +379,7 @@ def template_zsets_add():
     zset_add = r.zadd(key, member, score)
     db_size = r.dbsize()  
  
-    return dict(key=key, member=member, score=score, returned_value=returned_value, db_size=db_size, search_result=search_result)      
+    return dict(key=key, member=member, score=score, returned_value=zset_add, db_size=db_size, search_result=search_result)      
 
 
 # ZREM | remove a member of a sorted set
@@ -390,7 +391,7 @@ def template_zsets_remove():
     zset_remove = r.zrem(key, member)
     db_size = r.dbsize()  
   
-    return dict(key=key, member=member, returned_value=returned_value, db_size=db_size, search_result=search_result)      
+    return dict(key=key, member=member, returned_value=zset_remove, db_size=db_size, search_result=search_result)      
 
 # ZINCRBY
 # ZCRANGE

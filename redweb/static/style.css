@@ -25,6 +25,10 @@ strong {
 	margin: 0;
 }
 
+.spacer {
+	margin-left: 80px;
+}
+
 a:hover {
 
 	text-decoration: underline;
