@@ -303,7 +303,7 @@
    
     <hr />
 
-    <form name="zset_remove" action="/sets/remove/" method="post">
+    <form name="zset_remove" action="/zsets/remove/" method="post">
 
     <h3>Remove a member from a sorted set (ZREM)</h3>
     <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
@@ -319,6 +319,15 @@
     <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
     <input type="submit" class="submit_form" value="Return Cardinality" /></p>
 
+    </form>
+ 
+    <hr />
+
+    <form name="zset_score" action="/zsets/score/" method="post">
+
+    <h3>Return the score for a key a member (ZSCORE)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
+       Member:<input type="text" name="member" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return Score" /></p>
 
     </form>
 

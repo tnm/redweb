@@ -3,7 +3,7 @@ Redweb is a web interface to the Redis key-value store and server. It is written
 Bottle micro-framework. With Redweb, you can easily interact with the Redis database through your
 web browser, utilizing POST functionality.
 	
-	8 Feb 2010 | all functions return either a status code, value, or other (0.1.1)
+	8 Feb 2010 | all current functions return either a status code, value, etc. (0.1.1)
 	5 Feb 2010 | additional set functionality, UI improvements
 	2 Feb 2010 | first public release (0.1.0)
 """
@@ -408,7 +408,17 @@ def template_zsets_cardinality():
 
     return dict(key=key, returned_value=cardinality, db_size=db_size, search_result=search_result)
 
-# ZSCORE
+# ZSCORE | return the score for a particular key and member
+@route('/zsets/score/', method='POST')
+@view('central')
+def template_zsets_score():
+    key = request.POST.get('key', '').strip()
+    member = request.POST.get('member', '').strip()
+    score = r.zscore(key, member)
+    db_size = r.dbsize()  
+  
+    return dict(key=key, member=member, returned_value=score, db_size=db_size, search_result=search_result)    
+
 # ZREMRANGEBYSCORE
 
 
