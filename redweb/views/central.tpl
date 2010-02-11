@@ -23,6 +23,16 @@
 			});
   </script>
 
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$("#info").hide();
+					$("#info_button").click(function() {
+					$("#info").animate({height: "toggle"}, 500);
+					});
+				});
+  </script>
+
+
 
 </head>
 
@@ -36,6 +46,15 @@
 <hr />
 <p>Database Size: <strong>{{db_size}}</strong></p>
 <hr />
+
+
+<button id="info_button">Detailed Database Info</button>
+<div id="info">
+<p>{{info}}</p>
+</div>
+<hr />
+
+
 <p>Search for keys: (use <strong>*</strong> for wildcard)</p>
     <form name="search" action="/search/" method="post">
     <input type="text" name="key" input class=":required :only_on_submit input_form" />
@@ -325,7 +344,7 @@
 
     <form name="zset_score" action="/zsets/score/" method="post">
 
-    <h3>Return the score for a key a member (ZSCORE)</h3>
+    <h3>Return the score for a key and member (ZSCORE)</h3>
     <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
        Member:<input type="text" name="member" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return Score" /></p>
 
