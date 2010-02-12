@@ -142,6 +142,40 @@
 
     <hr />
 
+    <form name="list_range" action="/lists/range/" method="post">
+
+    <h3>Return a range of elements from a list (LRANGE)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
+       Start:<input type="text" name="start" input class=":required :only_on_submit input_form" />
+       End:<input type="text" name="end" input class=":required :only_on_submit input_form" />
+      <input type="submit" class="submit_form" value="Return Elements" /></p>
+
+    </form>
+
+    <hr />
+
+    <form name="list_trim" action="/lists/trim/" method="post">
+
+    <h3>Trim a list so it contains just a specific range of elements (LTRIM)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
+       Start:<input type="text" name="start" input class=":required :only_on_submit input_form" />
+       End:<input type="text" name="end" input class=":required :only_on_submit input_form" />
+      <input type="submit" class="submit_form" value="Trim" /></p>
+
+    </form>
+
+    <hr />
+
+    <form name="list_index" action="/lists/lindex/" method="post">
+
+    <h3>Return an indexed element for a particular key (LINDEX)</h3>
+    <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" />
+       Index:<input type="text" name="index" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Return Element" /></p>
+
+    </form>
+
+    <hr />
+
     <form name="list_lpop" action="/lists/leftpop/" method="post">
 
     <h3>Return and remove the first element of a list (LPOP)</h3>
@@ -157,6 +191,8 @@
     <p>Key:<input type="text" name="key" input class=":required :only_on_submit input_form" /><input type="submit" class="submit_form" value="Right Pop" /></p>
 
     </form>
+
+
 
 
    </div>
@@ -196,8 +232,8 @@
 
     <form name="set_move" action="/sets/move/" method="post">
     <h3>Move a member of a set to another set (SMOVE)</h3>
-    <p>Source Key:<input type="text" name="source_key" input class=":required :only_on_submit input_form" />
-       Destination Key:<input type="text" name="destination_key" input class=":required :only_on_submit input_form" /><br />
+    <p>Source key:<input type="text" name="source_key" input class=":required :only_on_submit input_form" />
+       Destination key:<input type="text" name="destination_key" input class=":required :only_on_submit input_form" /><br />
        Member:<input type="text" name="member" input class=":required :only_on_submit input_form" />
     <input type="submit" class="submit_form" value="Move" /></p>
 

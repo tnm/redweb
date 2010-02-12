@@ -170,8 +170,32 @@ def template_lists_range():
     return dict(key=key, returned_value=list_range, db_size=db_size, search_result=search_result, info=info)
 
 
-# LTRIM
-# LINDEX
+# LTRIM | trim a list so that it contains just the specific range of elements
+@route('/lists/trim/', method='POST')
+@view('central')
+def template_lists_range():
+    key = request.POST.get('key', '').strip()
+    start = request.POST.get('start', '').strip()
+    end = request.POST.get('end', '').strip()
+    ltrim = r.ltrim(key, start, end)
+    db_size = r.dbsize()
+    info = r.info()
+
+    return dict(key=key, returned_value=ltrim, db_size=db_size, search_result=search_result, info=info)
+
+
+# LINDEX | return the indexed element for a particular key
+@route('/lists/lindex/', method='POST')
+@view('central')
+def template_lists_lindex():
+    key = request.POST.get('key', '').strip()
+    index = request.POST.get('index', '').strip()
+    list_index = r.lindex(key, index)
+    db_size = r.dbsize()
+    info = r.info()
+ 
+    return dict(key=key, returned_value=list_index, db_size=db_size, search_result=search_result, info=info)
+
 # LSET
 # LREM
 
@@ -474,7 +498,6 @@ Sorting, Persistence, Remote Server
 @route('/info/', method='POST')
 @view('central')
 def template_info():
-    info = r.info()
     db_size = r.dbsize()  
     info = r.info()  
   
