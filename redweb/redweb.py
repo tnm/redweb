@@ -41,8 +41,7 @@ def static_file(filename):
 def template_keyvalue():
    db_size = r.dbsize()
    info = r.info()
-
-  
+ 
    return dict(returned_value=returned_value, db_size=db_size, search_result=search_result, info=info)
 
 """
