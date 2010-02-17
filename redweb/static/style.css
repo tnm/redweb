@@ -68,7 +68,7 @@ a:hover {
 .sidebar{
 	width: 25%;
 	height: 68%;
-	margin: 20px;
+	margin: 30px;
 	padding: 20px;
 	background-color:white;
 	overflow-x: hidden; 
@@ -77,7 +77,7 @@ a:hover {
 	right: 3%;
 	border-style:solid;
 	border-width:1px;
-	border-color: #7A7C80;
+	border-color: #cccccc;
 	text-align: left;
 
 }
@@ -225,7 +225,7 @@ div.vanadium-valid {
 /* Component containers
 ----------------------------------*/
 .ui-widget { font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; }
-.ui-widget-content { border: 1px solid;	border-color: #7A7C80; background: white; top repeat-x; color: #333333;	}
+.ui-widget-content { border: 0px solid;	border-color: #7A7C80; background: white; top repeat-x; color: #333333;	}
 .ui-widget-content a { color: #333333; }
 .ui-widget-header { background: white; repeat-x; color: #ffffff; font-weight: bold; }
 .ui-widget-header a { color: #ffffff; }
@@ -242,14 +242,23 @@ div.vanadium-valid {
 
 /* Tabs
 ----------------------------------*/
-.ui-tabs { padding: 10px; zoom: 1; }
+.ui-tabs { padding: 0px; zoom: 1; }
 .ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: 10px 10px 0; }
 .ui-tabs .ui-tabs-nav li { position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0; }
 .ui-tabs .ui-tabs-nav li a { float: left; text-decoration: none; padding: .5em 1em; }
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 1px; border-bottom-width: 0; }
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
 .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } 
-.ui-tabs .ui-tabs-panel { padding: 10px 10px; display: block; border-width: 0; background: none; }
+.ui-tabs .ui-tabs-panel { padding: 0px 10px; display: block; border-width: 0; background: none; }
 .ui-tabs .ui-tabs-hide { display: none !important; }
 
+/* Accordion
+----------------------------------*/
+.ui-accordion .ui-accordion-header { cursor: pointer; position: relative; margin-top: 1px; zoom: 1; }
+.ui-accordion .ui-accordion-li-fix { display: inline; }
+.ui-accordion .ui-accordion-header-active { border-bottom: 0 !important; }
+.ui-accordion .ui-accordion-header a { display: block; font-size: 1em; padding: .5em .5em .5em 2.2em; }
+.ui-accordion .ui-accordion-header .ui-icon { position: absolute; left: .5em; top: 50%; margin-top: -8px; }
+.ui-accordion .ui-accordion-content { padding: 1.75em 1em; border-width:1px; border-color: #fbd850; border-top: 0; margin-top: -2px; position: relative; top: 1px; margin-bottom: 2px; overflow: auto; display: none; }
+.ui-accordion .ui-accordion-content-active { display: block; }
 
