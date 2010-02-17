@@ -2,27 +2,20 @@
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	margin: 0;
-	padding: 0;
 	text-align:center;
 	background-repeat:repeat-x;
 }
 
 hr {
-	border:none 0;
-	margin-top:10px;
-	border-top:2px dotted #999;
-	height:1px;
 }
 
 a {
 
 	text-decoration: underline;
 	color: #3471CD;
-	margin: 0;
 }
 
 strong {
-	margin: 0;
 }
 
 .spacer {
@@ -39,8 +32,7 @@ a:hover {
 
 #header-wrap {
 	position: fixed;
-	top: -10px;
-	left: -10px;
+        top:0px;
 	width: 100%;
 	height: 55px;
 	text-align:left;
@@ -51,8 +43,8 @@ a:hover {
 
 #footer-wrap {
 	position: fixed;
-	bottom: -10px;
-	left: -10px;
+	bottom: 0px;
+	left: 0px;
 	width: 100%;
 	height: 55px;
 	text-align:left;
@@ -61,20 +53,22 @@ a:hover {
 	z-index:200;
 }
 
+#header-content {
+	margin-left:30px;
+}
 
 
 .wrapper {
 	clear: both;
-	width: 100%
-	margin 0 auto;	
-	margin-top: 65px;
+	width: 100%;
+	margin-top: 60px;
 }
 
 
 .sidebar{
 	width: 25%;
-	height: 600px;
-	margin: 30px;
+	height: 68%;
+	margin: 20px;
 	padding: 20px;
 	background-color:white;
 	overflow-x: hidden; 
@@ -97,17 +91,33 @@ a:hover {
 }
 
 
+label
+	{
+	width: 4em;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block
+}
+
+
+.submit input
+	{
+	margin-left: 4.5em;
+} 
+
+
 .input_form {
 	color: black;
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: normal;
-	line-height: 18px;
+	line-height: 14px;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .submit_form {
 	color: black;
-	font-size: 17px;
+	font-size: 14px;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -130,7 +140,7 @@ h2 {
 }
 
 h3 {
-	font-size:16px;
+	font-size:14px;
 }
 
 
@@ -138,16 +148,13 @@ h4 {
 	font-size:16px;
 }
 
+
 p {
-	font-size: 16px;
+	font-size: 14px;
 }
 
 
 /* style for validation */
-
-* {
-    margin: 10px;
-}
  
 div.vanadium-invalid {
     border-color: red !important;
@@ -244,4 +251,5 @@ div.vanadium-valid {
 .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } 
 .ui-tabs .ui-tabs-panel { padding: 10px 10px; display: block; border-width: 0; background: none; }
 .ui-tabs .ui-tabs-hide { display: none !important; }
+
 
