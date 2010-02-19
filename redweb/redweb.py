@@ -320,7 +320,7 @@ def template_sets_pop():
     db_size = r.dbsize()  
     info = r.info()
   
-    return dict(key=key, member=member, returned_value=random_pop, db_size=db_size, search_result=search_result, info=info)      
+    return dict(key=key, returned_value=random_pop, db_size=db_size, search_result=search_result, info=info)      
 
 # SMOVE | move a member of a one set to another set
 @route('/sets/move/', method='POST')
