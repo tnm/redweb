@@ -267,7 +267,7 @@
 	</form>
 	</div>
 
- 	<h3><a href="#">SISMEMBER | Check if member is a member at a particular key - returns 1 if true</a></h3>
+ 	<h3><a href="#">SISMEMBER | Check if member is a member at a particular key</a></h3>
   	<div>
 	<form name="set_ismember" action="/sets/ismember/" method="post">
  	<p><label for="key">Key:</label><input type="text" name="key" input class=":required :only_on_submit input_form" /></p>

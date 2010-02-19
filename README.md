@@ -10,7 +10,7 @@ The basic idea derives from my super-simple [RedBottle](http://github.com/tnm/re
 Install and Run
 ---------------
 
-Installation is simple. The only requirements are [Redis](http://code.google.com/p/redis/ "Redis"), [Bottle](http://github.com/defnull/bottle "Bottle"), and the Python interface for Redis (the latter two are included here). For now, I recommend using the version of the [Python interface] (http://github.com/razmataz/redis-py "Python Interface") (as modified by razmataz) included here, for how it handles types (the [main trunk](http://github.com/andymccurdy/redis-py/ "main trunk") of redis-py will soon include similar changes).
+Installation is simple. The only requirements are [Redis](http://code.google.com/p/redis/ "Redis"), [Bottle](http://github.com/defnull/bottle "Bottle"), and the Python interface for Redis [redis-py](http://github.com/andymccurdy/redis-py "redis-py") (the latter two are included here). The version of redis-py included here is the newly refactored one -- Redweb is designed for this new version, and it is highly recommended that you install the new client.
 
 Make sure Bottle and redis-py are in your PYTHONPATH.
 

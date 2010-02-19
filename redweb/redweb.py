@@ -176,7 +176,7 @@ Lists
 def template_lists_rightpush():
     key = request.POST.get('key', '').strip()
     element = request.POST.get('element', '').strip()
-    right_push = r.push(key,element)
+    right_push = r.rpush(key,element)
     db_size = r.dbsize()
     info = r.info()
  
@@ -189,7 +189,7 @@ def template_lists_rightpush():
 def template_lists_leftpush():
     key = request.POST.get('key', '').strip()
     element = request.POST.get('element', '').strip()
-    left_push = r.push(key,element, tail=True)
+    left_push = r.lpush(key,element)
     db_size = r.dbsize()
     info = r.info()
  
@@ -368,7 +368,7 @@ def template_sets_intersection():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
     tuple_keys = tuple(keys)
-    intersection = r.sinter('%s' % ' '.join(tuple_keys))
+    intersection = r.sinter(tuple_keys)
     db_size = r.dbsize()
     info = r.info()
   
@@ -383,7 +383,7 @@ def template_sets_interstore():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
     tuple_keys = tuple(keys)
-    interstore = r.sinterstore('%s %s' % (destination_key, ' '.join(tuple_keys)))
+    interstore = r.sinterstore(destination_key, tuple_keys)
     db_size = r.dbsize()
     info = r.info()
   
@@ -397,7 +397,7 @@ def template_sets_union():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
     tuple_keys = tuple(keys)
-    union = r.sunion('%s' % ' '.join(tuple_keys))
+    union = r.sunion(tuple_keys)
     db_size = r.dbsize()
     info = r.info()
   
@@ -412,7 +412,7 @@ def template_sets_unionstore():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
     tuple_keys = tuple(keys)
-    unionstore = r.sunionstore('%s %s' % (destination_key, ' '.join(tuple_keys)))
+    unionstore = r.sunionstore(destination_key, tuple_keys)
     db_size = r.dbsize()
     info = r.info()
   
@@ -426,7 +426,7 @@ def template_sets_difference():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
     tuple_keys = tuple(keys)
-    difference = r.sunion('%s' % ' '.join(tuple_keys))
+    difference = r.sunion(tuple_keys)
     db_size = r.dbsize()
     info = r.info()
   
@@ -441,7 +441,7 @@ def template_sets_diffstore():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
     tuple_keys = tuple(keys)
-    diffstore = r.sdiffstore('%s %s' % (destination_key, ' '.join(tuple_keys)))
+    diffstore = r.sdiffstore(destination_key, tuple_keys)
     db_size = r.dbsize()
     info = r.info()
   
