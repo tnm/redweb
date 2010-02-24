@@ -222,6 +222,26 @@
 	</form>
 	</div>
 
+	<h3><a href="#">LSET | Set an element at index</a></h3>
+    	<div>
+	<form name="list_set" action="/lists/set/" method="post">
+	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="index">Index:</label> <input type="text" name="index" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="element">Element:</label> <input type="text" name="element" input class=":required :only_on_submit input_form" /></p>
+	<p class="submit"> <input type="submit" class="submit_form" value="Set" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">LREM | For any element in a key, remove a specified number of those elements (the count)</a></h3>
+    	<div>
+	<form name="list_remove" action="/lists/remove/" method="post">
+	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="count">Count:</label> <input type="text" name="count" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="element">Element:</label> <input type="text" name="element" input class=":required :only_on_submit input_form" /></p>
+	<p class="submit"> <input type="submit" class="submit_form" value="Remove" /></p>
+	</form>
+	</div>
+
   	<h3><a href="#">LPOP | Return and remove the first element of a list</a></h3>
     	<div>
 	<form name="list_lpop" action="/lists/leftpop/" method="post">

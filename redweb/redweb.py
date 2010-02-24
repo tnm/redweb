@@ -273,8 +273,34 @@ def template_lists_lindex():
  
     return dict(key=key, returned_value=list_index, db_size=db_size, search_result=search_result, info=info)
 
-# LSET
-# LREM
+
+# LSET | set the list element at index
+@route('/lists/set/', method='POST')
+@view('central')
+def template_lists_lset():
+    key = request.POST.get('key', '').strip()
+    index = request.POST.get('index', '').strip()
+    element = request.POST.get('element', '').strip()
+    lset = r.lset(key, index, element)
+    db_size = r.dbsize()
+    info = r.info()
+ 
+    return dict(key=key, returned_value=lset, db_size=db_size, search_result=search_result, info=info)
+
+
+# LREM | for any element in a key, remove a specified number of those elements (the count)
+@route('/lists/remove/', method='POST')
+@view('central')
+def template_lists_lrem():
+    key = request.POST.get('key', '').strip()
+    count= request.POST.get('count', '').strip()
+    element = request.POST.get('element', '').strip()
+    lrem = r.lrem(key, count, element)
+    db_size = r.dbsize()
+    info = r.info()
+ 
+    return dict(key=key, returned_value=lrem, db_size=db_size, search_result=search_result, info=info)
+
 
 
 # LPOP | return and remove the first element of a list
@@ -527,6 +553,7 @@ def template_zsets_remove():
     return dict(key=key, member=member, returned_value=zset_remove, db_size=db_size, search_result=search_result, info=info)      
 
 # ZINCRBY
+
 # ZRANGE
 
 
