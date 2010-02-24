@@ -109,7 +109,7 @@
 	<h3><a href="#">GETSET | Set a new string value for a given key, and return the old value</a></h3>
 	
 	<div>
-	<form name="string_set" action="/strings/getset/" method="post">
+	<form name="string_getset" action="/strings/getset/" method="post">
    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
    	<p><label for="value">Value:</label> <input type="text" name="value" input class=":required :only_on_submit input_form" /></p>
     	<p class="submit"><input type="submit" class="submit_form" value="Set" /></p>
@@ -119,7 +119,7 @@
 	<h3><a href="#">SETNX | Set a string value for a given key, only if the key doesn't exist</a></h3>
 	
 	<div>
-	<form name="string_set" action="/strings/setnx/" method="post">
+	<form name="string_setnx" action="/strings/setnx/" method="post">
    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
    	<p><label for="value">Value:</label> <input type="text" name="value" input class=":required :only_on_submit input_form" /></p>
     	<p class="submit"><input type="submit" class="submit_form" value="Set" /></p>
@@ -136,7 +136,7 @@
 
 	<h3><a href="#">DECR | Decrement a value by 1</a></h3>
 	<div>
-    	<form name="string_get" action="/strings/decrement/" method="post">
+    	<form name="string_decr" action="/strings/decrement/" method="post">
     	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
     	<p class="submit"><input type="submit" class="submit_form" value="Increment" /></p>
 	</form>
@@ -144,7 +144,7 @@
 
 	<h3><a href="#">INCR | Increment a value by an amount</a></h3>
 	<div>
-    	<form name="string_get" action="/strings/incrementby/" method="post">
+    	<form name="string_incr" action="/strings/incrementby/" method="post">
     	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
     	<p><label for="amount">Amount:</label> <input type="text" name="amount" input class=":required :only_on_submit input_form" /></p>
     	<p class="submit"><input type="submit" class="submit_form" value="Increment" /></p>
@@ -153,7 +153,7 @@
 
 	<h3><a href="#">DECR | Decrement a value by an amount</a></h3>
 	<div>
-    	<form name="string_get" action="/strings/decrementby/" method="post">
+    	<form name="string_decr" action="/strings/decrementby/" method="post">
     	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
     	<p><label for="amount">Amount:</label> <input type="text" name="amount" input class=":required :only_on_submit input_form" /></p>
 	<p class="submit"><input type="submit" class="submit_form" value="Decrement" /></p>
