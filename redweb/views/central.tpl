@@ -106,6 +106,26 @@
 	</form>
 	</div>
 
+	<h3><a href="#">GETSET | Set a new string value for a given key, and return the old value</a></h3>
+	
+	<div>
+	<form name="string_set" action="/strings/getset/" method="post">
+   	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+   	<p><label for="value">Value:</label> <input type="text" name="value" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Set" /></p>
+    	</form>
+	</div>
+
+	<h3><a href="#">SETNX | Set a string value for a given key, only if the key doesn't exist</a></h3>
+	
+	<div>
+	<form name="string_set" action="/strings/setnx/" method="post">
+   	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+   	<p><label for="value">Value:</label> <input type="text" name="value" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Set" /></p>
+    	</form>
+	</div>
+
 	<h3><a href="#">INCR | Increment a value by 1</a></h3>
 	<div>
     	<form name="string_get" action="/strings/increment/" method="post">

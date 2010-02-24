@@ -111,13 +111,38 @@ def template_string_get():
 	
     return dict(key=key, returned_value=get, db_size=db_size, search_result=search_result, info=info)	
 
-#GETSET
-#MGET
-#SETNXT
-#MSET
-#MSETNX
+# GETSET | set a string value for a key, only if the key does not exist, and return value
+@route('/strings/getset/', method='POST')
+@view('central')
+def template_strings_getset():
+    key = request.POST.get('key', '').strip()
+    value = request.POST.get('value', '').strip()
+    getset = r.getset(key,value)
+    db_size = r.dbsize()
+    info = r.info()
+ 
+    return dict(key=key, value=value, returned_value=getset, db_size=db_size, search_result=search_result, info=info)
 
-#INCR | increment a value by 1
+#MGET
+
+# SETNX | set a string value for a given key, only if the key does not exists
+@route('/strings/setnx/', method='POST')
+@view('central')
+def template_strings_setnx():
+    key = request.POST.get('key', '').strip()
+    value = request.POST.get('value', '').strip()
+    setnx = r.setnx(key,value)
+    db_size = r.dbsize()
+    info = r.info()
+ 
+    return dict(key=key, value=value, returned_value=setnx, db_size=db_size, search_result=search_result, info=info)
+
+
+
+# MSET
+# MSETNX
+
+# INCR | increment a value by 1
 @route('/strings/increment/', method='POST')
 @view('central')
 def template_string_increment():
@@ -129,7 +154,7 @@ def template_string_increment():
     return dict(key=key, returned_value=increment, db_size=db_size, search_result=search_result, info=info)	
 
 
-#INCRBY | increment a value by any amount
+# INCRBY | increment a value by any amount
 @route('/strings/incrementby/', method='POST')
 @view('central')
 def template_string_incrementby():
@@ -141,7 +166,7 @@ def template_string_incrementby():
 	
     return dict(key=key, returned_value=incrementby, db_size=db_size, search_result=search_result, info=info)	
 
-#DECR | decrement a value by 1
+# DECR | decrement a value by 1
 @route('/strings/decrement/', method='POST')
 @view('central')
 def template_string_decrement():
@@ -152,7 +177,7 @@ def template_string_decrement():
 	
     return dict(key=key, returned_value=decrement, db_size=db_size, search_result=search_result, info=info)	
 
-#DECRBY | decrement a value by any amount
+# DECRBY | decrement a value by any amount
 @route('/strings/decrementby/', method='POST')
 @view('central')
 def template_string_decrementby():
