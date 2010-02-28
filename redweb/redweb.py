@@ -3,13 +3,14 @@ Redweb is a web interface to the Redis key-value store and server. It is written
 Bottle micro-framework. With Redweb, you can easily interact with the Redis database through your
 web browser, utilizing POST functionality.
 	
+       28 Feb 2010 | Redweb requires refactored redis-py bindings (0.2.0)
 	8 Feb 2010 | all current functions return either a status code, value, etc. (0.1.1)
 	5 Feb 2010 | additional set functionality, UI improvements
 	2 Feb 2010 | first public release (0.1.0)
 """
 
 __author__ = 'Ted Nyman'
-__version__ = '0.1.1'
+__version__ = '0.2.0'
 __license__ = 'MIT'
 
 
