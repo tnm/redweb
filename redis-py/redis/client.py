@@ -6,7 +6,27 @@ import warnings
 from redis.exceptions import ConnectionError, ResponseError, InvalidResponse
 from redis.exceptions import RedisError, AuthenticationError
 
-_connection_manager = threading.local()
+class ConnectionManager(threading.local):
+    "Manages a list of connections on the local thread"
+    def __init__(self):
+        self.connections = {}
+        
+    def make_connection_key(self, host, port, db):
+        "Create a unique key for the specified host, port and db"
+        return '%s:%s:%s' % (host, port, db)
+        
+    def get_connection(self, host, port, db, password):
+        "Return a specific connection for the specified host, port and db"
+        key = self.make_connection_key(host, port, db)
+        if key not in self.connections:
+            self.connections[key] = Connection(host, port, db, password)
+        return self.connections[key]
+        
+    def get_all_connections(self):
+        "Return a list of all connection objects the manager knows about"
+        return self.connections.values()
+        
+connection_manager = ConnectionManager()
 
 class Connection(object):
     "Manages TCP communication to and from a Redis server"
@@ -74,7 +94,7 @@ class Connection(object):
 def list_or_args(command, keys, args):
     # returns a single list combining keys and args
     # if keys is not a list or args has items, issue a
-    # deprecation wanring
+    # deprecation warning
     oldapi = bool(args)
     try:
         i = iter(keys)
@@ -143,17 +163,16 @@ def zset_score_pairs(response, **options):
     return zip(response[::2], map(float, response[1::2]))
     
     
-class Redis(object):
+class Redis(threading.local):
     """
     Implementation of the Redis protocol.
     
-    This abstract class proviles a Python interface to all Redis commands
+    This abstract class provides a Python interface to all Redis commands
     and an implementation of the Redis protocol.
     
     Connection and Pipeline derive from this, implementing how
     the commands are sent and received to the Redis server
     """
-    
     RESPONSE_CALLBACKS = dict_merge(
         string_keys_to_dict(
             'AUTH DEL EXISTS EXPIRE MOVE MSETNX RENAMENX SADD SISMEMBER SMOVE '
@@ -165,9 +184,15 @@ class Redis(object):
             'ZCARD ZREMRANGEBYSCORE',
             int
             ),
-        string_keys_to_dict('ZSCORE ZINCRBY', float),
         string_keys_to_dict(
-            'FLUSHALL FLUSHDB LPUSH LSET LTRIM MSET RENAME RPUSH '
+            # these return OK, or int if redis-server is >=1.3.4
+            'LPUSH RPUSH',
+            lambda r: isinstance(r, int) and r or r == 'OK'
+            ),
+        string_keys_to_dict('ZSCORE ZINCRBY',
+            lambda r: r is not None and float(r) or r),
+        string_keys_to_dict(
+            'FLUSHALL FLUSHDB LSET LTRIM MSET RENAME '
             'SAVE SELECT SET SHUTDOWN',
             lambda r: r == 'OK'
             ),
@@ -176,13 +201,12 @@ class Redis(object):
             ),
         string_keys_to_dict('ZRANGE ZRANGEBYSCORE ZREVRANGE', zset_score_pairs),
         {
-            'BGSAVE' : lambda r: r == 'Background saving started',
-            'INFO' : parse_info,
-            'KEYS' : lambda r: r and r.split(' ') or [],
-            'LASTSAVE' : timestamp_to_datetime,
-            'PING' : lambda r: r == 'PONG',
-            'RANDOMKEY' : lambda r: r and r or None,
-            'TTL' : lambda r: r != -1 and r or None,
+            'BGSAVE': lambda r: r == 'Background saving started',
+            'INFO': parse_info,
+            'LASTSAVE': timestamp_to_datetime,
+            'PING': lambda r: r == 'PONG',
+            'RANDOMKEY': lambda r: r and r or None,
+            'TTL': lambda r: r != -1 and r or None,
         }
         )
     
@@ -222,7 +246,7 @@ class Redis(object):
             self.connection.disconnect()
             return self._execute_command(command_name, command, **options)
         
-    def _parse_response(self, command_name):
+    def _parse_response(self, command_name, catch_errors):
         conn = self.connection
         response = conn.read().strip()
         if not response:
@@ -258,13 +282,27 @@ class Redis(object):
             length = int(response)
             if length == -1:
                 return None
-            return [self._parse_response(command_name) for i in range(length)]
+            if not catch_errors:
+                return [self._parse_response(command_name, catch_errors) 
+                    for i in range(length)]
+            else:
+                # for pipelines, we need to read everything, including response errors.
+                # otherwise we'd completely mess up the receive buffer
+                data = []
+                for i in range(length):
+                    try:
+                        data.append(
+                            self._parse_response(command_name, catch_errors)
+                            )
+                    except Exception, e:
+                        data.append(e)
+                return data
             
         raise InvalidResponse("Unknown response type for: %s" % command_name)
         
-    def parse_response(self, command_name, **options):
+    def parse_response(self, command_name, catch_errors=False, **options):
         "Parses a response from the Redis server"
-        response = self._parse_response(command_name)
+        response = self._parse_response(command_name, catch_errors)
         if command_name in self.RESPONSE_CALLBACKS:
             return self.RESPONSE_CALLBACKS[command_name](response, **options)
         return response
@@ -309,13 +347,7 @@ class Redis(object):
     #### CONNECTION HANDLING ####
     def get_connection(self, host, port, db, password):
         "Returns a connection object"
-        key = '%s:%s:%s' % (host, port, db)
-        if not hasattr(_connection_manager, key):
-            setattr(
-                _connection_manager,
-                key, 
-                Connection(host, port, db, password))
-        conn = getattr(_connection_manager, key)
+        conn = connection_manager.get_connection(host, port, db, password)
         # if for whatever reason the connection gets a bad password, make
         # sure a subsequent attempt with the right password makes its way
         # to the connection
@@ -347,7 +379,7 @@ class Redis(object):
     def bgsave(self):
         """
         Tell the Redis server to save its data to disk.  Unlike save(),
-        this method is asynchronus and returns immediately.
+        this method is asynchronous and returns immediately.
         """
         return self.format_inline('BGSAVE')
         
@@ -357,7 +389,7 @@ class Redis(object):
         
     def delete(self, *names):
         "Delete one or more keys specified by ``names``"
-        return self.format_inline('DEL', ' '.join(names))
+        return self.format_inline('DEL', *names)
     __delitem__ = delete
     
     def flush(self, all_dbs=False):
@@ -409,6 +441,7 @@ class Redis(object):
     def exists(self, name):
         "Returns a boolean indicating whether key ``name`` exists"
         return self.format_inline('EXISTS', name)
+    __contains__ = exists
         
     def expire(self, name, time):
         "Set an expire on key ``name`` for ``time`` seconds"
@@ -431,7 +464,7 @@ class Redis(object):
     def incr(self, name, amount=1):
         """
         Increments the value of ``key`` by ``amount``.  If no key exists,
-        the value will be initialied as ``amount``
+        the value will be initialized as ``amount``
         """
         return self.format_inline('INCRBY', name, amount)
         
@@ -449,14 +482,14 @@ class Redis(object):
         return self.format_inline('MGET', *keys)
         
     def mset(self, mapping):
-        "Sets each key in the ``mapping`` dict to it's corresponding value"
+        "Sets each key in the ``mapping`` dict to its corresponding value"
         items = []
         [items.extend(pair) for pair in mapping.iteritems()]
         return self.format_multi_bulk('MSET', *items)
         
     def msetnx(self, mapping):
         """
-        Sets each key in the ``mapping`` dict to it's corresponding value if
+        Sets each key in the ``mapping`` dict to its corresponding value if
         none of the keys are already set
         """
         items = []
@@ -675,7 +708,7 @@ class Redis(object):
             
         ``desc`` allows for reversing the sort
         
-        ``alpha`` allows for sorting lexographically rather than numerically
+        ``alpha`` allows for sorting lexicographically rather than numerically
         
         ``store`` allows for storing the result of the sort into 
             the key ``store``
@@ -810,7 +843,7 @@ class Redis(object):
         pieces = ['ZRANGE', name, start, end]
         if withscores:
             pieces.append('withscores')
-        return self.format_inline(*pieces, **{'withscores' : withscores})
+        return self.format_inline(*pieces, **{'withscores': withscores})
         
     def zrangebyscore(self, name, min, max, start=None, num=None, withscores=False):
         """
@@ -830,7 +863,7 @@ class Redis(object):
             pieces.extend(['LIMIT', start, num])
         if withscores:
             pieces.append('withscores')
-        return self.format_inline(*pieces, **{'withscores' : withscores})
+        return self.format_inline(*pieces, **{'withscores': withscores})
         
     def zrem(self, name, value):
         "Remove member ``value`` from sorted set ``name``"
@@ -856,11 +889,24 @@ class Redis(object):
         pieces = ['ZREVRANGE', name, start, num]
         if withscores:
             pieces.append('withscores')
-        return self.format_inline(*pieces, **{'withscores' : withscores})
+        return self.format_inline(*pieces, **{'withscores': withscores})
         
     def zscore(self, name, value):
         "Return the score of element ``value`` in sorted set ``name``"
         return self.format_bulk('ZSCORE', name, value)
+        
+    
+    #### HASH COMMANDS ####
+    def hget(self, name, key):
+        "Return the value of ``key`` within the hash ``name``"
+        return self.format_bulk('HGET', name, key)
+        
+    def hset(self, name, key, value):
+        """
+        Set ``key`` to ``value`` within hash ``name``
+        Returns 1 if HSET created a new field, otherwise 0
+        """
+        return self.format_multi_bulk('HSET', name, key, value)
         
     
 class Pipeline(Redis):
@@ -869,16 +915,27 @@ class Pipeline(Redis):
     in one transmission.  This is convenient for batch processing, such as
     saving all the values in a list to Redis.
     
-    Note that pipelining does *not* guarentee all the commands will be executed
-    together atomically, nor does it guarentee any transactional consistency.
-    If the third command in the batch fails, the first two will still have been
-    executed and "committed"
+    All commands executed within a pipeline are wrapped with MULTI and EXEC
+    calls. This guarantees all commands executed in the pipeline will be
+    executed atomically.
+    
+    Any command raising an exception does *not* halt the execution of
+    subsequent commands in the pipeline. Instead, the exception is caught
+    and its instance is placed into the response list returned by execute().
+    Code iterating over the response list should be able to deal with an
+    instance of an exception as a potential value. In general, these will be
+    ResponseError exceptions, such as those raised when issuing a command
+    on a key of a different datatype.
     """
     def __init__(self, connection, charset, errors):
         self.connection = connection
-        self.command_stack = []
         self.encoding = charset
         self.errors = errors
+        self.reset()
+        
+    def reset(self):
+        self.command_stack = []
+        self.format_inline('MULTI')
         
     def execute_command(self, command_name, command, **options):
         """
@@ -897,22 +954,42 @@ class Pipeline(Redis):
         # _setup_connection(). run these commands immediately without
         # buffering them.
         if command_name in ('AUTH', 'SELECT'):
-            response = self._execute([(command_name, command, options)])
-            return response[0]
+            return super(Pipeline, self).execute_command(
+                command_name, command, **options)
         else:
             self.command_stack.append((command_name, command, options))
         return self
         
     def _execute(self, commands):
-        for _, command, options in commands:
-            self.connection.send(command, self)
-        return [self.parse_response(name, **options) 
-                for name, _, options in commands]
+        # build up all commands into a single request to increase network perf
+        all_cmds = ''.join([c for _1, c, _2 in commands])
+        self.connection.send(all_cmds, self)
+        # we only care about the last item in the response, which should be
+        # the EXEC command
+        for i in range(len(commands)-1):
+            _ = self.parse_response('_')
+        # tell the response parse to catch errors and return them as
+        # part of the response
+        response = self.parse_response('_', catch_errors=True)
+        # don't return the results of the MULTI or EXEC command
+        commands = [(c[0], c[2]) for c in commands[1:-1]]
+        if len(response) != len(commands):
+            raise ResponseError("Wrong number of response items from "
+                "pipline execution")
+        # Run any callbacks for the commands run in the pipeline
+        data = []
+        for r, cmd in zip(response, commands):
+            if not isinstance(r, Exception):
+                if cmd[0] in self.RESPONSE_CALLBACKS:
+                    r = self.RESPONSE_CALLBACKS[cmd[0]](r, **cmd[1])
+            data.append(r)
+        return data
         
     def execute(self):
         "Execute all the commands in the current pipeline"
+        self.format_inline('EXEC')
         stack = self.command_stack
-        self.command_stack = []
+        self.reset()
         try:
             return self._execute(stack)
         except ConnectionError:
