@@ -257,6 +257,7 @@
   	<p class="submit"><input type="submit" class="submit_form" value="Right Pop" /></p>
 	</form>
 	</div>
+
 </div>
 </div>
 
@@ -406,6 +407,17 @@
  	<p><label for="key">Key:</label><input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
  	<p><label for="member">Member:</label> <input type="text" name="member" input class=":required :only_on_submit input_form" /></p>
  	<p class="submit"> <input type="submit" class="submit_form" value="Remove" /></p>
+	</form>
+	</div>
+
+ 	<h3><a href="#">ZINCRBY | Increment a member by any amount</a></h3>
+  	<div>
+	<form name="zset_remove" action="/zsets/remove/" method="post">
+ 	<p><label for="key">Key:</label><input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+ 	<p><label for="member">Member:</label> <input type="text" name="member" input class=":required :only_on_submit input_form" /></p>
+ 	<p><label for="amount">Amount:</label> <input type="text" name="amount" input class=":required :only_on_submit input_form" /></p>
+
+ 	<p class="submit"> <input type="submit" class="submit_form" value="Increment" /></p>
 	</form>
 	</div>
 

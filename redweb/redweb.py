@@ -309,7 +309,7 @@ def template_lists_lrem():
 @view('central')
 def template_lists_lpop():
     key = request.POST.get('key', '').strip()
-    left_pop = r.pop(key)
+    left_pop = r.lpop(key)
     db_size = r.dbsize()
     info = r.info()
 
@@ -321,17 +321,45 @@ def template_lists_lpop():
 @view('central')
 def template_lists_rpop():
     key = request.POST.get('key', '').strip()
-    right_pop = r.pop(key, tail=True)
+    right_pop = r.rpop(key)
     db_size = r.dbsize()
     info = r.info()
 
     return dict(key=key, returned_value=right_pop, db_size=db_size, search_result=search_result, info=info)
 
+"""
+These features are only in the Git edge versions of Redis -- you can activate the features if you are using
+Redis version 1.3.1 or greater
 
 # BLPOP
-# BRPOP
-# RPOPLPPUSH
+@route('/lists/blpop/', method='POST')
+@view('central')
+def template_lists_blpop():
+    key = request.POST.get('key', '').strip()
+    keys = string.split(key, ',')
+    tuple_keys = tuple(keys)
+    blpop = r.blpop(tuple_keys)
+    db_size = r.dbsize()
+    info = r.info()
 
+    return dict(key=key, returned_value=blpop, db_size=db_size, search_result=search_result, info=info)
+
+
+# BRPOP
+@route('/lists/brpop/', method='POST')
+@view('central')
+def template_lists_blrop():
+    key = request.POST.get('key', '').strip()
+    keys = string.split(key, ',')
+    tuple_keys = tuple(keys)
+    brpop = r.brpop(tuple_keys)
+    db_size = r.dbsize()
+    info = r.info()
+
+    return dict(key=key, returned_value=brpop, db_size=db_size, search_result=search_result, info=info)
+
+# RPOPLPPUSH
+"""
 
 """
 Sets
@@ -553,7 +581,19 @@ def template_zsets_remove():
   
     return dict(key=key, member=member, returned_value=zset_remove, db_size=db_size, search_result=search_result, info=info)      
 
-# ZINCRBY
+# ZINCRBY | increment a member by any amount
+@route('/zsets/incrementby/', method='POST')
+@view('central')
+def template_zsets_incrementby():
+    key = request.POST.get('key', '').strip()
+    member = request.POST.get('member', '').strip()
+    amount = request.POST.get('amount', '').strip()
+    incrementby = r.zincr(key, member, amount)
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=incrementby, db_size=db_size, search_result=search_result, info=info)	
+
 
 # ZRANGE
 
