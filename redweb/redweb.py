@@ -595,7 +595,6 @@ def template_zsets_incrementby():
 	
     return dict(key=key, returned_value=incrementby, db_size=db_size, search_result=search_result, info=info)	
 
-
 # ZRANGE
 
 
@@ -656,7 +655,6 @@ def template_bgsave():
     return dict(returned_value=bgsave, db_size=db_size, search_result=search_result, info=info)
 
 
-
 # LASTSAVE | return the time of the last save
 @route('/lastsave/', method='POST')
 @view('central')
@@ -676,8 +674,6 @@ def template_info():
     info = r.info()  
   
     return dict(returned_value=returned_value, db_size=db_size, search_result=search_result, info=info)    
-
-
 
 
 #run it!

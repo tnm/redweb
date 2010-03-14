@@ -158,7 +158,7 @@
 	</form>
 	</div>
 
-	<h3><a href="#">INCR | Increment a value by an amount</a></h3>
+	<h3><a href="#">INCRBY | Increment a value by an amount</a></h3>
 	<div>
     	<form name="string_incr" action="/strings/incrementby/" method="post">
     	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
@@ -167,7 +167,7 @@
 	</form>
 	</div>
 
-	<h3><a href="#">DECR | Decrement a value by an amount</a></h3>
+	<h3><a href="#">DECRBY | Decrement a value by an amount</a></h3>
 	<div>
     	<form name="string_decr" action="/strings/decrementby/" method="post">
     	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
