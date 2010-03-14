@@ -48,6 +48,15 @@
 <hr />
 
 <p>Database Size: <strong>{{db_size}}</strong> Keys</p>
+
+<form name="save" action="/save/" method="post">
+<input type = "submit" value ="Save">
+</form>
+
+<form name="bgsave" action="/bgsave/" method="post">
+<input type = "submit" value ="Background Save">
+</form>
+
 <hr />
 
 <h3>Detailed Database Info</h3>

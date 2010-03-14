@@ -634,7 +634,28 @@ Sorting, Persistence, Remote Server
 
 # SORT
 
-# BGSAVE
+# SAVE | save the DB to disk
+@route('/save/', method='POST')
+@view('central')
+def template_save():
+    save = r.save()
+    info = r.info()
+    db_size = r.dbsize()
+
+    return dict(returned_value=save, db_size=db_size, search_result=search_result, info=info)
+
+# BGSAVE | save the data to disk -- asynchronous 
+@route('/bgsave/', method='POST')
+@view('central')
+def template_bgsave():
+    bgsave = r.bgsave()
+    info = r.info()
+    db_size = r.dbsize()
+
+    return dict(returned_value=bgsave, db_size=db_size, search_result=search_result, info=info)
+
+
+
 # LASTSAVE
 # SHUTDOWN
 # BGREWRITEAOF
