@@ -57,6 +57,10 @@
 <input type = "submit" value ="Background Save">
 </form>
 
+<form name="lastsave" action="/lastsave/" method="post">
+<input type = "submit" value ="Time of Last Save">
+</form>
+
 <hr />
 
 <h3>Detailed Database Info</h3>
@@ -78,6 +82,9 @@
 <input type="submit" value="Delete" />
 </form>
 %end
+
+
+
 
 </div>
 

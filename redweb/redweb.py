@@ -657,9 +657,16 @@ def template_bgsave():
 
 
 
-# LASTSAVE
-# SHUTDOWN
-# BGREWRITEAOF
+# LASTSAVE | return the time of the last save
+@route('/lastsave/', method='POST')
+@view('central')
+def template_lastsave():
+    lastsave = r.lastsave()
+    info = r.info()
+    db_size = r.dbsize()
+
+    return dict(returned_value=lastsave, db_size=db_size, search_result=search_result, info=info)
+
 
 # INFO
 @route('/info/', method='POST')
@@ -671,8 +678,7 @@ def template_info():
     return dict(returned_value=returned_value, db_size=db_size, search_result=search_result, info=info)    
 
 
-# MONITOR
-# SLAVE
+
 
 #run it!
 run()
