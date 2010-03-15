@@ -487,10 +487,20 @@
 
 	<h3><a href="#">ZREVRANGE (with scores) | Return a range of elements from a list, reverse order, with scores</a></h3>
     	<div>
-	<form name="zset_revrange_scores" action="/zsets/rangewithscores/" method="post">
+	<form name="zset_revrange_scores" action="/zsets/revrangewithscores/" method="post">
 	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
 	<p><label for="start">Start:</label> <input type="text" name="start" input class=":required :only_on_submit input_form" /></p>
 	<p><label for="end">End:</label> <input type="text" name="end" input class=":required :only_on_submit input_form" /></p>
+	<p class="submit"> <input type="submit" class="submit_form" value="Return Elements" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">ZRANGEBYSCORE | Return a range by score</a></h3>
+    	<div>
+	<form name="zset_rangebyscore" action="/zsets/rangebyscore/" method="post">
+	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="start">Min:</label> <input type="text" name="min" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="end">Max:</label> <input type="text" name="max" input class=":required :only_on_submit input_form" /></p>
 	<p class="submit"> <input type="submit" class="submit_form" value="Return Elements" /></p>
 	</form>
 	</div>
@@ -499,8 +509,8 @@
     	<div>
 	<form name="zset_range" action="/zsets/remrangebyscore/" method="post">
 	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
-	<p><label for="start">Min:</label> <input type="text" name="min" input class=":required :only_on_submit input_form" /></p>
-	<p><label for="end">Max:</label> <input type="text" name="max" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="min">Min:</label> <input type="text" name="min" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="max">Max:</label> <input type="text" name="max" input class=":required :only_on_submit input_form" /></p>
 	<p class="submit"> <input type="submit" class="submit_form" value="Remove Elements" /></p>
 	</form>
 	</div>

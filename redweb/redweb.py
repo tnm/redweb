@@ -620,7 +620,18 @@ def template_zsets_zrangewithscores():
 
     return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)
 
-# ZRANGEBYSCORE 
+# ZRANGEBYSCORE | range by score
+@route('/zsets/rangebyscore/', method='POST')
+@view('central')
+def template_rangebyscore():
+    key = request.POST.get('key', '').strip()
+    minimum = request.POST.get('min', '').strip()
+    maximum = request.POST.get('max', '').strip()
+    zrange = r.zrangebyscore(key, minimum, maximum, withscores=False)
+    db_size = r.dbsize()
+    info = r.info()
+  
+    return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)     
 
 # ZREVRANGE | return a range in reverse order
 @route('/zsets/revrange/', method='POST')
@@ -647,7 +658,6 @@ def template_zsets_zrevrangescores():
     info = r.info()
 
     return dict(key=key, returned_value=zrevrange, db_size=db_size, search_result=search_result, info=info)
-
 
 
 # ZCARD | return the cardinality for a set
@@ -688,13 +698,9 @@ def template_zremrangebyscore():
     return dict(key=key, returned_value=remrange, db_size=db_size, search_result=search_result, info=info)    
 
 
-
-
 """
-Sorting, Persistence, Remote Server
+Server
 """
-
-# SORT
 
 # SAVE | save the DB to disk
 @route('/save/', method='POST')
