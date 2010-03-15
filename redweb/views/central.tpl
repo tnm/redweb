@@ -475,6 +475,16 @@
 	</form>
 	</div>
 
+	<h3><a href="#">ZREMRANGEBYSCORE | Remove all elements with a score between min and max</a></h3>
+    	<div>
+	<form name="zset_range" action="/zsets/remrangebyscore/" method="post">
+	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="start">Min:</label> <input type="text" name="min" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="end">Max:</label> <input type="text" name="max" input class=":required :only_on_submit input_form" /></p>
+	<p class="submit"> <input type="submit" class="submit_form" value="Remove Elements" /></p>
+	</form>
+	</div>
+
 
 
 </div>    

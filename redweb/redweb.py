@@ -650,6 +650,19 @@ def template_zsets_score():
     return dict(key=key, member=member, returned_value=score, db_size=db_size, search_result=search_result, info=info)    
 
 # ZREMRANGEBYSCORE
+@route('/zsets/remrangebyscore/', method='POST')
+@view('central')
+def template_zremrangebyscore():
+    key = request.POST.get('key', '').strip()
+    minimum = request.POST.get('min', '').strip()
+    maximum = request.POST.get('max', '').strip()
+    remrange = r.zremrangebyscore(key, minimum, maximum)
+    db_size = r.dbsize()
+    info = r.info()
+  
+    return dict(key=key, returned_value=remrange, db_size=db_size, search_result=search_result, info=info)    
+
+
 
 
 """
