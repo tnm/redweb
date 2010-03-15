@@ -611,6 +611,19 @@ class ServerCommandsTestCase(unittest.TestCase):
             [('a2', 2.0), ('a3', 3.0), ('a4', 4.0)])
         # a non existant key should return None
         self.assertEquals(self.client.zrangebyscore('b', 0, 1, withscores=True), None)
+        
+    def test_zrank(self):
+        # key is not a zset
+        self.client['a'] = 'a'
+        self.assertRaises(redis.ResponseError, self.client.zrank, 'a', 'a4')
+        del self.client['a']
+        # real logic
+        self.make_zset('a', {'a1': 1, 'a2': 2, 'a3': 3, 'a4': 4, 'a5': 5})
+        self.assertEquals(self.client.zrank('a', 'a1'), 0)
+        self.assertEquals(self.client.zrank('a', 'a2'), 1)
+        self.assertEquals(self.client.zrank('a', 'a3'), 2)
+        self.assertEquals(self.client.zrank('a', 'a4'), 3)
+        self.assertEquals(self.client.zrank('a', 'a5'), 4)
             
     def test_zrem(self):
         # key is not a zset
@@ -653,7 +666,19 @@ class ServerCommandsTestCase(unittest.TestCase):
             [('a2', 2.0), ('a1', 1.0)])
         # a non existant key should return None
         self.assertEquals(self.client.zrange('b', 0, 1, withscores=True), None)
-            
+        
+    def test_zrevrank(self):
+        # key is not a zset
+        self.client['a'] = 'a'
+        self.assertRaises(redis.ResponseError, self.client.zrevrank, 'a', 'a4')
+        del self.client['a']
+        # real logic
+        self.make_zset('a', {'a1': 5, 'a2': 4, 'a3': 3, 'a4': 2, 'a5': 1})
+        self.assertEquals(self.client.zrevrank('a', 'a1'), 0)
+        self.assertEquals(self.client.zrevrank('a', 'a2'), 1)
+        self.assertEquals(self.client.zrevrank('a', 'a3'), 2)
+        self.assertEquals(self.client.zrevrank('a', 'a4'), 3)
+        self.assertEquals(self.client.zrevrank('a', 'a5'), 4)
             
     def test_zscore(self):
         # key is not a zset
@@ -672,11 +697,10 @@ class ServerCommandsTestCase(unittest.TestCase):
             self.client.hset(key, k, v)
     
     def test_hget_and_hset(self):
-        # TODO: add these back in, but right now they produce a crash bug.
         # key is not a hash
-        # self.client['a'] = 'a'
-        # self.assertRaises(redis.ResponseError, self.client.hget, 'a', 'a1')
-        # del self.client['a']
+        self.client['a'] = 'a'
+        self.assertRaises(redis.ResponseError, self.client.hget, 'a', 'a1')
+        del self.client['a']
         # no key
         self.assertEquals(self.client.hget('a', 'a1'), None)
         # real logic
@@ -688,6 +712,22 @@ class ServerCommandsTestCase(unittest.TestCase):
         self.assertEquals(self.client.hget('a', 'a2'), '5')
         self.assertEquals(self.client.hset('a', 'a4', 4), 1)
         self.assertEquals(self.client.hget('a', 'a4'), '4')
+        # key inside of hash that doesn't exist returns null value
+        self.assertEquals(self.client.hget('a', 'b'), None)
+        
+    def test_hdel(self):
+        # key is not a hash
+        self.client['a'] = 'a'
+        self.assertRaises(redis.ResponseError, self.client.hdel, 'a', 'a1')
+        del self.client['a']
+        # no key
+        self.assertEquals(self.client.hdel('a', 'a1'), False)
+        # real logic
+        self.make_hash('a', {'a1': 1, 'a2': 2, 'a3': 3})
+        self.assertEquals(self.client.hget('a', 'a2'), '2')
+        self.assert_(self.client.hdel('a', 'a2'))
+        self.assertEquals(self.client.hget('a', 'a2'), None)
+        
     
     # SORT
     def test_sort_bad_key(self):
