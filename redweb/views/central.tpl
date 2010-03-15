@@ -65,7 +65,9 @@
 
 <h3>Detailed Database Info</h3>
 <div>
-<p>{{info}}</p>
+%for key in info:
+<li>{{key}} : <strong> {{info[key]}}</strong> </li>
+%end
 </div>
 <hr />
 
@@ -523,7 +525,7 @@
 
 
 <div id="footer-wrap">
-<div id="header-content"><p><strong class="red">Redweb</strong> | a web interface for Redis, by Ted Nyman | MIT licensed. <a href="https://github.com/tnm/redweb">Fork Redweb</a> on GitHub | The <a href="http://code.google.com/p/redis/wiki/CommandReference">Redis Command Reference</a>
+<div id="header-content"><p><strong class="red">Redweb</strong> | a web interface for Redis | MIT licensed, by Ted Nyman | <a href="https://github.com/tnm/redweb">Source</a> on GitHub | The <a href="http://code.google.com/p/redis/wiki/CommandReference">Redis Command Reference</a>
 </div>
 </div>
 
