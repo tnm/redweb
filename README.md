@@ -32,9 +32,9 @@ The code is easily portable, and can be incorporated into simple, quick applicat
 More and To Do
 ---------------
 
-Redweb implements nearly all Redis functionality, but there is still a bit more to be added. Additional sorted set functionality is upcoming. 
+Redweb implements nearly all current-realese Redis functionality, but there is still a bit more to be added. 
 
-I intend to keep Redweb as current as possible for each new Redis release. 
+Redweb will be kept current with each new Redis release, with each update documented. 
 
 JSON serialization is also on the to-do list
 
