@@ -608,6 +608,18 @@ def template_zsets_zrange():
 
     return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)
 
+@route('/zsets/rangewithscores/', method='POST')
+@view('central')
+def template_zsets_zrangewithscores():
+    key = request.POST.get('key', '').strip()
+    start = request.POST.get('start', '').strip()
+    end = request.POST.get('end', '').strip()
+    zrange = r.zrange(key, start, end, desc=False, withscores=True)
+    db_size = r.dbsize()
+    info = r.info()
+
+    return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)
+
 # ZRANGEBYSCORE
 
 # ZREVRANGE
