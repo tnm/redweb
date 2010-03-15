@@ -3,6 +3,7 @@ Redweb is a web interface to the Redis key-value store and server. It is written
 Bottle micro-framework. With Redweb, you can easily interact with the Redis database through your
 web browser, utilizing POST functionality.
 
+       15 Mar 2010 | Additional ZSET functionality
        13 Mar 2010 | Save and background save functionality added (0.2.1) 		
        28 Feb 2010 | Redweb requires refactored redis-py bindings (0.2.0)
 	8 Feb 2010 | all current functions return either a status code, value, etc. (0.1.1)
@@ -11,7 +12,7 @@ web browser, utilizing POST functionality.
 """
 
 __author__ = 'Ted Nyman'
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 __license__ = 'MIT'
 
 
@@ -46,9 +47,7 @@ def template_keyvalue():
  
    return dict(returned_value=returned_value, db_size=db_size, search_result=search_result, info=info)
 
-"""
-Actions for all data types
-"""
+### Actions for all data types ###
  
 @route('/delete/', method='POST')
 @view('central')
@@ -85,9 +84,8 @@ def template_search():
     return dict(returned_value=returned_value, db_size=db_size, search_result=search_result, info=info)
 
 
-"""
-Strings
-""" 
+### Strings ###
+
 
 # SET | set a string value for a given key
 @route('/strings/set/', method='POST')
@@ -113,6 +111,7 @@ def template_string_get():
 	
     return dict(key=key, returned_value=get, db_size=db_size, search_result=search_result, info=info)	
 
+
 # GETSET | set a string value for a key, only if the key does not exist, and return value
 @route('/strings/getset/', method='POST')
 @view('central')
@@ -125,7 +124,7 @@ def template_strings_getset():
  
     return dict(key=key, value=value, returned_value=getset, db_size=db_size, search_result=search_result, info=info)
 
-#MGET
+# MGET
 
 # SETNX | set a string value for a given key, only if the key does not exists
 @route('/strings/setnx/', method='POST')
@@ -138,7 +137,6 @@ def template_strings_setnx():
     info = r.info()
  
     return dict(key=key, value=value, returned_value=setnx, db_size=db_size, search_result=search_result, info=info)
-
 
 
 # MSET
@@ -192,10 +190,8 @@ def template_string_decrementby():
     return dict(key=key, returned_value=decrementby, db_size=db_size, search_result=search_result, info=info)	
 
 
-"""
-Lists
+### Lists ###
 
-"""
 
 # RPUSH | append an element to the tail of a list
 @route('/lists/rightpush/', method='POST')
@@ -362,9 +358,8 @@ def template_lists_blrop():
 # RPOPLPPUSH
 """
 
-"""
-Sets
-"""
+### Sets ###
+
 
 # SADD | add a member to a set
 @route('/sets/add/', method='POST')
@@ -553,9 +548,8 @@ def template_sets_srandom():
     return dict(key=key, returned_value=random_member, db_size=db_size, search_result=search_result, info=info)
 
 
-"""
-Sorted Sets
-"""
+### Sorted Sets ###
+
 
 # ZADD | add a member to a sorted set
 @route('/zsets/add/', method='POST')
@@ -570,6 +564,7 @@ def template_zsets_add():
  
     return dict(key=key, member=member, score=score, returned_value=zset_add, db_size=db_size, search_result=search_result, info=info)      
 
+
 # ZREM | remove a member of a sorted set
 @route('/zsets/remove/', method='POST')
 @view('central')
@@ -581,6 +576,7 @@ def template_zsets_remove():
     info = r.info()
   
     return dict(key=key, member=member, returned_value=zset_remove, db_size=db_size, search_result=search_result, info=info)      
+
 
 # ZINCRBY | increment a member by any amount
 @route('/zsets/incrementby/', method='POST')
@@ -595,6 +591,7 @@ def template_zsets_incrementby():
 	
     return dict(key=key, returned_value=incrementby, db_size=db_size, search_result=search_result, info=info)	
 
+
 # ZRANGE  return a range
 @route('/zsets/range/', method='POST')
 @view('central')
@@ -608,6 +605,7 @@ def template_zsets_zrange():
 
     return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)
 
+
 @route('/zsets/rangewithscores/', method='POST')
 @view('central')
 def template_zsets_zrangewithscores():
@@ -619,6 +617,7 @@ def template_zsets_zrangewithscores():
     info = r.info()
 
     return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)
+
 
 # ZRANGEBYSCORE | range by score
 @route('/zsets/rangebyscore/', method='POST')
@@ -633,6 +632,7 @@ def template_rangebyscore():
   
     return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)     
 
+
 # ZREVRANGE | return a range in reverse order
 @route('/zsets/revrange/', method='POST')
 @view('central')
@@ -645,6 +645,7 @@ def template_zsets_zrevrange():
     info = r.info()
 
     return dict(key=key, returned_value=zrevrange, db_size=db_size, search_result=search_result, info=info)
+
 
 # ZREVRANGE | return a range in reverse order, with scores
 @route('/zsets/revrangewithscores/', method='POST')
@@ -684,6 +685,7 @@ def template_zsets_score():
   
     return dict(key=key, member=member, returned_value=score, db_size=db_size, search_result=search_result, info=info)    
 
+
 # ZREMRANGEBYSCORE
 @route('/zsets/remrangebyscore/', method='POST')
 @view('central')
@@ -698,9 +700,7 @@ def template_zremrangebyscore():
     return dict(key=key, returned_value=remrange, db_size=db_size, search_result=search_result, info=info)    
 
 
-"""
-Server
-"""
+### Server ###
 
 # SAVE | save the DB to disk
 @route('/save/', method='POST')
@@ -711,6 +711,7 @@ def template_save():
     db_size = r.dbsize()
 
     return dict(returned_value=save, db_size=db_size, search_result=search_result, info=info)
+
 
 # BGSAVE | save the data to disk -- asynchronous 
 @route('/bgsave/', method='POST')
