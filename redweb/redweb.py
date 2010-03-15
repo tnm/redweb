@@ -595,7 +595,7 @@ def template_zsets_incrementby():
 	
     return dict(key=key, returned_value=incrementby, db_size=db_size, search_result=search_result, info=info)	
 
-# ZRANGE
+# ZRANGE  return a range
 @route('/zsets/range/', method='POST')
 @view('central')
 def template_zsets_zrange():
@@ -620,9 +620,34 @@ def template_zsets_zrangewithscores():
 
     return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)
 
-# ZRANGEBYSCORE
+# ZRANGEBYSCORE 
 
-# ZREVRANGE
+# ZREVRANGE | return a range in reverse order
+@route('/zsets/revrange/', method='POST')
+@view('central')
+def template_zsets_zrevrange():
+    key = request.POST.get('key', '').strip()
+    start = request.POST.get('start', '').strip()
+    end = request.POST.get('end', '').strip()
+    zrevrange = r.zrevrange(key, start, end, withscores=False)
+    db_size = r.dbsize()
+    info = r.info()
+
+    return dict(key=key, returned_value=zrevrange, db_size=db_size, search_result=search_result, info=info)
+
+# ZREVRANGE | return a range in reverse order, with scores
+@route('/zsets/revrangewithscores/', method='POST')
+@view('central')
+def template_zsets_zrevrangescores():
+    key = request.POST.get('key', '').strip()
+    start = request.POST.get('start', '').strip()
+    end = request.POST.get('end', '').strip()
+    zrevrange = r.zrevrange(key, start, end, withscores=True)
+    db_size = r.dbsize()
+    info = r.info()
+
+    return dict(key=key, returned_value=zrevrange, db_size=db_size, search_result=search_result, info=info)
+
 
 
 # ZCARD | return the cardinality for a set
