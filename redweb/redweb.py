@@ -596,10 +596,22 @@ def template_zsets_incrementby():
     return dict(key=key, returned_value=incrementby, db_size=db_size, search_result=search_result, info=info)	
 
 # ZRANGE
+@route('/zsets/range/', method='POST')
+@view('central')
+def template_zsets_zrange():
+    key = request.POST.get('key', '').strip()
+    start = request.POST.get('start', '').strip()
+    end = request.POST.get('end', '').strip()
+    zrange = r.zrange(key, start, end, desc=False, withscores=False)
+    db_size = r.dbsize()
+    info = r.info()
 
+    return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)
+
+# ZRANGEBYSCORE
 
 # ZREVRANGE
-# ZRANGEBYSCORE
+
 
 # ZCARD | return the cardinality for a set
 @route('/zsets/cardinality/', method='POST')

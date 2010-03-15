@@ -454,6 +454,19 @@
 	</form>
 	</div>
 
+
+	<h3><a href="#">ZRANGE | Return a range of elements from a list, without scores</a></h3>
+    	<div>
+	<form name="zset_range" action="/zsets/range/" method="post">
+	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="start">Start:</label> <input type="text" name="start" input class=":required :only_on_submit input_form" /></p>
+	<p><label for="end">End:</label> <input type="text" name="end" input class=":required :only_on_submit input_form" /></p>
+	<p class="submit"> <input type="submit" class="submit_form" value="Return Elements" /></p>
+	</form>
+	</div>
+
+
+
 </div>    
 </div>
 </div>
