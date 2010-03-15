@@ -32,7 +32,7 @@ The code is easily portable, and can be incorporated into simple, quick applicat
 More and To Do
 ---------------
 
-Redweb is certainly alpha. It implements most Redis functionality, but there is still more to be added. Additional list and sorted set functionality is upcoming. The plan is to include all Redis functionality soon.
+Redweb implements nearly all Redis functionality, but there is still a bit more to be added. Additional sorted set functionality is upcoming. 
 
 I intend to keep Redweb as current as possible for each new Redis release. 
 
