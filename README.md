@@ -32,7 +32,7 @@ The code is easily portable, and can be incorporated into simple, quick applicat
 More and To Do
 ---------------
 
-Redweb implements nearly all current-realese Redis functionality, but there is still a bit more to be added. 
+Redweb implements nearly all current-release Redis functionality, but there is still a bit more to be added. 
 
 Redweb will be kept current with each new Redis release, with each update documented. 
 
