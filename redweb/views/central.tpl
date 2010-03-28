@@ -578,6 +578,22 @@
 	</form>
 	</div>
 
+	<h3><a href="#">HVALS | Return all the values contained into a hash</a></h3>
+	<div>
+    	<form name="hash_values" action="/hashes/values/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Get Values" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">HGETALL | Return both the fields names and the values contained into a hash</a></h3>
+	<div>
+    	<form name="hash_getall" action="/hashes/getall/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Get All" /></p>
+	</form>
+	</div>
+
 </div>
 </div>
 
