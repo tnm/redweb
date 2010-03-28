@@ -85,9 +85,6 @@
 </form>
 %end
 
-
-
-
 </div>
 
 
@@ -101,7 +98,11 @@
 		<li><a href="#lists">Lists</a></li>
 		<li><a href="#sets">Sets</a></li>
 		<li><a href="#zsets">Sorted Sets</a></li>
+		<li><a href="#hashes">Hashes</a></li>
 	</ul>
+
+
+
 
 <div id="strings">
 <div class="accordion">
@@ -517,12 +518,84 @@
 	</form>
 	</div>
 
-
-
 </div>    
 </div>
-</div>
 
+<div id="hashes">
+<div class="accordion">
+
+	<h3><a href="#">HSET | Set the hash field to the specified value</a></h3>
+	
+	<div>
+	<form name="hash_set" action="/hashes/hset/" method="post">
+   	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+   	<p><label for="value">Field:</label> <input type="text" name="field" input class=":required :only_on_submit input_form" /></p>
+   	<p><label for="value">Value:</label> <input type="text" name="value" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Set" /></p>
+    	</form>
+	</div>
+
+	<h3><a href="#">HGET | Retrieve the value of the specified hash field</a></h3>
+	<div>
+    	<form name="hash_get" action="/hashes/get/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+   	    <p><label for="value">Field:</label> <input type="text" name="field" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Get" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">HDEL | Remove the specified field from a hash</a></h3>
+	<div>
+    	<form name="hash_delete" action="/hashes/delete/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+   	    <p><label for="value">Field:</label> <input type="text" name="field" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Delete" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">HEXISTS | Test if the specified fields exists in a hash</a></h3>
+	<div>
+    	<form name="hash_exists" action="/hashes/exists/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+   	    <p><label for="value">Field:</label> <input type="text" name="field" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Test" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">HLEN | Return the number of fields contained in a hash</a></h3>
+	<div>
+    	<form name="hash_length" action="/hashes/length/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Get Length" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">HKEYS | Return all the fields names contained into a hash</a></h3>
+	<div>
+    	<form name="hash_keys" action="/hashes/keys/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Get Keys" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">HVALS | Return all the values contained into a hash</a></h3>
+	<div>
+    	<form name="hash_values" action="/hashes/values/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Get Values" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">HGETALL | Return both the fields names and the values contained into a hash</a></h3>
+	<div>
+    	<form name="hash_getall" action="/hashes/getall/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Get All" /></p>
+	</form>
+	</div>
+
+</div>
+</div>
 
 <div id="footer-wrap">
 <div id="header-content"><p><strong class="red">Redweb</strong> | a web interface for Redis | MIT licensed, by Ted Nyman | <a href="https://github.com/tnm/redweb">Source</a> on GitHub | The <a href="http://code.google.com/p/redis/wiki/CommandReference">Redis Command Reference</a>

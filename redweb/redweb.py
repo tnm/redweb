@@ -699,6 +699,100 @@ def template_zremrangebyscore():
   
     return dict(key=key, returned_value=remrange, db_size=db_size, search_result=search_result, info=info)    
 
+### Hashes ###
+
+# HSET | Set the hash field to the specified value. Creates the hash if needed.
+@route('/hashes/hset/', method='POST')
+@view('central')
+def template_hashes_set():
+    key = request.POST.get('key', '').strip()
+    field = request.POST.get('field', '').strip()
+    value = request.POST.get('value', '').strip()
+    hset = r.hset(key, field, value)
+    db_size = r.dbsize()
+    info = r.info()
+ 
+    return dict(key=key, value=value, returned_value=hset, db_size=db_size, search_result=search_result, info=info)
+
+# HGET | return the string value of a key
+@route('/hashes/get/', method='POST')
+@view('central')
+def template_hashes_get():
+    key = request.POST.get('key', '').strip()
+    field = request.POST.get('field', '').strip()
+    hget = r.hget(key, field)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hget, db_size=db_size, search_result=search_result, info=info)	
+
+# HDEL | Remove the specified field from a hash
+@route('/hashes/delete/', method='POST')
+@view('central')
+def template_hashes_delete():
+    key = request.POST.get('key', '').strip()
+    field = request.POST.get('field', '').strip()
+    hdel = r.hdel(key, field)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hdel, db_size=db_size, search_result=search_result, info=info)	
+
+# HEXIST | Test if the specified field exists in a hash
+@route('/hashes/exists/', method='POST')
+@view('central')
+def template_hashes_exists():
+    key = request.POST.get('key', '').strip()
+    field = request.POST.get('field', '').strip()
+    hexists = r.hexists(key, field)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hexists, db_size=db_size, search_result=search_result, info=info)	
+
+# HLEN | Return the number of fields contained in a hash
+@route('/hashes/length/', method='POST')
+@view('central')
+def template_hashes_length():
+    key = request.POST.get('key', '').strip()
+    hlen = r.hlen(key)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hlen, db_size=db_size, search_result=search_result, info=info)	
+
+# HKEYS | Return all the fields names contained into a hash
+@route('/hashes/keys/', method='POST')
+@view('central')
+def template_hashes_keys():
+    key = request.POST.get('key', '').strip()
+    hkeys = r.hkeys(key)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hkeys, db_size=db_size, search_result=search_result, info=info)	
+
+# HVALS | Return all the values contained into a hash
+@route('/hashes/values/', method='POST')
+@view('central')
+def template_hashes_values():
+    key = request.POST.get('key', '').strip()
+    hvals = r.hvals(key)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hvals, db_size=db_size, search_result=search_result, info=info)	
+
+# HGETALL | Return both the fields names and the values contained into a hash
+@route('/hashes/getall/', method='POST')
+@view('central')
+def template_string_get():
+    key = request.POST.get('key', '').strip()
+    hgetall = r.hgetall(key)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hgetall, db_size=db_size, search_result=search_result, info=info)	
 
 ### Server ###
 
