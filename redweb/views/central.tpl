@@ -411,7 +411,7 @@
 
  	<h3><a href="#">ZADD | Add a member to a sorted set</a></h3>
  	<div>
-	<form name="zset_remove" action="/zsets/add/" method="post">
+	<form name="zset_add" action="/zsets/add/" method="post">
  	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
  	<p><label for="member">Member:</label> <input type="text" name="member" input class=":required :only_on_submit input_form" /></p>
   	<p><label for="score">Score:</label> <input type="text" name="score" input class=":required :only_on_submit input_form" /></p>
@@ -430,7 +430,7 @@
 
  	<h3><a href="#">ZINCRBY | Increment a member by any amount</a></h3>
   	<div>
-	<form name="zset_remove" action="/zsets/remove/" method="post">
+	<form name="zset_incrementby" action="/zsets/incrementby/" method="post">
  	<p><label for="key">Key:</label><input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
  	<p><label for="member">Member:</label> <input type="text" name="member" input class=":required :only_on_submit input_form" /></p>
  	<p><label for="amount">Amount:</label> <input type="text" name="amount" input class=":required :only_on_submit input_form" /></p>
