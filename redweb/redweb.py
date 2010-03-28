@@ -325,10 +325,6 @@ def template_lists_rpop():
 
     return dict(key=key, returned_value=right_pop, db_size=db_size, search_result=search_result, info=info)
 
-"""
-These features are only in the Git edge versions of Redis -- you can activate the features if you are using
-Redis version 1.3.1 or greater
-
 # BLPOP
 @route('/lists/blpop/', method='POST')
 @view('central')
@@ -357,7 +353,7 @@ def template_lists_blrop():
     return dict(key=key, returned_value=brpop, db_size=db_size, search_result=search_result, info=info)
 
 # RPOPLPPUSH
-"""
+
 
 ### Sets ###
 
