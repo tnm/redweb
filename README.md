@@ -29,20 +29,19 @@ You will be able to add key-value pairs, return random values, append lists and 
 
 The code is easily portable, and can be incorporated into simple, quick applications that utilize Bottle and Redis.
 
-More and To Do
----------------
+More and TODO:
+------------------------
+The current TODO list (patches are welcome):
 
-Redweb implements nearly all current-release Redis functionality, but there is still a bit more to be added. 
-
-Redweb will be kept current with each new Redis release, with each update documented. 
-
-JSON serialization is also on the to-do list
+* Implement all Redis 2.0 functionality by the time of 2.0 release
+* Add more server-focused functionality
+* Option to return values as JSON
 
 A [blog post](http://philosophyofweb.com/2010/02/redweb-a-web-interface-for-redis/ "blog post") about Redweb, with screenshots.
 
-Feel free to fork. Patches are welcome.
-
 Author: Ted Nyman - @tnm8
+
+Thanks to Antonio Ognio for Redis hash implementation.
 
 Screenshot
 -----------
