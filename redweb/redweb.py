@@ -3,6 +3,7 @@ Redweb is a web interface to the Redis key-value store and server. It is written
 Bottle micro-framework. With Redweb, you can easily interact with the Redis database through your
 web browser, utilizing POST functionality.
 
+       28 Mar 2010 | Adding hash functions (thanks gnrfan) (0.2.3)
        15 Mar 2010 | Additional ZSET functionality
        13 Mar 2010 | Save and background save functionality added (0.2.1) 		
        28 Feb 2010 | Redweb requires refactored redis-py bindings (0.2.0)
@@ -12,7 +13,7 @@ web browser, utilizing POST functionality.
 """
 
 __author__ = 'Ted Nyman'
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 __license__ = 'MIT'
 
 
@@ -689,7 +690,7 @@ def template_zsets_score():
 # ZREMRANGEBYSCORE
 @route('/zsets/remrangebyscore/', method='POST')
 @view('central')
-def template_zremrangebyscore():
+def template_zsets_remrangebyscore():
     key = request.POST.get('key', '').strip()
     minimum = request.POST.get('min', '').strip()
     maximum = request.POST.get('max', '').strip()
@@ -786,7 +787,7 @@ def template_hashes_values():
 # HGETALL | Return both the fields names and the values contained into a hash
 @route('/hashes/getall/', method='POST')
 @view('central')
-def template_string_get():
+def template_hashes_getall():
     key = request.POST.get('key', '').strip()
     hgetall = r.hgetall(key)	
     db_size = r.dbsize()
