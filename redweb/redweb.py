@@ -699,6 +699,32 @@ def template_zremrangebyscore():
   
     return dict(key=key, returned_value=remrange, db_size=db_size, search_result=search_result, info=info)    
 
+### Hashes ###
+
+# HSET | Set the hash field to the specified value. Creates the hash if needed.
+@route('/hashes/hset/', method='POST')
+@view('central')
+def template_strings_set():
+    key = request.POST.get('key', '').strip()
+    field = request.POST.get('field', '').strip()
+    value = request.POST.get('value', '').strip()
+    hset = r.hset(key, field, value)
+    db_size = r.dbsize()
+    info = r.info()
+ 
+    return dict(key=key, value=value, returned_value=hset, db_size=db_size, search_result=search_result, info=info)
+
+# HGET | return the string value of a key
+@route('/hashes/get/', method='POST')
+@view('central')
+def template_string_get():
+    key = request.POST.get('key', '').strip()
+    field = request.POST.get('field', '').strip()
+    hget = r.hget(key, field)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hget, db_size=db_size, search_result=search_result, info=info)	
 
 ### Server ###
 
