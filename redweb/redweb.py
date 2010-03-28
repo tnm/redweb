@@ -750,6 +750,28 @@ def template_string_get():
 	
     return dict(key=key, returned_value=hexists, db_size=db_size, search_result=search_result, info=info)	
 
+# HLEN | Return the number of fields contained in a hash
+@route('/hashes/length/', method='POST')
+@view('central')
+def template_string_get():
+    key = request.POST.get('key', '').strip()
+    hlen = r.hlen(key)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hlen, db_size=db_size, search_result=search_result, info=info)	
+
+# HKEYS | Return all the fields names contained into a hash
+@route('/hashes/keys/', method='POST')
+@view('central')
+def template_string_get():
+    key = request.POST.get('key', '').strip()
+    hkeys = r.hkeys(key)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hkeys, db_size=db_size, search_result=search_result, info=info)	
+
 ### Server ###
 
 # SAVE | save the DB to disk

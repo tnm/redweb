@@ -562,6 +562,22 @@
 	</form>
 	</div>
 
+	<h3><a href="#">HLEN | Return the number of fields contained in a hash</a></h3>
+	<div>
+    	<form name="hash_length" action="/hashes/length/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Get Length" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">HKEYS | Return all the fields names contained into a hash</a></h3>
+	<div>
+    	<form name="hash_keys" action="/hashes/keys/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Get Keys" /></p>
+	</form>
+	</div>
+
 </div>
 </div>
 
