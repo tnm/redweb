@@ -544,6 +544,24 @@
 	</form>
 	</div>
 
+	<h3><a href="#">HDEL | Remove the specified field from a hash</a></h3>
+	<div>
+    	<form name="hash_delete" action="/hashes/delete/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+   	    <p><label for="value">Field:</label> <input type="text" name="field" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Delete" /></p>
+	</form>
+	</div>
+
+	<h3><a href="#">HEXISTS | Test if the specified fields exists in a hash</a></h3>
+	<div>
+    	<form name="hash_exists" action="/hashes/exists/" method="post">
+    	<p><label for="key">Key:</label> <input type="text" name="key" input class=":required :only_on_submit input_form" /></p>
+   	    <p><label for="value">Field:</label> <input type="text" name="field" input class=":required :only_on_submit input_form" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Test" /></p>
+	</form>
+	</div>
+
 </div>
 </div>
 

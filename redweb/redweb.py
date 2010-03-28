@@ -726,6 +726,30 @@ def template_string_get():
 	
     return dict(key=key, returned_value=hget, db_size=db_size, search_result=search_result, info=info)	
 
+# HDEL | Remove the specified field from a hash
+@route('/hashes/delete/', method='POST')
+@view('central')
+def template_string_get():
+    key = request.POST.get('key', '').strip()
+    field = request.POST.get('field', '').strip()
+    hdel = r.hdel(key, field)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hdel, db_size=db_size, search_result=search_result, info=info)	
+
+# HEXIST | Test if the specified field exists in a hash
+@route('/hashes/exists/', method='POST')
+@view('central')
+def template_string_get():
+    key = request.POST.get('key', '').strip()
+    field = request.POST.get('field', '').strip()
+    hexists = r.hexists(key, field)	
+    db_size = r.dbsize()
+    info = r.info()
+	
+    return dict(key=key, returned_value=hexists, db_size=db_size, search_result=search_result, info=info)	
+
 ### Server ###
 
 # SAVE | save the DB to disk
