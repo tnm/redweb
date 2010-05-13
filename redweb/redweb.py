@@ -1,15 +1,16 @@
 """
-Redweb is a web interface to the Redis key-value store and server. It is written in Python, and is built on the
-Bottle micro-framework. With Redweb, you can easily interact with the Redis database through your
+Redweb is a web interface to the Redis key-value store and server. It is writte
+n in Python, and is built on the Bottle micro-framework. With Redweb, you 
+can easily interact with the Redis database through your
 web browser, utilizing POST functionality.
 
-       28 Mar 2010 | Adding hash functions (thanks gnrfan) (0.2.3)
-       15 Mar 2010 | Additional ZSET functionality
-       13 Mar 2010 | Save and background save functionality added (0.2.1) 		
-       28 Feb 2010 | Redweb requires refactored redis-py bindings (0.2.0)
-	8 Feb 2010 | all current functions return either a status code, value, etc. (0.1.1)
-	5 Feb 2010 | additional set functionality, UI improvements
-	2 Feb 2010 | first public release (0.1.0)
+  28 Mar 2010 | Adding hash functions (thanks gnrfan) (0.2.3)
+  15 Mar 2010 | Additional ZSET functionality
+  13 Mar 2010 | Save and background save functionality added (0.2.1) 		
+  28 Feb 2010 | Redweb requires refactored redis-py bindings (0.2.0)
+   8 Feb 2010 | all functions return either a status code, value, etc. (0.1.1)
+   5 Feb 2010 | additional set functionality, UI improvements
+   2 Feb 2010 | first public release (0.1.0)
 """
 
 __author__ = 'Ted Nyman'
@@ -46,7 +47,8 @@ def template_keyvalue():
    db_size = r.dbsize()
    info = r.info()
  
-   return dict(returned_value=returned_value, db_size=db_size, search_result=search_result, info=info)
+   return dict(returned_value=returned_value, db_size=db_size, 
+               search_result=search_result, info=info)
 
 ### Actions for all data types ###
  
@@ -59,8 +61,8 @@ def template_delete():
     db_size = r.dbsize()
     info = r.info()
 	   
-    return dict(returned_value=delete, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(returned_value=delete, db_size=db_size, 
+                search_result=search_result, info=info)
 
 @route('/delete/all/', method='POST')
 @view('central')
@@ -73,7 +75,6 @@ def template_delete_all():
 
     return dict(db_size=db_size, search_result=search_result, info=info)
 
-
 @route('/search/', method='POST')
 @view('central')
 def template_search():
@@ -82,11 +83,10 @@ def template_search():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(returned_value=returned_value, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(returned_value=returned_value, db_size=db_size, 
+                search_result=search_result, info=info)
 
 ### Strings ###
-
 
 # SET | set a string value for a given key
 @route('/strings/set/', method='POST')
@@ -98,7 +98,8 @@ def template_strings_set():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, value=value, returned_value=sset, db_size=db_size, search_result=search_result, info=info)
+    return dict(key=key, value=value, returned_value=sset, db_size=db_size, 
+                search_result=search_result, info=info)
 
 
 # GET | return the string value of a key
@@ -110,10 +111,11 @@ def template_string_get():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=get, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=get, db_size=db_size, 
+                search_result=search_result, info=info)	
 
-
-# GETSET | set a string value for a key, only if the key does not exist, and return value
+# GETSET | set a string value for a key, only if the key does not exist, 
+# and return value
 @route('/strings/getset/', method='POST')
 @view('central')
 def template_strings_getset():
@@ -123,7 +125,8 @@ def template_strings_getset():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, value=value, returned_value=getset, db_size=db_size, search_result=search_result, info=info)
+    return dict(key=key, value=value, returned_value=getset, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # MGET
 
@@ -137,8 +140,8 @@ def template_strings_setnx():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, value=value, returned_value=setnx, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, value=value, returned_value=setnx, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # MSET
 # MSETNX
@@ -152,7 +155,8 @@ def template_string_increment():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=increment, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=increment, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 
 # INCRBY | increment a value by any amount
@@ -165,7 +169,8 @@ def template_string_incrementby():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=incrementby, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=incrementby, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 # DECR | decrement a value by 1
 @route('/strings/decrement/', method='POST')
@@ -176,7 +181,8 @@ def template_string_decrement():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=decrement, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=decrement, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 # DECRBY | decrement a value by any amount
 @route('/strings/decrementby/', method='POST')
@@ -188,11 +194,10 @@ def template_string_decrementby():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=decrementby, db_size=db_size, search_result=search_result, info=info)	
-
+    return dict(key=key, returned_value=decrementby, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 ### Lists ###
-
 
 # RPUSH | append an element to the tail of a list
 @route('/lists/rightpush/', method='POST')
@@ -204,8 +209,8 @@ def template_lists_rightpush():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, element=element, returned_value=right_push, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, element=element, returned_value=right_push, 
+                db_size=db_size, search_result=search_result, info=info)
 
 # LPUSH | append an element to the head of a list
 @route('/lists/leftpush/', method='POST')
@@ -217,8 +222,8 @@ def template_lists_leftpush():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, element=element, returned_value=left_push, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, element=element, returned_value=left_push, 
+                db_size=db_size, search_result=search_result, info=info)
 
 # LLEN | return the length of a list
 @route('/lists/length/', method='POST')
@@ -229,8 +234,8 @@ def template_lists_length():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=llen, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=llen, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # LRANGE | return a range of elements from a list
 @route('/lists/range/', method='POST')
@@ -243,8 +248,8 @@ def template_lists_range():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=list_range, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=list_range, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # LTRIM | trim a list so that it contains just the specific range of elements
 @route('/lists/trim/', method='POST')
@@ -257,8 +262,8 @@ def template_lists_range():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=ltrim, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=ltrim, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # LINDEX | return the indexed element for a particular key
 @route('/lists/lindex/', method='POST')
@@ -270,8 +275,8 @@ def template_lists_lindex():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, returned_value=list_index, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=list_index, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # LSET | set the list element at index
 @route('/lists/set/', method='POST')
@@ -284,10 +289,11 @@ def template_lists_lset():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, returned_value=lset, db_size=db_size, search_result=search_result, info=info)
+    return dict(key=key, returned_value=lset, db_size=db_size, 
+                search_result=search_result, info=info)
 
-
-# LREM | for any element in a key, remove a specified number of those elements (the count)
+# LREM | for any element in a key, remove a specified number of those 
+# elements (the count)
 @route('/lists/remove/', method='POST')
 @view('central')
 def template_lists_lrem():
@@ -298,9 +304,8 @@ def template_lists_lrem():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, returned_value=lrem, db_size=db_size, search_result=search_result, info=info)
-
-
+    return dict(key=key, returned_value=lrem, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # LPOP | return and remove the first element of a list
 @route('/lists/leftpop/', method='POST')
@@ -311,8 +316,8 @@ def template_lists_lpop():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=left_pop, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=left_pop, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # RPOP | return and remove the last element of a list
 @route('/lists/rightpop/', method='POST')
@@ -323,7 +328,8 @@ def template_lists_rpop():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=right_pop, db_size=db_size, search_result=search_result, info=info)
+    return dict(key=key, returned_value=right_pop, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # BLPOP
 @route('/lists/blpop/', method='POST')
@@ -336,8 +342,8 @@ def template_lists_blpop():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=blpop, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=blpop, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # BRPOP
 @route('/lists/brpop/', method='POST')
@@ -350,13 +356,12 @@ def template_lists_blrop():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=brpop, db_size=db_size, search_result=search_result, info=info)
+    return dict(key=key, returned_value=brpop, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # RPOPLPPUSH
 
-
 ### Sets ###
-
 
 # SADD | add a member to a set
 @route('/sets/add/', method='POST')
@@ -368,8 +373,8 @@ def template_sets_add():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, member=member, returned_value=set_add, db_size=db_size, search_result=search_result, info=info)      
-
+    return dict(key=key, member=member, returned_value=set_add, 
+                db_size=db_size, search_result=search_result, info=info)      
 
 # SREM | remove a member of a set
 @route('/sets/remove/', method='POST')
@@ -381,8 +386,8 @@ def template_sets_remove():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, member=member, returned_value=set_remove, db_size=db_size, search_result=search_result, info=info)      
-
+    return dict(key=key, member=member, returned_value=set_remove, 
+                db_size=db_size, search_result=search_result, info=info)      
 
 # SPOP | return and remove a random member from a set
 @route('/sets/pop/', method='POST')
@@ -393,7 +398,8 @@ def template_sets_pop():
     db_size = r.dbsize()  
     info = r.info()
   
-    return dict(key=key, returned_value=random_pop, db_size=db_size, search_result=search_result, info=info)      
+    return dict(key=key, returned_value=random_pop, db_size=db_size, 
+                search_result=search_result, info=info)      
 
 # SMOVE | move a member of a one set to another set
 @route('/sets/move/', method='POST')
@@ -406,8 +412,8 @@ def template_sets_move():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(member=member, returned_value=smove, db_size=db_size, search_result=search_result, info=info)      
-
+    return dict(member=member, returned_value=smove, db_size=db_size, 
+                search_result=search_result, info=info)      
 
 # SCARD | return the cardinality for a set
 @route('/sets/cardinality/', method='POST')
@@ -418,10 +424,11 @@ def template_sets_cardinality():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=cardinality, db_size=db_size, search_result=search_result, info=info)
+    return dict(key=key, returned_value=cardinality, db_size=db_size, 
+                search_result=search_result, info=info)
 
-
-# SISMEMBER | check if a member is stored at a key - returns 1 if true, 0 if false
+# SISMEMBER | check if a member is stored at a key - returns 1 if true, 
+# or 0 if false
 @route('/sets/ismember/', method='POST')
 @view('central')
 def template_sets_ismember():
@@ -431,8 +438,8 @@ def template_sets_ismember():
     db_size = r.dbsize()  
     info = r.info()
  
-    return dict(key=key, member=member, returned_value=is_member, db_size=db_size, search_result=search_result, info=info)      
-
+    return dict(key=key, member=member, returned_value=is_member, 
+                db_size=db_size, search_result=search_result, info=info)      
 
 # SINTER | for any number of sets, return the intersection
 @route('/sets/intersection/', method='POST')
@@ -445,10 +452,11 @@ def template_sets_intersection():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, returned_value=intersection, db_size=db_size, search_result=search_result, info=info)
+    return dict(key=key, returned_value=intersection, db_size=db_size, 
+                search_result=search_result, info=info)
 
-
-# SINTERSTORE | for any number of sets, return the intersection and store it as a new key
+# SINTERSTORE | for any number of sets, return the intersection and store 
+# it as a new key
 @route('/sets/interstore/', method='POST')
 @view('central')
 def template_sets_interstore():
@@ -460,8 +468,8 @@ def template_sets_interstore():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, returned_value=interstore, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=interstore, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # SUNION | for any number of sets, return the union
 @route('/sets/union/', method='POST')
@@ -474,10 +482,11 @@ def template_sets_union():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, returned_value=union, db_size=db_size, search_result=search_result, info=info)
+    return dict(key=key, returned_value=union, db_size=db_size, 
+                search_result=search_result, info=info)
 
-
-# SUNIONSTORE | for any number of sets, return the union and store it as a new key
+# SUNIONSTORE | for any number of sets, return the union and store it 
+# as a new key
 @route('/sets/unionstore/', method='POST')
 @view('central')
 def template_sets_unionstore():
@@ -489,8 +498,8 @@ def template_sets_unionstore():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, returned_value=unionstore, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=unionstore, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # SDIFF | for any number of sets, return the difference
 @route('/sets/difference/', method='POST')
@@ -503,8 +512,8 @@ def template_sets_difference():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, returned_value=difference, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=difference, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # SDIFFSTORE | for any number of sets, return the difference and store it as a new key
 @route('/sets/diffstore/', method='POST')
@@ -518,8 +527,8 @@ def template_sets_diffstore():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, returned_value=diffstore, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=diffstore, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # SMEMBERS | return all members of a set
 @route('/sets/members/', method='POST')
@@ -530,8 +539,8 @@ def template_sets_members():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, returned_value=members, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=members, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # SRANDMEMBER | return a random member of set, without removing it
 @route('/sets/random/', method='POST')
@@ -542,11 +551,10 @@ def template_sets_srandom():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, returned_value=random_member, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=random_member, db_size=db_size, 
+                search_result=search_result, info=info)
 
 ### Sorted Sets ###
-
 
 # ZADD | add a member to a sorted set
 @route('/zsets/add/', method='POST')
@@ -559,8 +567,8 @@ def template_zsets_add():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, member=member, score=score, returned_value=zset_add, db_size=db_size, search_result=search_result, info=info)      
-
+    return dict(key=key, member=member, score=score, returned_value=zset_add, 
+                db_size=db_size, search_result=search_result, info=info)      
 
 # ZREM | remove a member of a sorted set
 @route('/zsets/remove/', method='POST')
@@ -572,8 +580,8 @@ def template_zsets_remove():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, member=member, returned_value=zset_remove, db_size=db_size, search_result=search_result, info=info)      
-
+    return dict(key=key, member=member, returned_value=zset_remove, 
+                db_size=db_size, search_result=search_result, info=info)      
 
 # ZINCRBY | increment a member by any amount
 @route('/zsets/incrementby/', method='POST')
@@ -586,8 +594,8 @@ def template_zsets_incrementby():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=incrementby, db_size=db_size, search_result=search_result, info=info)	
-
+    return dict(key=key, returned_value=incrementby, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 # ZRANGE  return a range
 @route('/zsets/range/', method='POST')
@@ -600,8 +608,8 @@ def template_zsets_zrange():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=zrange, db_size=db_size, 
+                search_result=search_result, info=info)
 
 @route('/zsets/rangewithscores/', method='POST')
 @view('central')
@@ -613,8 +621,8 @@ def template_zsets_zrangewithscores():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=zrange, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # ZRANGEBYSCORE | range by score
 @route('/zsets/rangebyscore/', method='POST')
@@ -627,8 +635,8 @@ def template_rangebyscore():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, returned_value=zrange, db_size=db_size, search_result=search_result, info=info)     
-
+    return dict(key=key, returned_value=zrange, db_size=db_size, 
+                search_result=search_result, info=info)     
 
 # ZREVRANGE | return a range in reverse order
 @route('/zsets/revrange/', method='POST')
@@ -641,8 +649,8 @@ def template_zsets_zrevrange():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=zrevrange, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=zrevrange, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # ZREVRANGE | return a range in reverse order, with scores
 @route('/zsets/revrangewithscores/', method='POST')
@@ -655,8 +663,8 @@ def template_zsets_zrevrangescores():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=zrevrange, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=zrevrange, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # ZCARD | return the cardinality for a set
 @route('/zsets/cardinality/', method='POST')
@@ -667,8 +675,8 @@ def template_zsets_cardinality():
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(key=key, returned_value=cardinality, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(key=key, returned_value=cardinality, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # ZSCORE | return the score for a particular key and member
 @route('/zsets/score/', method='POST')
@@ -680,8 +688,8 @@ def template_zsets_score():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, member=member, returned_value=score, db_size=db_size, search_result=search_result, info=info)    
-
+    return dict(key=key, member=member, returned_value=score, 
+                db_size=db_size, search_result=search_result, info=info)    
 
 # ZREMRANGEBYSCORE
 @route('/zsets/remrangebyscore/', method='POST')
@@ -694,7 +702,8 @@ def template_zsets_remrangebyscore():
     db_size = r.dbsize()
     info = r.info()
   
-    return dict(key=key, returned_value=remrange, db_size=db_size, search_result=search_result, info=info)    
+    return dict(key=key, returned_value=remrange, db_size=db_size, 
+                search_result=search_result, info=info)    
 
 ### Hashes ###
 
@@ -709,7 +718,8 @@ def template_hashes_set():
     db_size = r.dbsize()
     info = r.info()
  
-    return dict(key=key, value=value, returned_value=hset, db_size=db_size, search_result=search_result, info=info)
+    return dict(key=key, value=value, returned_value=hset, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # HGET | return the string value of a key
 @route('/hashes/get/', method='POST')
@@ -721,7 +731,8 @@ def template_hashes_get():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=hget, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=hget, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 # HDEL | Remove the specified field from a hash
 @route('/hashes/delete/', method='POST')
@@ -733,7 +744,8 @@ def template_hashes_delete():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=hdel, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=hdel, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 # HEXIST | Test if the specified field exists in a hash
 @route('/hashes/exists/', method='POST')
@@ -745,7 +757,8 @@ def template_hashes_exists():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=hexists, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=hexists, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 # HLEN | Return the number of fields contained in a hash
 @route('/hashes/length/', method='POST')
@@ -756,7 +769,8 @@ def template_hashes_length():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=hlen, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=hlen, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 # HKEYS | Return all the fields names contained into a hash
 @route('/hashes/keys/', method='POST')
@@ -767,7 +781,8 @@ def template_hashes_keys():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=hkeys, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=hkeys, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 # HVALS | Return all the values contained into a hash
 @route('/hashes/values/', method='POST')
@@ -778,7 +793,8 @@ def template_hashes_values():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=hvals, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=hvals, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 # HGETALL | Return both the fields names and the values contained into a hash
 @route('/hashes/getall/', method='POST')
@@ -789,7 +805,8 @@ def template_hashes_getall():
     db_size = r.dbsize()
     info = r.info()
 	
-    return dict(key=key, returned_value=hgetall, db_size=db_size, search_result=search_result, info=info)	
+    return dict(key=key, returned_value=hgetall, db_size=db_size, 
+                search_result=search_result, info=info)	
 
 ### Server ###
 
@@ -801,8 +818,8 @@ def template_save():
     info = r.info()
     db_size = r.dbsize()
 
-    return dict(returned_value=save, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(returned_value=save, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # BGSAVE | save the data to disk -- asynchronous 
 @route('/bgsave/', method='POST')
@@ -812,8 +829,8 @@ def template_bgsave():
     info = r.info()
     db_size = r.dbsize()
 
-    return dict(returned_value=bgsave, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(returned_value=bgsave, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # LASTSAVE | return the time of the last save
 @route('/lastsave/', method='POST')
@@ -823,8 +840,8 @@ def template_lastsave():
     info = r.info()
     db_size = r.dbsize()
 
-    return dict(returned_value=lastsave, db_size=db_size, search_result=search_result, info=info)
-
+    return dict(returned_value=lastsave, db_size=db_size, 
+                search_result=search_result, info=info)
 
 # INFO
 @route('/info/', method='POST')
@@ -833,7 +850,8 @@ def template_info():
     db_size = r.dbsize()  
     info = r.info()  
   
-    return dict(returned_value=returned_value, db_size=db_size, search_result=search_result, info=info)    
+    return dict(returned_value=returned_value, db_size=db_size, 
+                search_result=search_result, info=info)    
 
 
 #run it!
