@@ -5,10 +5,10 @@ class PipelineTestCase(unittest.TestCase):
     def setUp(self):
         self.client = redis.Redis(host='localhost', port=6379, db=9)
         self.client.flushdb()
-        
+
     def tearDown(self):
         self.client.flushdb()
-    
+
     def test_pipeline(self):
         pipe = self.client.pipeline()
         pipe.set('a', 'a1').get('a').zadd('z', 'z1', 1).zadd('z', 'z2', 4)
@@ -20,17 +20,17 @@ class PipelineTestCase(unittest.TestCase):
                 True,
                 True,
                 2.0,
-                [('z1', 2.0), ('z2', 4)]
+                [('z1', 2.0), ('z2', 4)],
             ]
             )
-            
+
     def test_invalid_command_in_pipeline(self):
         # all commands but the invalid one should be excuted correctly
         self.client['c'] = 'a'
         pipe = self.client.pipeline()
         pipe.set('a', 1).set('b', 2).lpush('c', 3).set('d', 4)
         result = pipe.execute()
-        
+
         self.assertEquals(result[0], True)
         self.assertEquals(self.client['a'], '1')
         self.assertEquals(result[1], True)
@@ -41,15 +41,21 @@ class PipelineTestCase(unittest.TestCase):
         self.assertEquals(self.client['c'], 'a')
         self.assertEquals(result[3], True)
         self.assertEquals(self.client['d'], '4')
-        
+
         # make sure the pipe was restored to a working state
         self.assertEquals(pipe.set('z', 'zzz').execute(), [True])
         self.assertEquals(self.client['z'], 'zzz')
-        
-    def test_pipe_cannot_select(self):
+
+    def test_pipeline_cannot_select(self):
         pipe = self.client.pipeline()
         self.assertRaises(redis.RedisError,
             pipe.select, 'localhost', 6379, db=9)
-        
-        
-        
+
+    def test_pipeline_no_transaction(self):
+        pipe = self.client.pipeline(transaction=False)
+        pipe.set('a', 'a1').set('b', 'b1').set('c', 'c1')
+        self.assertEquals(pipe.execute(), [True, True, True])
+        self.assertEquals(self.client['a'], 'a1')
+        self.assertEquals(self.client['b'], 'b1')
+        self.assertEquals(self.client['c'], 'c1')
+
