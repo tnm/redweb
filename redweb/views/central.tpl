@@ -120,6 +120,7 @@
 		<li><a href="#sets">Sets</a></li>
 		<li><a href="#zsets">Sorted Sets</a></li>
 		<li><a href="#hashes">Hashes</a></li>
+		<li><a href="#settings">Settings</a></li>
 	</ul>
 
 
@@ -615,6 +616,22 @@
 	</form>
 	</div>
 
+</div>
+</div>
+
+<div id="settings">
+<div class="accordion">
+	<h3><a href="#">Set active db | Configure, select and set the database</a></h3>
+	
+	<div>
+	<form name="db0_cfg" action="/settings/db/" method="post">
+   	<p><label for="value">Host:</label> <input type="text" name="host" input class=":required :only_on_submit input_form" value="localhost" /></p>
+   	<p><label for="value">Port:</label> <input type="text" name="port" input class=":required :only_on_submit input_form" value="6379" /></p>
+   	<p><label for="value">DB:</label> <input type="text" name="dbnum" input class=":required :only_on_submit input_form" value="0" /></p>
+    	<p class="submit"><input type="submit" class="submit_form" value="Configure" /></p>
+    	</form>
+	</div>
+	
 </div>
 </div>
 

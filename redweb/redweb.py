@@ -27,6 +27,7 @@ import string
 bottle.debug(True)
 
 # The main redis object
+global r
 r = redis.Redis()
 
 # returned_value defaults to empty string
@@ -49,6 +50,23 @@ def template_keyvalue():
  
    return dict(returned_value=returned_value, db_size=db_size, 
                search_result=search_result, info=info)
+               
+### Settings for DB ###
+@route('/settings/db/', method='POST')
+@view('central')
+def template_settings():
+    host = request.POST.get('host', '')
+    port = int(request.POST.get('port', 6379))
+    dbnum = int(request.POST.get('dbnum', 0))
+    
+    r = redis.Redis(host=host, port=port, db=dbnum)
+    db_size = r.dbsize()
+    info = r.info()
+        
+    returned_value = '%s:%d - db%d' % (host,port,dbnum)
+        
+    return dict(returned_value=returned_value, db_size=db_size, 
+                search_result=search_result, info=info)
 
 ### Actions for all data types ###
  
