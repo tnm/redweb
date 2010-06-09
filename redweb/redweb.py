@@ -27,7 +27,6 @@ import string
 bottle.debug(True)
 
 # The main redis object
-global r
 r = redis.Redis()
 
 # returned_value defaults to empty string
@@ -59,6 +58,7 @@ def template_settings():
     port = int(request.POST.get('port', 6379))
     dbnum = int(request.POST.get('dbnum', 0))
     
+    global r
     r = redis.Redis(host=host, port=port, db=dbnum)
     db_size = r.dbsize()
     info = r.info()
