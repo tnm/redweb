@@ -33,10 +33,10 @@ More and TODO:
 ------------------------
 The current TODO list (patches are welcome):
 
-* Implement all Redis 2.0 functionality by the time of 2.0 release
+* Implement all Redis 2.0 functions
+* Emphasize and add more monitoring features
 * Add inline help for each command
-* Add the rest of the general "all keys" functions
-* Option to return values as JSON
+* Option and ability to return values as JSON
 
 A [blog post](http://philosophyofweb.com/2010/02/redweb-a-web-interface-for-redis/ "blog post") about Redweb, with screenshots.
 
