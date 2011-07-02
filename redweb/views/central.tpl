@@ -7,6 +7,8 @@
   
   <script type="text/javascript" src="/static/jquery-1.3.2.min.js"></script>
   <script type="text/javascript" src="/static/jquery-ui-1.7.2.custom.min.js"></script>
+  <script type="text/javascript" src="/static/jquery.form.js"></script>
+
   <script type="text/javascript" src="/static/vanadium-min.js" ></script> 
   <script type="text/javascript">
   $(document).ready(function(){
@@ -28,6 +30,26 @@
 				);				
 			});
   </script>
+ 
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('form').ajaxForm({
+              dataType: 'json',
+              success: function(response) {
+                  var el = $('#returned_value');
+                  el.animate({opacity: 0}, 100, function() {
+                      var ret_val = response.returned_value;
+                      if (ret_val.constructor === Array) {
+                          ret_val = ret_val.join(', ');
+                      }
+                      el.text(ret_val);
+                      el.animate({opacity: 1}, 100);
+                  });
+              }
+          });
+      });
+  </script>
+  
 
 
  </head>
@@ -37,7 +59,7 @@
 
 <div id="header-wrap"> 
 <div id="header-content">
-<h1>Returned: <strong class="red">{{returned_value}}</strong></h1>
+<h1>Returned: <strong id="returned_value" class="red">{{returned_value}}</strong></h1>
 </div>
 </div>
 
