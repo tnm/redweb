@@ -794,10 +794,6 @@ def template_info():
                 search_result=search_result, info=info)    
 
 
-<<<<<<< HEAD
-#run it!
-run()
-=======
 class StripPathMiddleware(object):
   def __init__(self, app):
     self.app = app
@@ -806,5 +802,5 @@ class StripPathMiddleware(object):
     return self.app(e,h)
 
 app = bottle.default_app()
-application = StripPathMiddleware(app)
->>>>>>> c84cabb... ignore trailing slashes, ajaxify web interface
+app = StripPathMiddleware(app)
+bottle.run(app=app)
