@@ -1,16 +1,30 @@
 Redweb
 =======
 
-Redweb is a web interface to the **Redis key-value store and server**. It is written in Python, and is built on the Bottle micro-framework. With Redweb, you can easily interact with Redis through your web browser, utilizing POST functionality.
+Redweb is a internal web administrative and query UI to the **Redis key-value store and server**. It is written in 
+Python, and is built on the Bottle micro-framework. With Redweb, you can interact with Redis through your web 
+browser. 
 
-But Redweb is more than that, too. The Redweb source can be reused to create neat web applications that utilize Bottle and Redis. So Redweb is sort of like a reversible jacket -- you get two nice features for the price of one. Well, you get it for no price actually -- Redweb is MIT-licensed.
+This is **not** a REST interface to Redis -- it is designed as a web interface -- and its internal structure reflects that.
+URL's are mapped to Redis commands in an RPC-style, accepting keys and values as parameters. An example of REST-style 
+interaction is something like another old project of mine, [diner](https://github.com/tnm/diner/), with the key 
+identified as the resource.
 
-The basic idea derives from my super-simple [RedBottle](http://github.com/tnm/redbottle/"RedBottle") project.
+The Redweb interface obviously should not be directly exposed to the Internet. 
+
+
+Nota bene
+-----------
+
+I haven't worked on or actively maintained this project in over a year. However I am now merging in pull requests, 
+so I will make a best effort to keep this repo maintained.
+
 
 Install and Run
 ---------------
 
-Installation is simple. The only requirements are [Redis](http://code.google.com/p/redis/ "Redis"), [Bottle](http://github.com/defnull/bottle "Bottle"), and the Python interface for Redis [redis-py](http://github.com/andymccurdy/redis-py "redis-py").
+Installation is simple. The only requirements are a running [Redis](http://code.google.com/p/redis/ "Redis") server, 
+[Bottle](http://github.com/defnull/bottle "Bottle"), and the Python interface for Redis [redis-py](http://github.com/andymccurdy/redis-py "redis-py").
 
 Install Bottle and redis-py. Start your Redis server, head to the Redweb directory, and then:
 
@@ -18,42 +32,33 @@ Install Bottle and redis-py. Start your Redis server, head to the Redweb directo
 
 The web interface will start on localhost, so point your browser to `http://127.0.0.1:8080/`. 
 
-The Python code lives at ** redweb.py**, and the web template is at **/views/central.tpl**. I've included some client-side JS form validation, as well.  
 
 What You Can Do
 ---------------
 
-You will be able to add key-value pairs, return random values, append lists and sets, return and store intersection and union for sets, and a good deal more -- through an easy-to-use web interface. You can also use standard Redis syntax to search for keys, and you can delete keys.
+Through a web interface, you will be able to add access the Redis INFO command, search for (and delete) keys, and use most 
+of the Redis commands that existed the last time this was actively maintained (April 2010). 
 
-The code is easily portable, and can be incorporated into simple, quick applications that utilize Bottle and Redis.
+More
+------
 
-More and TODO:
-------------------------
-The current TODO list (patches are welcome):
-
-* Implement all Redis 2.0 functions
-* Emphasize and add more monitoring features
-* Add inline help for each command
-* Option and ability to return values as JSON
-
-A [blog post](http://philosophyofweb.com/2010/02/redweb-a-web-interface-for-redis/ "blog post") about Redweb, with screenshots.
-
-Author: Ted Nyman - @tnm8
-
-Thanks to Antonio Ognio for Redis hash implementation.
-
-Screenshot
------------
-![Screenshot of Redweb](http://www.philosophyofweb.com/redweb5.gif "Redweb")
+Thanks to Antonio Ognio for Redis hash implementation, and Mark Erdmann for various additions, including AJAX support.
 
 
 MIT License
 ------------
 Copyright (c) 2010 Ted Nyman
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS IN THE SOFTWARE.
+
+
 
