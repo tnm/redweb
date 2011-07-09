@@ -52,8 +52,7 @@ def template_keyvalue():
 
 ### Actions for all data types ###
  
-@route('/delete/', method='POST')
-@view('central')
+@route('/delete', method='POST')
 def template_delete():
 
     key_delete = request.POST.get('key_delete', '').strip()
@@ -64,8 +63,7 @@ def template_delete():
     return dict(returned_value=delete, db_size=db_size, 
                 search_result=search_result, info=info)
 
-@route('/delete/all/', method='POST')
-@view('central')
+@route('/delete/all', method='POST')
 def template_delete_all():
 
     delete_all = request.POST.get('delete_all', '').strip()
@@ -75,22 +73,20 @@ def template_delete_all():
 
     return dict(db_size=db_size, search_result=search_result, info=info)
 
-@route('/search/', method='POST')
-@view('central')
+@route('/search', method='POST')
 def template_search():
     key = request.POST.get('key', '').strip()
     search_result = r.keys(key)
     db_size = r.dbsize()
     info = r.info()
 
-    return dict(returned_value=returned_value, db_size=db_size, 
+    return dict(returned_value=search_result, db_size=db_size, 
                 search_result=search_result, info=info)
 
 ### Strings ###
 
 # SET | set a string value for a given key
-@route('/strings/set/', method='POST')
-@view('central')
+@route('/strings/set', method='POST')
 def template_strings_set():
     key = request.POST.get('key', '').strip()
     value = request.POST.get('value', '').strip()
@@ -103,8 +99,7 @@ def template_strings_set():
 
 
 # GET | return the string value of a key
-@route('/strings/get/', method='POST')
-@view('central')
+@route('/strings/get', method='POST')
 def template_string_get():
     key = request.POST.get('key', '').strip()
     get = r.get(key)	
@@ -116,8 +111,7 @@ def template_string_get():
 
 # GETSET | set a string value for a key, only if the key does not exist, 
 # and return value
-@route('/strings/getset/', method='POST')
-@view('central')
+@route('/strings/getset', method='POST')
 def template_strings_getset():
     key = request.POST.get('key', '').strip()
     value = request.POST.get('value', '').strip()
@@ -131,8 +125,7 @@ def template_strings_getset():
 # MGET
 
 # SETNX | set a string value for a given key, only if the key does not exists
-@route('/strings/setnx/', method='POST')
-@view('central')
+@route('/strings/setnx', method='POST')
 def template_strings_setnx():
     key = request.POST.get('key', '').strip()
     value = request.POST.get('value', '').strip()
@@ -147,8 +140,7 @@ def template_strings_setnx():
 # MSETNX
 
 # INCR | increment a value by 1
-@route('/strings/increment/', method='POST')
-@view('central')
+@route('/strings/increment', method='POST')
 def template_string_increment():
     key = request.POST.get('key', '').strip()
     increment = r.incr(key)
@@ -160,8 +152,7 @@ def template_string_increment():
 
 
 # INCRBY | increment a value by any amount
-@route('/strings/incrementby/', method='POST')
-@view('central')
+@route('/strings/incrementby', method='POST')
 def template_string_incrementby():
     key = request.POST.get('key', '').strip()
     amount = request.POST.get('amount', '').strip()
@@ -173,8 +164,7 @@ def template_string_incrementby():
                 search_result=search_result, info=info)	
 
 # DECR | decrement a value by 1
-@route('/strings/decrement/', method='POST')
-@view('central')
+@route('/strings/decrement', method='POST')
 def template_string_decrement():
     key = request.POST.get('key', '').strip()
     decrement = r.decr(key)
@@ -185,8 +175,7 @@ def template_string_decrement():
                 search_result=search_result, info=info)	
 
 # DECRBY | decrement a value by any amount
-@route('/strings/decrementby/', method='POST')
-@view('central')
+@route('/strings/decrementby', method='POST')
 def template_string_decrementby():
     key = request.POST.get('key', '').strip()
     amount = request.POST.get('amount', '').strip()
@@ -200,8 +189,7 @@ def template_string_decrementby():
 ### Lists ###
 
 # RPUSH | append an element to the tail of a list
-@route('/lists/rightpush/', method='POST')
-@view('central')
+@route('/lists/rightpush', method='POST')
 def template_lists_rightpush():
     key = request.POST.get('key', '').strip()
     element = request.POST.get('element', '').strip()
@@ -213,8 +201,7 @@ def template_lists_rightpush():
                 db_size=db_size, search_result=search_result, info=info)
 
 # LPUSH | append an element to the head of a list
-@route('/lists/leftpush/', method='POST')
-@view('central')
+@route('/lists/leftpush', method='POST')
 def template_lists_leftpush():
     key = request.POST.get('key', '').strip()
     element = request.POST.get('element', '').strip()
@@ -226,8 +213,7 @@ def template_lists_leftpush():
                 db_size=db_size, search_result=search_result, info=info)
 
 # LLEN | return the length of a list
-@route('/lists/length/', method='POST')
-@view('central')
+@route('/lists/length', method='POST')
 def template_lists_length():
     key = request.POST.get('key', '').strip()
     llen = r.llen(key)
@@ -238,8 +224,7 @@ def template_lists_length():
                 search_result=search_result, info=info)
 
 # LRANGE | return a range of elements from a list
-@route('/lists/range/', method='POST')
-@view('central')
+@route('/lists/range', method='POST')
 def template_lists_range():
     key = request.POST.get('key', '').strip()
     start = request.POST.get('start', '').strip()
@@ -252,8 +237,7 @@ def template_lists_range():
                 search_result=search_result, info=info)
 
 # LTRIM | trim a list so that it contains just the specific range of elements
-@route('/lists/trim/', method='POST')
-@view('central')
+@route('/lists/trim', method='POST')
 def template_lists_range():
     key = request.POST.get('key', '').strip()
     start = request.POST.get('start', '').strip()
@@ -266,8 +250,7 @@ def template_lists_range():
                 search_result=search_result, info=info)
 
 # LINDEX | return the indexed element for a particular key
-@route('/lists/lindex/', method='POST')
-@view('central')
+@route('/lists/lindex', method='POST')
 def template_lists_lindex():
     key = request.POST.get('key', '').strip()
     index = request.POST.get('index', '').strip()
@@ -279,8 +262,7 @@ def template_lists_lindex():
                 search_result=search_result, info=info)
 
 # LSET | set the list element at index
-@route('/lists/set/', method='POST')
-@view('central')
+@route('/lists/set', method='POST')
 def template_lists_lset():
     key = request.POST.get('key', '').strip()
     index = request.POST.get('index', '').strip()
@@ -294,8 +276,7 @@ def template_lists_lset():
 
 # LREM | for any element in a key, remove a specified number of those 
 # elements (the count)
-@route('/lists/remove/', method='POST')
-@view('central')
+@route('/lists/remove', method='POST')
 def template_lists_lrem():
     key = request.POST.get('key', '').strip()
     count= request.POST.get('count', '').strip()
@@ -308,8 +289,7 @@ def template_lists_lrem():
                 search_result=search_result, info=info)
 
 # LPOP | return and remove the first element of a list
-@route('/lists/leftpop/', method='POST')
-@view('central')
+@route('/lists/leftpop', method='POST')
 def template_lists_lpop():
     key = request.POST.get('key', '').strip()
     left_pop = r.lpop(key)
@@ -320,8 +300,7 @@ def template_lists_lpop():
                 search_result=search_result, info=info)
 
 # RPOP | return and remove the last element of a list
-@route('/lists/rightpop/', method='POST')
-@view('central')
+@route('/lists/rightpop', method='POST')
 def template_lists_rpop():
     key = request.POST.get('key', '').strip()
     right_pop = r.rpop(key)
@@ -332,8 +311,7 @@ def template_lists_rpop():
                 search_result=search_result, info=info)
 
 # BLPOP
-@route('/lists/blpop/', method='POST')
-@view('central')
+@route('/lists/blpop', method='POST')
 def template_lists_blpop():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
@@ -346,8 +324,7 @@ def template_lists_blpop():
                 search_result=search_result, info=info)
 
 # BRPOP
-@route('/lists/brpop/', method='POST')
-@view('central')
+@route('/lists/brpop', method='POST')
 def template_lists_blrop():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
@@ -364,8 +341,7 @@ def template_lists_blrop():
 ### Sets ###
 
 # SADD | add a member to a set
-@route('/sets/add/', method='POST')
-@view('central')
+@route('/sets/add', method='POST')
 def template_sets_add():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
@@ -377,8 +353,7 @@ def template_sets_add():
                 db_size=db_size, search_result=search_result, info=info)      
 
 # SREM | remove a member of a set
-@route('/sets/remove/', method='POST')
-@view('central')
+@route('/sets/remove', method='POST')
 def template_sets_remove():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
@@ -390,8 +365,7 @@ def template_sets_remove():
                 db_size=db_size, search_result=search_result, info=info)      
 
 # SPOP | return and remove a random member from a set
-@route('/sets/pop/', method='POST')
-@view('central')
+@route('/sets/pop', method='POST')
 def template_sets_pop():
     key = request.POST.get('key', '').strip()
     random_pop = r.spop(key)
@@ -402,8 +376,7 @@ def template_sets_pop():
                 search_result=search_result, info=info)      
 
 # SMOVE | move a member of a one set to another set
-@route('/sets/move/', method='POST')
-@view('central')
+@route('/sets/move', method='POST')
 def template_sets_move():
     source_key = request.POST.get('source_key', '').strip()
     destination_key = request.POST.get('destination_key', '').strip()
@@ -416,8 +389,7 @@ def template_sets_move():
                 search_result=search_result, info=info)      
 
 # SCARD | return the cardinality for a set
-@route('/sets/cardinality/', method='POST')
-@view('central')
+@route('/sets/cardinality', method='POST')
 def template_sets_cardinality():
     key = request.POST.get('key', '').strip() 
     cardinality = r.scard(key)
@@ -429,8 +401,7 @@ def template_sets_cardinality():
 
 # SISMEMBER | check if a member is stored at a key - returns 1 if true, 
 # or 0 if false
-@route('/sets/ismember/', method='POST')
-@view('central')
+@route('/sets/ismember', method='POST')
 def template_sets_ismember():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
@@ -442,8 +413,7 @@ def template_sets_ismember():
                 db_size=db_size, search_result=search_result, info=info)      
 
 # SINTER | for any number of sets, return the intersection
-@route('/sets/intersection/', method='POST')
-@view('central')
+@route('/sets/intersection', method='POST')
 def template_sets_intersection():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
@@ -457,8 +427,7 @@ def template_sets_intersection():
 
 # SINTERSTORE | for any number of sets, return the intersection and store 
 # it as a new key
-@route('/sets/interstore/', method='POST')
-@view('central')
+@route('/sets/interstore', method='POST')
 def template_sets_interstore():
     destination_key = request.POST.get('destkey', '').strip()
     key = request.POST.get('key', '').strip()
@@ -472,8 +441,7 @@ def template_sets_interstore():
                 search_result=search_result, info=info)
 
 # SUNION | for any number of sets, return the union
-@route('/sets/union/', method='POST')
-@view('central')
+@route('/sets/union', method='POST')
 def template_sets_union():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
@@ -487,8 +455,7 @@ def template_sets_union():
 
 # SUNIONSTORE | for any number of sets, return the union and store it 
 # as a new key
-@route('/sets/unionstore/', method='POST')
-@view('central')
+@route('/sets/unionstore', method='POST')
 def template_sets_unionstore():
     destination_key = request.POST.get('destkey', '').strip()
     key = request.POST.get('key', '').strip()
@@ -502,8 +469,7 @@ def template_sets_unionstore():
                 search_result=search_result, info=info)
 
 # SDIFF | for any number of sets, return the difference
-@route('/sets/difference/', method='POST')
-@view('central')
+@route('/sets/difference', method='POST')
 def template_sets_difference():
     key = request.POST.get('key', '').strip()
     keys = string.split(key, ',')
@@ -516,8 +482,7 @@ def template_sets_difference():
                 search_result=search_result, info=info)
 
 # SDIFFSTORE | for any number of sets, return the difference and store it as a new key
-@route('/sets/diffstore/', method='POST')
-@view('central')
+@route('/sets/diffstore', method='POST')
 def template_sets_diffstore():
     destination_key = request.POST.get('destkey', '').strip()
     key = request.POST.get('key', '').strip()
@@ -531,8 +496,7 @@ def template_sets_diffstore():
                 search_result=search_result, info=info)
 
 # SMEMBERS | return all members of a set
-@route('/sets/members/', method='POST')
-@view('central')
+@route('/sets/members', method='POST')
 def template_sets_members():
     key = request.POST.get('key', '').strip()
     members = r.smembers(key)
@@ -543,8 +507,7 @@ def template_sets_members():
                 search_result=search_result, info=info)
 
 # SRANDMEMBER | return a random member of set, without removing it
-@route('/sets/random/', method='POST')
-@view('central')
+@route('/sets/random', method='POST')
 def template_sets_srandom():
     key = request.POST.get('key', '').strip()
     random_member = r.srandmember(key)
@@ -557,8 +520,7 @@ def template_sets_srandom():
 ### Sorted Sets ###
 
 # ZADD | add a member to a sorted set
-@route('/zsets/add/', method='POST')
-@view('central')
+@route('/zsets/add', method='POST')
 def template_zsets_add():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
@@ -571,8 +533,7 @@ def template_zsets_add():
                 db_size=db_size, search_result=search_result, info=info)      
 
 # ZREM | remove a member of a sorted set
-@route('/zsets/remove/', method='POST')
-@view('central')
+@route('/zsets/remove', method='POST')
 def template_zsets_remove():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
@@ -584,8 +545,7 @@ def template_zsets_remove():
                 db_size=db_size, search_result=search_result, info=info)      
 
 # ZINCRBY | increment a member by any amount
-@route('/zsets/incrementby/', method='POST')
-@view('central')
+@route('/zsets/incrementby', method='POST')
 def template_zsets_incrementby():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
@@ -598,8 +558,7 @@ def template_zsets_incrementby():
                 search_result=search_result, info=info)	
 
 # ZRANGE  return a range
-@route('/zsets/range/', method='POST')
-@view('central')
+@route('/zsets/range', method='POST')
 def template_zsets_zrange():
     key = request.POST.get('key', '').strip()
     start = request.POST.get('start', '').strip()
@@ -611,8 +570,7 @@ def template_zsets_zrange():
     return dict(key=key, returned_value=zrange, db_size=db_size, 
                 search_result=search_result, info=info)
 
-@route('/zsets/rangewithscores/', method='POST')
-@view('central')
+@route('/zsets/rangewithscores', method='POST')
 def template_zsets_zrangewithscores():
     key = request.POST.get('key', '').strip()
     start = request.POST.get('start', '').strip()
@@ -625,8 +583,7 @@ def template_zsets_zrangewithscores():
                 search_result=search_result, info=info)
 
 # ZRANGEBYSCORE | range by score
-@route('/zsets/rangebyscore/', method='POST')
-@view('central')
+@route('/zsets/rangebyscore', method='POST')
 def template_rangebyscore():
     key = request.POST.get('key', '').strip()
     minimum = request.POST.get('min', '').strip()
@@ -639,8 +596,7 @@ def template_rangebyscore():
                 search_result=search_result, info=info)     
 
 # ZREVRANGE | return a range in reverse order
-@route('/zsets/revrange/', method='POST')
-@view('central')
+@route('/zsets/revrange', method='POST')
 def template_zsets_zrevrange():
     key = request.POST.get('key', '').strip()
     start = request.POST.get('start', '').strip()
@@ -653,8 +609,7 @@ def template_zsets_zrevrange():
                 search_result=search_result, info=info)
 
 # ZREVRANGE | return a range in reverse order, with scores
-@route('/zsets/revrangewithscores/', method='POST')
-@view('central')
+@route('/zsets/revrangewithscores', method='POST')
 def template_zsets_zrevrangescores():
     key = request.POST.get('key', '').strip()
     start = request.POST.get('start', '').strip()
@@ -667,8 +622,7 @@ def template_zsets_zrevrangescores():
                 search_result=search_result, info=info)
 
 # ZCARD | return the cardinality for a set
-@route('/zsets/cardinality/', method='POST')
-@view('central')
+@route('/zsets/cardinality', method='POST')
 def template_zsets_cardinality():
     key = request.POST.get('key', '').strip() 
     cardinality = r.zcard(key)
@@ -679,8 +633,7 @@ def template_zsets_cardinality():
                 search_result=search_result, info=info)
 
 # ZSCORE | return the score for a particular key and member
-@route('/zsets/score/', method='POST')
-@view('central')
+@route('/zsets/score', method='POST')
 def template_zsets_score():
     key = request.POST.get('key', '').strip()
     member = request.POST.get('member', '').strip()
@@ -692,8 +645,7 @@ def template_zsets_score():
                 db_size=db_size, search_result=search_result, info=info)    
 
 # ZREMRANGEBYSCORE
-@route('/zsets/remrangebyscore/', method='POST')
-@view('central')
+@route('/zsets/remrangebyscore', method='POST')
 def template_zsets_remrangebyscore():
     key = request.POST.get('key', '').strip()
     minimum = request.POST.get('min', '').strip()
@@ -708,8 +660,7 @@ def template_zsets_remrangebyscore():
 ### Hashes ###
 
 # HSET | Set the hash field to the specified value. Creates the hash if needed.
-@route('/hashes/hset/', method='POST')
-@view('central')
+@route('/hashes/hset', method='POST')
 def template_hashes_set():
     key = request.POST.get('key', '').strip()
     field = request.POST.get('field', '').strip()
@@ -722,8 +673,7 @@ def template_hashes_set():
                 search_result=search_result, info=info)
 
 # HGET | return the string value of a key
-@route('/hashes/get/', method='POST')
-@view('central')
+@route('/hashes/get', method='POST')
 def template_hashes_get():
     key = request.POST.get('key', '').strip()
     field = request.POST.get('field', '').strip()
@@ -735,8 +685,7 @@ def template_hashes_get():
                 search_result=search_result, info=info)	
 
 # HDEL | Remove the specified field from a hash
-@route('/hashes/delete/', method='POST')
-@view('central')
+@route('/hashes/delete', method='POST')
 def template_hashes_delete():
     key = request.POST.get('key', '').strip()
     field = request.POST.get('field', '').strip()
@@ -748,8 +697,7 @@ def template_hashes_delete():
                 search_result=search_result, info=info)	
 
 # HEXIST | Test if the specified field exists in a hash
-@route('/hashes/exists/', method='POST')
-@view('central')
+@route('/hashes/exists', method='POST')
 def template_hashes_exists():
     key = request.POST.get('key', '').strip()
     field = request.POST.get('field', '').strip()
@@ -761,8 +709,7 @@ def template_hashes_exists():
                 search_result=search_result, info=info)	
 
 # HLEN | Return the number of fields contained in a hash
-@route('/hashes/length/', method='POST')
-@view('central')
+@route('/hashes/length', method='POST')
 def template_hashes_length():
     key = request.POST.get('key', '').strip()
     hlen = r.hlen(key)	
@@ -773,8 +720,7 @@ def template_hashes_length():
                 search_result=search_result, info=info)	
 
 # HKEYS | Return all the fields names contained into a hash
-@route('/hashes/keys/', method='POST')
-@view('central')
+@route('/hashes/keys', method='POST')
 def template_hashes_keys():
     key = request.POST.get('key', '').strip()
     hkeys = r.hkeys(key)	
@@ -785,8 +731,7 @@ def template_hashes_keys():
                 search_result=search_result, info=info)	
 
 # HVALS | Return all the values contained into a hash
-@route('/hashes/values/', method='POST')
-@view('central')
+@route('/hashes/values', method='POST')
 def template_hashes_values():
     key = request.POST.get('key', '').strip()
     hvals = r.hvals(key)	
@@ -797,8 +742,7 @@ def template_hashes_values():
                 search_result=search_result, info=info)	
 
 # HGETALL | Return both the fields names and the values contained into a hash
-@route('/hashes/getall/', method='POST')
-@view('central')
+@route('/hashes/getall', method='POST')
 def template_hashes_getall():
     key = request.POST.get('key', '').strip()
     hgetall = r.hgetall(key)	
@@ -811,8 +755,7 @@ def template_hashes_getall():
 ### Server ###
 
 # SAVE | save the DB to disk
-@route('/save/', method='POST')
-@view('central')
+@route('/save', method='POST')
 def template_save():
     save = r.save()
     info = r.info()
@@ -822,8 +765,7 @@ def template_save():
                 search_result=search_result, info=info)
 
 # BGSAVE | save the data to disk -- asynchronous 
-@route('/bgsave/', method='POST')
-@view('central')
+@route('/bgsave', method='POST')
 def template_bgsave():
     bgsave = r.bgsave()
     info = r.info()
@@ -833,10 +775,9 @@ def template_bgsave():
                 search_result=search_result, info=info)
 
 # LASTSAVE | return the time of the last save
-@route('/lastsave/', method='POST')
-@view('central')
+@route('/lastsave', method='POST')
 def template_lastsave():
-    lastsave = r.lastsave()
+    lastsave = str(r.lastsave())
     info = r.info()
     db_size = r.dbsize()
 
@@ -844,8 +785,7 @@ def template_lastsave():
                 search_result=search_result, info=info)
 
 # INFO
-@route('/info/', method='POST')
-@view('central')
+@route('/info', method='POST')
 def template_info():
     db_size = r.dbsize()  
     info = r.info()  
@@ -854,5 +794,13 @@ def template_info():
                 search_result=search_result, info=info)    
 
 
-#run it!
-run()
+class StripPathMiddleware(object):
+  def __init__(self, app):
+    self.app = app
+  def __call__(self, e, h):
+    e['PATH_INFO'] = e['PATH_INFO'].rstrip('/')
+    return self.app(e,h)
+
+app = bottle.default_app()
+app = StripPathMiddleware(app)
+bottle.run(app=app)
