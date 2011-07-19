@@ -26,7 +26,12 @@ Install and Run
 Installation is simple. The only requirements are a running [Redis](http://code.google.com/p/redis/ "Redis") server, 
 [Bottle](http://github.com/defnull/bottle "Bottle"), and the Python interface for Redis [redis-py](http://github.com/andymccurdy/redis-py "redis-py").
 
-Install Bottle and redis-py. Start your Redis server, head to the Redweb directory, and then:
+Install Bottle and redis-py:
+
+    pip install bottle
+    pip install redis
+
+Start your Redis server, head to the Redweb directory, and then:
 
 `python redweb.py`
 
