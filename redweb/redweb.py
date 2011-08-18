@@ -36,7 +36,7 @@ returned_value = ""
 search_result = ""
 
 def dictWithAddedCommonFields(**kwargs):
-    result=kwargs.copy()
+    result=kwargs
     result.update({'db_size':r.dbsize(),'info':r.info(),'search_result':search_result})
     return result
 
