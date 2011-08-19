@@ -35,6 +35,8 @@
           $('form').ajaxForm({
               dataType: 'json',
               success: function(response) {
+                  $('#currentConnection').text("Currently you're working on - host: "+response.infoAboutConnection.host+' db: '+response.infoAboutConnection.db+' port: '+response.infoAboutConnection.port);
+                  
                   var el = $('#returned_value');
                   el.animate({opacity: 0}, 100, function() {
                       var ret_val = response.returned_value || "nil";
@@ -59,6 +61,14 @@
 <div id="header-wrap"> 
 <div id="header-content">
 <h1>Returned: <strong id="returned_value" class="red">{{returned_value}}</strong></h1>
+
+<h4 id="currentConnection">
+Currently you're working on - 
+	%for key in infoAboutConnection:
+		{{key}}: {{infoAboutConnection[key]}}
+	+%end
+</h4>
+
 </div>
 </div>
 
@@ -624,12 +634,12 @@
 	<h3><a href="#">Set active db | Configure, select and set the database</a></h3>
 	
 	<div>
-	<form name="db0_cfg" action="/settings/db/" method="post">
-   	<p><label for="value">Host:</label> <input type="text" name="host" input class=":required :only_on_submit input_form" value="localhost" /></p>
-   	<p><label for="value">Port:</label> <input type="text" name="port" input class=":required :only_on_submit input_form" value="6379" /></p>
-   	<p><label for="value">DB:</label> <input type="text" name="dbnum" input class=":required :only_on_submit input_form" value="0" /></p>
-    	<p class="submit"><input type="submit" class="submit_form" value="Configure" /></p>
-    	</form>
+		<form name="db_cfg" action="/settings/db/" method="post">
+	   	<p><label for="host">Host:</label> <input type="text" name="host" input class=":required :only_on_submit input_form" value="localhost" /></p>
+	   	<p><label for="port">Port:</label> <input type="text" name="port" input class=":required :only_on_submit input_form" value="6379" /></p>
+	   	<p><label for="dbnum">DB:</label> <input type="text" name="dbnum" input class=":required :only_on_submit input_form" value="0" /></p>
+	    <p class="submit"><input type="submit" class="submit_form" value="Configure" /></p>
+	    </form>
 	</div>
 	
 </div>
