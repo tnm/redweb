@@ -12,6 +12,7 @@ identified as the resource.
 
 The Redweb interface obviously should not be directly exposed to the Internet. 
 
+Here's a screencap of [Redweb](http://i.imgur.com/qxwhC.png).
 
 Nota bene
 -----------
