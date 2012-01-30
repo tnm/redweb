@@ -18,7 +18,7 @@ __version__ = '0.2.3'
 __license__ = 'MIT'
 
 
-from bottle import route, request, response, view, send_file, run
+from bottle import route, request, response, view, static_file, run
 import redis
 import bottle
 import string
@@ -60,8 +60,8 @@ def dictWithAddedCommonFields(**kwargs):
 
 # Set static file routing
 @route('/static/:filename')
-def static_file(filename):
-    send_file(filename, root='../redweb/static')
+def send_file(filename):
+    return static_file(filename, root='../redweb/static')
 
 # Home route
 @route('/')
