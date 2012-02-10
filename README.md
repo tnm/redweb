@@ -17,7 +17,7 @@ Here's a screencap of [Redweb](http://i.imgur.com/qxwhC.png).
 Nota bene
 -----------
 
-I haven't worked on or actively maintained this project in over a year. However I am now merging in pull requests, 
+I haven't worked on or actively maintained this project in over two years. However I am now merging in pull requests, 
 so I will make a best effort to keep this repo maintained.
 
 
