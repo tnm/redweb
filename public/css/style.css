@@ -1,9 +1,9 @@
 h1 {
-  font: Helvetica;
+  font: 24px Helvetica, Verdana, sans-serif;
 }
 
 h2 {
-  font: 24px Helvetica, Verdana, sans-serif;
+  font: 20px Helvetica, Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
