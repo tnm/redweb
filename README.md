@@ -15,14 +15,15 @@ to run
 ----------------
 
 ```
-ruby redweb.rb [config_file]
+ruby redweb.rb [path/to/your_config_file.yml]
 ```
 
 config file
 --------------
 
-The config file is where you tell **redweb** the hostname and port for
-your Redis servers. It looks like this:
+The config file is a YAML file, and it's where you tell **redweb**
+the hostname and port for your Redis servers. It must be structured
+like this:
 
 ```
 redis1:
