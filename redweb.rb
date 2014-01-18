@@ -209,6 +209,7 @@ end
 def servers
   # Set the global config and build the RedisServerInfo instances
   config_file = ARGV[1]
+  raise "Must start redweb with a config filepath as first argument" if config_file.nil?
   $config ||= YAML.load_file(config_file)
   $config.map do |name, data|
     RedisServerInfo.new(name, data["hostname"], data["port"])
