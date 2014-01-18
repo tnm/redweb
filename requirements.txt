@@ -1,4 +1,0 @@
-bottle==0.11.3
-distribute==0.6.28
-redis==2.7.1
-wsgiref==0.1.2

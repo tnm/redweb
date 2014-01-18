@@ -1,0 +1,44 @@
+h1 {
+  font: Helvetica;
+}
+
+h2 {
+  font: 24px Helvetica, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font: 14px Helvetica;
+}
+
+.infobox {
+  width: 400px;
+  text-overflow: ellipsis;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  font: 12px Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #c9cccc;
+}
+
+li:last-child {
+  border: none;
+}
+
+label, key {
+  display: inline-block;
+}
+
+label {
+  width: 200px;
+  text-align: left;
+  padding-right: 20px;
+}
+
