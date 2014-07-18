@@ -2,68 +2,71 @@
 <link href="css/style.css" media="screen" rel="stylesheet" type="text/css" />
 
 <h2>redweb</h2>
-<br /><hr />
+<br />
+<hr />
 
 <% servers.each do |server| %>
   <img src="/images/database.png">
 
-  <p><strong><%= server.name %></strong> | <%= server.info.role %> | hostname: <strong><%= server.host %></strong> | port: <strong><%= server.port %></strong>
+  <p>
+  <strong><%= server.name %></strong> | <%= server.info.role %> | hostname: <strong><%= server.host %></strong> | port: <strong><%= server.port %></strong>
+  <% if server.slave? %>
+    | slave of <strong><%= server.master_node %></strong>
+  <% end %>
+  </p>
 
-    <% if server.slave? %>
-      | slave of <strong><%= server.master_node %></strong>
-    <% end %></p>
+  <div class="infobox">
+    <ul>
 
-    <div class="infobox">
-      <ul>
+    <p>core redis</p>
+    <% server.core_redis.each do |k,v| %>
+        <li> <label><%= k %></label> <%= v %> </li>
+    <% end %>
 
-      <p>core redis</p>
-      <% server.core_redis.each do |k,v| %>
-          <li> <label><%= k %></label> <%= v %> </li>
-      <% end %>
+    <p>os and process</p>
+    <% server.process.each do |k,v| %>
+        <li> <label><%= k %></label> <%= v %> </li>
+    <% end %>
 
-      <p>os and process</p>
-      <% server.process.each do |k,v| %>
-          <li> <label><%= k %></label> <%= v %> </li>
-      <% end %>
+    <p>uptime</p>
+    <% server.uptime.each do |k,v| %>
+        <li> <label><%= k %></label> <%= v %> </li>
+    <% end %>
 
-      <p>uptime</p>
-      <% server.uptime.each do |k,v| %>
-          <li> <label><%= k %></label> <%= v %> </li>
-      <% end %>
+    <p>clients</p>
+    <% server.clients.each do |k,v| %>
+        <li> <label><%= k %></label> <%= v %> </li>
+    <% end %>
 
-      <p>clients</p>
-      <% server.clients.each do |k,v| %>
-          <li> <label><%= k %></label> <%= v %> </li>
-      <% end %>
+    <p>memory and cpu</p>
+    <% server.memory_and_cpu.each do |k,v| %>
+        <li> <label><%= k %></label> <%= v %> </li>
+    <% end %>
 
-      <p>memory and cpu</p>
-      <% server.memory_and_cpu.each do |k,v| %>
-          <li> <label><%= k %></label> <%= v %> </li>
-      <% end %>
+    <p>rdb</p>
+    <% server.rdb.each do |k,v| %>
+        <li> <label><%= k %></label> <%= v %> </li>
+    <% end %>
 
-      <p>rdb</p>
-      <% server.rdb.each do |k,v| %>
-          <li> <label><%= k %></label> <%= v %> </li>
-      <% end %>
+    <p>aof</p>
+    <% server.aof.each do |k,v| %>
+        <li> <label><%= k %></label> <%= v %> </li>
+    <% end %>
 
-      <p>aof</p>
-      <% server.aof.each do |k,v| %>
-          <li> <label><%= k %></label> <%= v %> </li>
-      <% end %>
+    <p>connections and keys</p>
+    <% server.connections_and_keys.each do |k,v| %>
+        <li> <label><%= k %></label> <%= v %> </li>
+    <% end %>
 
-      <p>connections and keys</p>
-      <% server.connections_and_keys.each do |k,v| %>
-          <li> <label><%= k %></label> <%= v %> </li>
-      <% end %>
+    <p>replication</p>
+    <% server.replication.each do |k,v| %>
+        <li> <label><%= k %></label> <%= v %> </li>
+    <% end %>
 
-      <p>replication</p>
-      <% server.replication.each do |k,v| %>
-          <li> <label><%= k %></label> <%= v %> </li>
-      <% end %>
+    </ul>
+  </div>
 
-      </ul>
-    </div>
-
-    <br /><hr />
+  <br />
+  <hr />
 <% end %>
 </html>
