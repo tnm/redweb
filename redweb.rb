@@ -99,19 +99,19 @@ class RedWeb < Sinatra::Base
     def core_redis
       all_info.select { |k,v| %w(
         redis_version
+        redis_mode
         redis_git_sha1
         redis_git_dirty
-        redis_mode
       ).include?(k) }
     end
 
     def process
       all_info.select { |k,v| %w(
         os
+        tcp_port
         multiplexing_api
         gcc_version
         process_id
-        tcp_port
       ).include?(k) }
     end
 
@@ -135,18 +135,18 @@ class RedWeb < Sinatra::Base
 
     def memory_and_cpu
       all_info.select { |k,v| %w(
-        used_memory
-        used_memory_human
-        used_memory_rss
-        used_memory_peak
-        used_memory_peak_human
-        used_memory_lua
         mem_fragmentation_ratio
         mem_allocator
         used_cpu_sys
         used_cpu_user
         used_cpu_sys_children
         used_cpu_user_children
+        used_memory
+        used_memory_human
+        used_memory_rss
+        used_memory_peak
+        used_memory_peak_human
+        used_memory_lua
       ).include?(k) }
     end
 
